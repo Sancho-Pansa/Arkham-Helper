@@ -1,0 +1,7 @@
+/.metadata/
+*/.gitignore
+*.accdb
+*/.*
+!*/.project
+!*/.classpath
+*.jpg
