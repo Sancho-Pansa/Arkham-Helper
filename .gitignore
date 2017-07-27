@@ -1,7 +1,7 @@
+/.recommenders
 /.metadata/
 */.gitignore
-*.accdb
 */.*
 !*/.project
 !*/.classpath
-*.jpg
+*.jar

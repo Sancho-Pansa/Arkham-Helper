@@ -929,25 +929,25 @@ public final class MainWindowController
 	private class Picture
 	{
 		private final Image[] UPKEEP = {
-			new Image("Upkeep-01.jpg", 1050, 800, false, false),
-			new Image("Upkeep-02.jpg", 1050, 800, false, false),
-			new Image("Upkeep-03.jpg", 1050, 800, false, false),
+			new Image(this.getClass().getResource("pictures/Upkeep-01.jpg").toString(), 1050, 800, false, false),
+			new Image(this.getClass().getResource("pictures/Upkeep-02.jpg").toString(), 1050, 800, false, false),
+			new Image(this.getClass().getResource("pictures/Upkeep-03.jpg").toString(), 1050, 800, false, false),
 		};
 		
 		private final Image[] ENCOUNTER = {
-				new Image("Contact-01.jpg", 1050, 800, false, false),
-				new Image("Contact-02.jpg", 1050, 800, false, false),
-				new Image("Contact-03.jpg", 1050, 800, false, false),
+				new Image(this.getClass().getResource("pictures/Contact-01.jpg").toString(), 1050, 800, false, false),
+				new Image(this.getClass().getResource("pictures/Contact-02.jpg").toString(), 1050, 800, false, false),
+				new Image(this.getClass().getResource("pictures/Contact-03.jpg").toString(), 1050, 800, false, false),
 			};
 		private final Image[] OTHERWORLD = {
-				new Image("OtherWorlds-01.jpg", 1050, 800, false, false),
-				new Image("OtherWorlds-02.jpg", 1050, 800, false, false),
-				new Image("OtherWorlds-03.jpg", 1050, 800, false, false),
+				new Image(this.getClass().getResource("pictures/OtherWorlds-01.jpg").toString(), 1050, 800, false, false),
+				new Image(this.getClass().getResource("pictures/OtherWorlds-02.jpg").toString(), 1050, 800, false, false),
+				new Image(this.getClass().getResource("pictures/OtherWorlds-03.jpg").toString(), 1050, 800, false, false),
 			};
 		private final Image[] MYTHOS = {
-				new Image("Mythos-01.jpg", 1050, 800, false, false),
-				new Image("Mythos-02.jpg", 1050, 800, false, false),
-				new Image("Mythos-03.jpg", 1050, 800, false, false),
+				new Image(this.getClass().getResource("pictures/Mythos-01.jpg").toString(), 1050, 800, false, false),
+				new Image(this.getClass().getResource("pictures/Mythos-02.jpg").toString(), 1050, 800, false, false),
+				new Image(this.getClass().getResource("pictures/Mythos-03.jpg").toString(), 1050, 800, false, false),
 			};
 		
 		public final Background generateRandomUpkeep()

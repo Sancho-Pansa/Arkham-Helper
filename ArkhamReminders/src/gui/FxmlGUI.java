@@ -22,7 +22,7 @@ import javafx.fxml.FXMLLoader;
 
 public class FxmlGUI extends Application
 {
-	private static String arg = "/D:/Java & Git/Sandbox/ArkhamReminders/src/ArkhamDB.accdb";
+	private static String arg = "/D:/Java & Git/Arkham/ArkhamReminders/src/ArkhamDB.accdb";
 	
 	/**
 	 * This overriden method loads the first FXML UI (Arkham_Welcome.fxml)
@@ -31,7 +31,7 @@ public class FxmlGUI extends Application
 	public void start(Stage primaryStage) throws Exception 
 	{
 		// In order to correctly load .fxml file, it must be in the same folder (or subfolder), where class resides
-		Parent root = FXMLLoader.load(getClass().getResource("Arkham_Welcome.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("fxml/Arkham_Welcome.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Arkham Horror Reminders");

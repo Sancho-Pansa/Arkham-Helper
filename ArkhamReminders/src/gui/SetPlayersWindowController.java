@@ -101,7 +101,8 @@ public final class SetPlayersWindowController
 		bPane.setTop(label);
 		bPane.setCenter(gPane);
 		bPane.setBorder(new Border((new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1, 0, 0, 0)))));
-		BackgroundImage bi = new BackgroundImage(new Image("Arkham Horror-01.jpg", 1050, 800, false, false), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+		Image backgr = new Image(this.getClass().getResource("pictures/Arkham Horror-01.jpg").toString(), 1050, 800, false, false);
+		BackgroundImage bi = new BackgroundImage(backgr, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 		bPane.setBackground(new Background(bi));
 		
 		scene.setRoot(bPane);
@@ -121,7 +122,7 @@ public final class SetPlayersWindowController
 		fw.setAncientOne(this.ancientTField.getText()); 
 		
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("Arkham_Main.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/Arkham_Main.fxml"));
 			Parent root = loader.load();
 			MainWindowController stub = loader.getController();
 			stub.setFramework(this.fw);
@@ -131,16 +132,13 @@ public final class SetPlayersWindowController
 		{
 			System.out.println(".fxml not found");
 		}
-		
-		//MainWindowController mainWindow = new MainWindowController(fw, this.bPane.getScene());
-		//mainWindow.arrangeWindow();
 	}
 	
 	private void backPressed(ActionEvent event)
 	{
 		Parent root = null;
 		try {
-			root = FXMLLoader.load(getClass().getResource("Arkham_Welcome.fxml"));
+			root = FXMLLoader.load(getClass().getResource("fxml/Arkham_Welcome.fxml"));
 		} catch (IOException e) 
 		{
 			System.out.println(".fxml was not found");

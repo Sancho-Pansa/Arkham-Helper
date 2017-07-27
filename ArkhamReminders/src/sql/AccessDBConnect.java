@@ -25,17 +25,12 @@ public class AccessDBConnect
 	
 	public AccessDBConnect()
 	{
-		try {
-			//final File file = new File("resources\\ArkhamDB.accdb");
-			//if(!file.exists())
-				//throw new FileNotFoundException("DB lost");
-			File dummy = new File("/D:/Java & Git/Sandbox/ArkhamReminders/src/ArkhamDB.accdb");
-			System.out.println(dummy.exists());
-			String pathDB = FxmlGUI.getArg();
-			this.con = DriverManager.getConnection("jdbc:ucanaccess://" + pathDB);
+		try {			
+			File file = new File(this.getClass().getClassLoader().getResource("sql/repository/ArkhamDB.accdb").toURI());
+			this.con = DriverManager.getConnection("jdbc:ucanaccess://" + file.getAbsolutePath());
 			this.s = con.createStatement();
 			System.out.println("Established");
-		} catch (SQLException e) 
+		} catch (SQLException | URISyntaxException e) 
 		{
 			System.out.println("Something somewhere had gone terribly wrong");
 			//e.printStackTrace();
