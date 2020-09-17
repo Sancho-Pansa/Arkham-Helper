@@ -1,7 +1,5 @@
 package mechanics;
 
-import sql.AccessDBConnect;
-
 /**
  * This class describes a single investigator (representative of Player in the world of Arkham Horror)
  * @author SanchoPansa
@@ -9,75 +7,41 @@ import sql.AccessDBConnect;
  */
 public class Investigator 
 {
-	//NB: ��� ���������� static final, �� ���� ������ �� ����� �������� (���� �� �� ��������� final).
-	public final static AccessDBConnect ACCDB = new AccessDBConnect();
-	
-	private final String name;
-	private int maxHealth;
-	private int maxSanity;
-	private final int initMoney;
-	private byte blessing = 0;
-	private boolean killed = false;
-	
-	private boolean retain = false;
-	private boolean loan = false;
-	private boolean canLoan = true;
-	private boolean silverTwilight = false;
-	private boolean sheriff = false;
-	
-	private int health;
-	private int sanity;
-	private int money;
+	// Основные характеристики
+	private final String name;     // Имя
+	private Statistic stamina;     // Максимальное Здоровье
+	private Statistic sanity;      // Максимальный Рассудок
+	private Statistic money;       // Капитал
+	private boolean alive = true;  // Статус: Жив?
+
+	// Вторичные характеристики
+	private Blessing blessing = Blessing.NO_EFFECT; // Благословение
+	private boolean retain = false;                 // Гонорар
+	private boolean loan = false;                   // Ссуда
+	private boolean canLoan = true;                 // Возможность брать ссуду
+	private boolean silverTwilight = false;         // Членство в ЛСС
+	private boolean sheriff = false;                // Статус шерифа
+
 	
 	public Investigator(String name)
 	{
 		this.name = name;
-		this.maxHealth = new Integer(ACCDB.getInvestField("Health", name));
-		this.health = this.maxHealth;
-		this.maxSanity = new Integer(ACCDB.getInvestField("Sanity", name));
-		this.sanity = this.maxSanity;
-		this.initMoney = new Integer(ACCDB.getInvestField("InitMoney", name));
-		this.money = this.initMoney;
-	}
-	
-	public int getHealth() {
-		return health;
 	}
 
-	public void setHealth(int health) {
-		this.health = health;
+	public Statistic getStamina() {
+		return stamina;
 	}
 
-	public int getSanity() {
+	public Statistic getSanity() {
 		return sanity;
 	}
 
-	public void setSanity(int sanity) {
-		this.sanity = sanity;
-	}
-
-	public int getMoney() {
+	public Statistic getMoney() {
 		return money;
-	}
-
-	public void setMoney(int money) {
-		this.money = money;
 	}
 
 	public String getName() {
 		return name;
-	}
-
-	public int getMaxHealth() {
-		return maxHealth;
-	}
-
-	public int getMaxSanity() {
-		return maxSanity;
-	}
-
-	public int getInitMoney() {
-		return initMoney;
 	}
 	
 	public void setRetain()
@@ -97,17 +61,17 @@ public class Investigator
 
 	public boolean isBlessed()
 	{
-		return this.blessing == 1;
+		return this.blessing == Blessing.BLESSED;
 	}
 	
 	public boolean isCursed()
 	{
-		return this.blessing == -1;
+		return this.blessing == Blessing.CURSED;
 	}
 	
-	public boolean isKilled()
+	public boolean isAlive()
 	{
-		return this.killed;
+		return this.alive;
 	}
 	
 	public boolean isSheriff()
@@ -130,72 +94,34 @@ public class Investigator
 		return this.canLoan;
 	}
 	
-	public boolean isTwilight()
+	public boolean isInSilverTwilight()
 	{
 		return this.silverTwilight;
 	}
-	
+
+	// Получить благословение
 	public void bless()
 	{
-		if(this.blessing < 1)
-			this.blessing++;
+		this.blessing = this.blessing == Blessing.CURSED ? Blessing.NO_EFFECT : Blessing.BLESSED;
 	}
-	
+
+	// Получить проклятие
 	public void curse()
 	{
-		if(this.blessing > -1)
-			this.blessing--;
+		this.blessing = this.blessing == Blessing.BLESSED ? Blessing.NO_EFFECT : Blessing.CURSED;
 	}
 	
-	public void setTwilight()
+	public void joinSilverTwilight()
 	{
 		this.silverTwilight = true;
-	}
-	
-	public void damage()
-	{
-		if(this.health > 0)
-			this.health--;
-	}
-	
-	public void heal()
-	{
-		if(this.health < this.maxHealth)
-			this.health++;
-	}
-	
-	public void addSanity()
-	{
-		if(this.sanity < this.maxSanity)
-			this.sanity++;
-	}
-	
-	public void minusSanity()
-	{
-		if(this.sanity > 0)
-			this.sanity--;
-	}
-	
-	public void minusMaxHealth()
-	{
-		if(this.maxHealth > 0)
-			this.maxHealth--;
-		if(this.health > this.maxHealth)
-			this.health = this.maxHealth;
-	}
-	
-	public void minusMaxSanity()
-	{
-		if(this.maxSanity > 0)
-			this.maxSanity--;
-		if(this.maxSanity < this.sanity)
-			this.sanity = this.maxSanity;
 	}
 	
 	public void discardRetain()
 	{
 		this.retain = false;
 	}
+
+	public void returnLoan() { this.loan = false; }
 	
 	public void discardLoan()
 	{
@@ -205,6 +131,50 @@ public class Investigator
 	
 	public void killInvest()
 	{
-		this.killed = true;
+		this.alive = true;
+	}
+
+	/**
+	 * Обозначает объект характеристики Сыщика и операции с ними
+	 */
+	public class Statistic {
+
+		private int current;
+		private int maximum;
+
+		Statistic(int initialValue) {
+			maximum = initialValue;
+			current = maximum;
+		}
+
+		public int getCurrent() {
+			return current;
+		}
+
+		public void setCurrent(int current) {
+			this.current = current;
+		}
+
+		public int getMaximum() {
+			return maximum;
+		}
+
+		public void setMaximum(int maximum) {
+			this.maximum = maximum;
+		}
+
+		// Математическое суммирование. Текущее значение не может превысить максимум или быть меньше нуля
+		public void add(int value) {
+			current += value;
+			if(current >= maximum)
+				current = maximum;
+			if(current < 0)
+				current = 0;
+		}
+
+		@Override
+		public String toString() {
+			return String.format("%d / %d", current, maximum);
+		}
 	}
 }
