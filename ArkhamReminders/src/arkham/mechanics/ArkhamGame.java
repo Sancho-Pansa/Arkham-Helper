@@ -10,7 +10,7 @@ import list.CircularLinkedList;
  *
  */
 
-public class Framework 
+public class ArkhamGame
 {
 	private int players;
 	private CircularLinkedList<Investigator> cll;
@@ -41,7 +41,7 @@ public class Framework
 	 * @param players
 	 */
 	
-	public Framework(int players)
+	public ArkhamGame(int players)
 	{
 		setPlayers(players);
 	}
