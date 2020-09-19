@@ -1,4 +1,4 @@
-package mechanics;
+package arkham.mechanics;
 
 import sql.AccessDBConnect;
 

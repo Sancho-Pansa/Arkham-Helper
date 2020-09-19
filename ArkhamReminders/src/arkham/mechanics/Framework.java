@@ -1,4 +1,4 @@
-package mechanics;
+package arkham.mechanics;
 
 import java.util.ArrayList;
 import list.CircularLinkedList;
@@ -94,7 +94,7 @@ public class Framework
 	public void setAncientOne(String name)
 	{
 		this.ancientOne = new AncientOne(name);
-		if(name.equals("Хастур"))
+		if(name.equals("пїЅпїЅпїЅпїЅпїЅпїЅ"))
 			this.clueNum = 8;
 	}
 	

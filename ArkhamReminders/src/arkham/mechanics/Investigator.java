@@ -1,4 +1,4 @@
-package mechanics;
+package arkham.mechanics;
 
 /**
  * This class describes a single investigator (representative of Player in the world of Arkham Horror)
