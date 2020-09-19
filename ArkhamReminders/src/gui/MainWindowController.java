@@ -1,5 +1,8 @@
 package gui;
 
+import arkham.mechanics.AncientOne;
+import arkham.mechanics.ArkhamGame;
+import arkham.mechanics.Investigator;
 import list.CircularLinkedList;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -17,7 +20,7 @@ import messages.Messager;
 
 public final class MainWindowController
 {
-	private Framework fw;
+	private ArkhamGame fw;
 	private byte phaseCounter = 3;
 	private Label tipLabel;
 	private Investigator sheriff = null;
@@ -42,7 +45,7 @@ public final class MainWindowController
 	
 	//private GridPane botPane;
 
-	public void setFramework(Framework fw)
+	public void setFramework(ArkhamGame fw)
 	{ 
 		this.fw = fw;
 		this.cll = fw.getCList();
@@ -112,7 +115,7 @@ public final class MainWindowController
 				dummy.setMinWidth(400);
 				dummy.setMaxWidth(400);
 				gPane.add(dummy, 1, row);
-				Button btn = new Button("Снять");
+				Button btn = new Button("пїЅпїЅпїЅпїЅпїЅ");
 				btn.setOnAction(new ChangeState(i, "Curse"));
 				gPane.add(btn, 2, row);
 				row++;
@@ -131,7 +134,7 @@ public final class MainWindowController
 				dummy.setMinWidth(400);
 				dummy.setMaxWidth(400);
 				gPane.add(dummy, 1, row);
-				Button btn = new Button("Снять");
+				Button btn = new Button("пїЅпїЅпїЅпїЅпїЅ");
 				btn.setOnAction(new ChangeState(i, "Bless"));
 				gPane.add(btn, 2, row);
 				row++;
@@ -150,7 +153,7 @@ public final class MainWindowController
 				dummy.setMinWidth(400);
 				dummy.setMaxWidth(400);
 				gPane.add(dummy, 1, row);
-				Button btn = new Button("Убрать");
+				Button btn = new Button("пїЅпїЅпїЅпїЅпїЅпїЅ");
 				btn.setOnAction(new ChangeState(i, "Retain"));
 				gPane.add(btn, 2, row);
 				row++;
@@ -168,7 +171,7 @@ public final class MainWindowController
 				dummy.setMinWidth(400);
 				dummy.setMaxWidth(400);
 				gPane.add(dummy, 1, row);
-				Button btn = new Button("Нищеброд");
+				Button btn = new Button("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 				btn.setOnAction(new ChangeState(i, "Loan"));
 				gPane.add(btn, 2, row);
 				row++;
@@ -190,12 +193,12 @@ public final class MainWindowController
 		gPane.setBorder(createStandartBorder());
 		HBox hb = new HBox();
 		
-		changeBars = new Button("Здоровье / разум");
+		changeBars = new Button("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ / пїЅпїЅпїЅпїЅпїЅ");
 		PaintInvestigatorsList action = new PaintInvestigatorsList();
 		changeBars.setOnAction(action);
 		changeBars.setMinWidth(165);
 		
-		mythosBars = new Button("События Мифоса");
+		mythosBars = new Button("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ");
 		PaintMythosEventsList mythosaction = new PaintMythosEventsList();
 		mythosBars.setOnAction(mythosaction);
 		mythosBars.setMinWidth(165);
@@ -230,10 +233,10 @@ public final class MainWindowController
 		
 		GridPane botPane = this.createbotPane();
 		
-		Button escapeMonster = this.createTipButton("Retreat", "Уход от монстров");
-		Button horrorMonster = this.createTipButton("Horror", "Проверка ужаса");
-		Button fightMonster = this.createTipButton("Fight", "Бой с монстром");
-		Button monsterFeats = this.createTipButton("MonsterFeatures", "Свойства монстров");
+		Button escapeMonster = this.createTipButton("Retreat", "пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+		Button horrorMonster = this.createTipButton("Horror", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
+		Button fightMonster = this.createTipButton("Fight", "пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+		Button monsterFeats = this.createTipButton("MonsterFeatures", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 		
 		botPane.add(escapeMonster, 0, 0);
 		botPane.add(horrorMonster, 1, 0);
@@ -274,12 +277,12 @@ public final class MainWindowController
 		
 		GridPane botPane = this.createbotPane();
 		
-		Button escapeMonster = this.createTipButton("Retreat", "Уход от монстров");
-		Button horrorMonster = this.createTipButton("Horror", "Проверка ужаса");
-		Button fightMonster = this.createTipButton("Fight", "Бой с монстром");
-		Button monsterFeats = this.createTipButton("MonsterFeatures", "Свойства монстров");
-		Button gateClose = this.createTipButton("GateClose", "Закрытие Врат");
-		Button gateSeal = this.createTipButton("GateSeal", "Запечатывание Врат");
+		Button escapeMonster = this.createTipButton("Retreat", "пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+		Button horrorMonster = this.createTipButton("Horror", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
+		Button fightMonster = this.createTipButton("Fight", "пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+		Button monsterFeats = this.createTipButton("MonsterFeatures", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+		Button gateClose = this.createTipButton("GateClose", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ");
+		Button gateSeal = this.createTipButton("GateSeal", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ");
 		
 		botPane.add(escapeMonster, 0, 0);
 		botPane.add(horrorMonster, 1, 0);
@@ -307,29 +310,29 @@ public final class MainWindowController
 			Investigator dummy = cll.getAt(i).getContents();
 			Label name = new Label(dummy.getName() + ": ");
 			gPane.add(name, 0, row);
-			if(dummy.isKilled())
+			if(dummy.isAlive())
 			{
-				Label killed = new Label("Сожран");
+				Label killed = new Label("пїЅпїЅпїЅпїЅпїЅпїЅ");
 				killed.setTextFill(Color.RED);
 				gPane.add(killed, 1, row);
 				row++;
 				continue;
 			}
-			Label health = new Label(new String("Здоровье: \t" + dummy.getHealth() + " / " + dummy.getMaxHealth()));
+			Label health = new Label(new String("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: \t" + dummy.getStamina() + " / " + dummy.getMaxHealth()));
 			gPane.add(health, 1, row);
 			row++;
-			Label sanity = new Label(new String("Рассудок: \t" + dummy.getSanity() + " / " + dummy.getMaxSanity()));
+			Label sanity = new Label(new String("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: \t" + dummy.getSanity() + " / " + dummy.getMaxSanity()));
 			gPane.add(sanity, 1, row);
 			row++;
 			if(dummy.isBlessed())
 			{
-				Label blessing = new Label("Благословлен");
+				Label blessing = new Label("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 				gPane.add(blessing, 1, row);
 				row++;
 			}
 			if(dummy.isCursed())
 			{
-				Label cursed = new Label("Проклят");
+				Label cursed = new Label("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 				gPane.add(cursed, 1, row);
 				row++;
 			}
@@ -348,12 +351,12 @@ public final class MainWindowController
 		name.setTextAlignment(TextAlignment.CENTER);
 		name.setFont(new Font(24));
 		gPane.add(name, 0, 0);
-		gPane.add(new Label("Безысходность: " + fw.getDoomTrack() + " / " + mythos.getAwakening()), 0, 1);
-		gPane.add(new Label("Уровень ужаса: " + fw.getTerrorLevel() + " / 10"), 0, 2);
-		gPane.add(new Label("Монстры в Аркхеме: " + fw.getMonstersOnMap() + " / " + fw.getMonsterLimit()), 0, 3);
-		gPane.add(new Label("Монстры на окраинах: " + fw.getMonsteronOutskirts() + " / " + fw.getOutskirtsLimit()), 0, 4);
-		gPane.add(new Label("Открытые Врата: " + fw.getGateNum() + " / " + fw.getGateLimit()), 0, 5);
-		gPane.add(new Label("Знаков Древних расставлено: " + fw.getElderSignsOnMap() + " / 6" ), 0, 6);
+		gPane.add(new Label("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " + fw.getDoomLevel() + " / " + mythos.getAwakening()), 0, 1);
+		gPane.add(new Label("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: " + fw.getTerrorLevel() + " / 10"), 0, 2);
+		gPane.add(new Label("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " + fw.getMapMonsterCount() + " / " + fw.getMonsterLimit()), 0, 3);
+		gPane.add(new Label("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " + fw.getOutMonsterCount() + " / " + fw.getOutskirtsLimit()), 0, 4);
+		gPane.add(new Label("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: " + fw.getGateCount() + " / " + fw.getGateLimit()), 0, 5);
+		gPane.add(new Label("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " + fw.getElderSignsOnMap() + " / 6" ), 0, 6);
 		Label followers = new Label(mythos.getFollowers());
 		followers.setWrapText(true);
 		gPane.add(followers, 0, 7);
@@ -484,7 +487,7 @@ public final class MainWindowController
 	{
 		private String tipCode;
 		
-		private Button backBtn = new Button("Назад");
+		private Button backBtn = new Button("пїЅпїЅпїЅпїЅпїЅ");
 		
 		public TipBringer(String tipCode)
 		{
@@ -521,7 +524,7 @@ public final class MainWindowController
 	
 	private class PaintInvestigatorsList implements EventHandler<ActionEvent>
 	{
-		private Button backBtn = new Button("Назад");
+		private Button backBtn = new Button("пїЅпїЅпїЅпїЅпїЅ");
 		
 		public PaintInvestigatorsList()
 		{
@@ -558,14 +561,14 @@ public final class MainWindowController
 			{
 				Investigator dummy = cll.getAt(i).getContents();
 				Label name = new Label(dummy.getName() + ": ");
-				Button health = this.createButton("Здоровье", "health", dummy);
-				Button sanity = this.createButton("Рассудок", "sanity", dummy);
-				Button maxHealth = this.createButton("Макс. здоровье", "maxhealth", dummy);
-				Button maxSanity = this.createButton("Макс. рассудок", "maxsanity", dummy);
-				Button bless = this.createButton("Судьба", "bless", dummy);
-				Button retain = this.createButton("Гонорар", "retain", dummy);
-				Button loan = this.createButton("Заем", "loan", dummy);
-				Button sheriffBtn = this.createButton("Стать шерифом", "sheriff", dummy);
+				Button health = this.createButton("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", "health", dummy);
+				Button sanity = this.createButton("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", "sanity", dummy);
+				Button maxHealth = this.createButton("пїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", "maxhealth", dummy);
+				Button maxSanity = this.createButton("пїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", "maxsanity", dummy);
+				Button bless = this.createButton("пїЅпїЅпїЅпїЅпїЅпїЅ", "bless", dummy);
+				Button retain = this.createButton("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ", "retain", dummy);
+				Button loan = this.createButton("пїЅпїЅпїЅпїЅ", "loan", dummy);
+				Button sheriffBtn = this.createButton("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ", "sheriff", dummy);
 				
 				gPane.add(name, 0, 2 * i);
 				gPane.add(health, 1, 2 * i);
@@ -607,7 +610,7 @@ public final class MainWindowController
 			minus.setMinWidth(100);
 			minus.setOnAction(new PlusMinus(this.barName, false, this.invest));
 			
-			backBtn = new Button("Назад");
+			backBtn = new Button("пїЅпїЅпїЅпїЅпїЅ");
 			backBtn.setMinWidth(225);
 			backBtn.setOnAction(new PaintInvestigatorsList());
 		}
@@ -645,24 +648,24 @@ public final class MainWindowController
 		
 		private void checkVitals()
 		{
-			if((this.invest.getSanity() <= 0 && this.invest.getHealth() <= 0) || invest.getMaxHealth() <= 0 || invest.getMaxSanity() <= 0)
+			if((this.invest.getSanity() <= 0 && this.invest.getStamina() <= 0) || invest.getMaxHealth() <= 0 || invest.getMaxSanity() <= 0)
 			{
 				this.invest.killInvest();
-				Label dummy = new Label("Сыщик " + invest.getName() + " cожран.");
+				Label dummy = new Label("пїЅпїЅпїЅпїЅпїЅ " + invest.getName() + " cпїЅпїЅпїЅпїЅпїЅ.");
 				dummy.setFont(new Font(24));
 				dummy.setTextFill(Color.RED);
 				changeBotPane(dummy);
 				return;
 			}
 				
-			if(this.invest.getHealth() <= 0)
+			if(this.invest.getStamina() <= 0)
 			{
 				this.invest.discardRetain();
 				this.invest.heal();
-				Label dummy = new Label("Сыщик " + invest.getName() + " потерял сознание. "
-						+ " Этот сыщик должен отдать половину вещей на выбор (округление вниз), "
-						+ "а также карты Гонорара, а затем переместиться в больницу св. Марии.\n"
-						+ "Если он в Ином мире, он потерян во времени и пространстве.");
+				Label dummy = new Label("пїЅпїЅпїЅпїЅпїЅ " + invest.getName() + " пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. "
+						+ " пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ), "
+						+ "пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ. пїЅпїЅпїЅпїЅпїЅ.\n"
+						+ "пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.");
 				changeBotPane(dummy);
 			}
 			
@@ -670,10 +673,10 @@ public final class MainWindowController
 			{
 				this.invest.discardRetain();
 				this.invest.addSanity();
-				Label dummy = new Label("Сыщик " + invest.getName() + " упал в обморок. "
-						+ " Этот сыщик должен отдать половину вещей на выбор (округление вниз), "
-						+ "а также карты Гонорара, а затем переместиться в Аркхэмскую лечебницу.\n"
-						+ "Если он в Ином мире, он потерян во времени и пространстве.");
+				Label dummy = new Label("пїЅпїЅпїЅпїЅпїЅ " + invest.getName() + " пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ. "
+						+ " пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ), "
+						+ "пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.\n"
+						+ "пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.");
 				changeBotPane(dummy);
 			}
 			investigatorPaneArrange();
@@ -741,7 +744,7 @@ public final class MainWindowController
 	
 	private class PaintMythosEventsList implements EventHandler<ActionEvent>
 	{
-		private Button backBtn = new Button("Назад");
+		private Button backBtn = new Button("пїЅпїЅпїЅпїЅпїЅ");
 		
 		public PaintMythosEventsList()
 		{
@@ -766,21 +769,21 @@ public final class MainWindowController
 			gPane.setHgap(30);
 			gPane.setVgap(10);
 
-			gPane.add(createMythosEventsButton("doom", "minus", "Снизить безысходность"), 0, 0);
-			gPane.add(createMythosEventsButton("doom", "plus", "Увеличить безысходность"), 1, 0);
-			gPane.add(createMythosEventsButton("terror", "minus", "Снизить ужас"), 0, 1);
-			gPane.add(createMythosEventsButton("terror", "plus", "Увеличить ужас"), 1, 1);
-			gPane.add(createMythosEventsButton("gate", "open", "Открыть Врата"), 0, 2);
-			gPane.add(createMythosEventsButton("gate", "surge", "Нашествие монстров"), 1, 2);
-			gPane.add(createMythosEventsButton("gate", "close", "Закрыть Врата"), 0, 3);
-			gPane.add(createMythosEventsButton("gate", "seal", "Запечатать Врата"), 1, 3);
-			Button elderSign = createMythosEventsButton("gate", "eldersign", "Знак Древних");
+			gPane.add(createMythosEventsButton("doom", "minus", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"), 0, 0);
+			gPane.add(createMythosEventsButton("doom", "plus", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"), 1, 0);
+			gPane.add(createMythosEventsButton("terror", "minus", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ"), 0, 1);
+			gPane.add(createMythosEventsButton("terror", "plus", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ"), 1, 1);
+			gPane.add(createMythosEventsButton("gate", "open", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ"), 0, 2);
+			gPane.add(createMythosEventsButton("gate", "surge", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"), 1, 2);
+			gPane.add(createMythosEventsButton("gate", "close", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ"), 0, 3);
+			gPane.add(createMythosEventsButton("gate", "seal", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ"), 1, 3);
+			Button elderSign = createMythosEventsButton("gate", "eldersign", "пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 			elderSign.setMinWidth(430);
 			gPane.add(elderSign, 0, 4);
 			GridPane.setColumnSpan(elderSign, 2);
 			
-			gPane.add(createMythosEventsButton("monster", "spawn", "Добавить монстра"), 0, 6);
-			gPane.add(createMythosEventsButton("monster", "kill", "Убить монстра"), 1, 6);
+			gPane.add(createMythosEventsButton("monster", "spawn", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ"), 0, 6);
+			gPane.add(createMythosEventsButton("monster", "kill", "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ"), 1, 6);
 
 			gPane.add(backBtn, 0, 12);
 			GridPane.setColumnSpan(backBtn, 2);
@@ -807,7 +810,7 @@ public final class MainWindowController
 			
 			if(fw.isAwaken())
 			{
-				Label dummy = new Label(fw.getAncientOne().getName() + " пробудился!");
+				Label dummy = new Label(fw.getAncientOne().getName() + " пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
 				dummy.setFont(new Font(24));
 				dummy.setTextFill(Color.RED);
 				changeBotPane(dummy);
@@ -816,8 +819,8 @@ public final class MainWindowController
 			
 			if(fw.getElderSignsOnMap() >= 6)
 			{
-				Label dummy = new Label("Вы победили!\nНа карте есть 6 Знаков Древних, а значит Аркхэм "
-						+ "отгорожен от посягательств Мифоса навсегда.");
+				Label dummy = new Label("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!\nпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ 6 пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ "
+						+ "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.");
 				dummy.setFont(new Font(20));
 				dummy.setTextFill(Color.GREEN);
 				changeBotPane(dummy);
@@ -827,32 +830,32 @@ public final class MainWindowController
 			if(action.equals("surge"))
 			{
 				int monsters = 0;
-				if(fw.getPlayers() > fw.getGateNum())
+				if(fw.getPlayers() > fw.getGateCount())
 					monsters = fw.getPlayers();
 				else
-					monsters = fw.getGateNum();
-				report = "Нашествие монстров! Распределите по открытым вратам " + monsters + " монстров.\n";
+					monsters = fw.getGateCount();
+				report = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ! пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ " + monsters + " пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.\n";
 			}
 			
-			report += (fw.getAncientOne().getAwakening() - fw.getDoomTrack()) + " раундов до пробуждения Древнего.\n";
+			report += (fw.getAncientOne().getAwakening() - fw.getDoomLevel()) + " пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.\n";
 			
 			if(fw.isMapLimit())
-				report += "Достигнут лимит монстров на карте, следующих кладите на Окраины.\n";
+				report += "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.\n";
 			
 			if(fw.isOutskirtsLimit())
-				report += "Достигнут предел окраин. Уберите всех монстров с окраин в пул (в том числе с Неба).\n";
+				report += "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ (пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ).\n";
 			
 			if(fw.isTerrorRaised())
-				report += "Уровень ужаса повысился. Уберите из колоды спутников 1 карту.\n";
+				report += "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 1 пїЅпїЅпїЅпїЅпїЅ.\n";
 			
 			if(fw.getTerrorLevel() >= 3)
 			{
-				report += "Закрыт магазин";
+				report += "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
 				if(fw.getTerrorLevel() >= 6)
 				{
-					report += ", лавка древностей";
+					report += ", пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
 					if(fw.getTerrorLevel() >= 9)
-						report += " и \"Старинная лавка волшбы\"";
+						report += " пїЅ \"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ\"";
 				}
 				report += ".\n";
 			}
@@ -860,8 +863,8 @@ public final class MainWindowController
 			if(fw.getTerrorLevel() >= 10)
 			{
 				fw.cancelOutskirtsLimit();
-				report += "Уровень ужаса достигнут максимума. Верните всех монстров с окраин в пул."
-						+ " Лимит монстров на окраинах больше не действует.\n";
+				report += "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ."
+						+ " пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.\n";
 			}
 			
 			Label dummy = new Label(report);

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="CircularLinkedList">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/ArkhamReminders/lib/CircularLinkedList.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

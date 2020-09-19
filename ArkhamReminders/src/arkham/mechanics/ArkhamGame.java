@@ -1,115 +1,88 @@
 package arkham.mechanics;
 
+import sanchopansa.list.CircularLinkedList;
 import java.util.ArrayList;
-import list.CircularLinkedList;
 
 /**
  * This class represents a game instance and contains most of its features: players, monsters, 
  * open gates, and various mechanisms created to control these parameters.
  * @author SanchoPansa
- *
  */
 
-public class ArkhamGame
-{
-	private int players;
-	private CircularLinkedList<Investigator> cll;
+public class ArkhamGame {
+	private int playerCount;
+	private CircularLinkedList<Investigator> playersList;
 	private AncientOne ancientOne;
 	
-	private boolean AncientAwaken = false;
-	private boolean mapLimitBreached = false;
-	private boolean outskirtsLimitBreached = false;
-	private boolean terrorRaised = false;
-	
-	private int clueNum = 5;
-	private int gateNum = 0;
-	private int monstersOnMap = 0;
-	private int outskirtsMonsters = 0;
+	private int gateCount = 0;
+	private int mapMonsterCount = 0;
+	private int outMonsterCount = 0;
 	private int gateLimit;
 	private int monsterLimit;
 	private int outskirtsLimit;
 	private int terrorLevel = 0;
-	private int doomTrack = 0;
-	private int addedMonsters;
+	private int doomLevel = 0;
+
+	// Flags and game states
+	private boolean activeEnvironment = false;
+	private boolean activeRumor = false;
+	//private int monstersPerGate;
 	
 	// Victory conditions
 	private int elderSignsOnMap = 0;
 	
 	/**
-	 * Constructs an instance of Arkham Horror game.
-	 * Non-zero and less than 9 player number is required
-	 * @param players
+	 * Constructs an instance of Arkham Horror game
+	 * @param players Number of players in instance of Game
 	 */
-	
 	public ArkhamGame(int players)
 	{
-		setPlayers(players);
+		setPlayersList(players);
 	}
 	
 	/**
 	 * Returns the number of players in game
-	 * @return
+	 * @return Number of players
 	 */
-	public int getPlayers()
+	public int getPlayersList()
 	{
-		return players;
+		return playerCount;
 	}
 	
 	/**
-	 * Sets the number of players. Note, there can be from 1 to 8 players, 
-	 * any other number will be mistake and will throw exception
-	 * @param players
-	 * @throws IllegalArgumentException
+	 * Sets the number of players. Depending on number of player sets gate and monster limits
+	 * There can be from 1 to 8 players. Any other value will throw an error
+	 * @param playersList Number of Players
+	 * @throws IllegalArgumentException If player count is not between 1 and 8
 	 */
-	public void setPlayers(int players)
+	public void setPlayersList(int playersList)
 	{
-		if(players <= 0 || players > 8)
+		if(playersList <= 0 || playersList > 8)
 			throw new IllegalArgumentException("Incorrect number of players");
-		this.players = players;
+		this.playerCount = playersList;
 		
-		this.monsterLimit = this.players + 3;
-		this.outskirtsLimit = 8 - this.players;
-		this.gateLimit = 9 - (int) (Math.ceil((this.players) / 2.0));
+		this.monsterLimit = this.playerCount + 3;
+		this.outskirtsLimit = 8 - this.playerCount;
+		this.gateLimit = 9 - (int) (Math.ceil((this.playerCount) / 2.0));
 	}
 	
 	/**
 	 * This function initializes Investigators by their names and then puts instances of 
 	 * Investigator class into circular linked list
-	 * @param names
+	 * @param names Array of Investigator's names
 	 */
 	public void setInvestigators(ArrayList<String> names)
 	{
-		this.cll = new CircularLinkedList<>();
+		playersList = new CircularLinkedList<>();
 		for(String x : names)
 		{
-			cll.push(new Investigator(x));
+			playersList.push(new Investigator(x));
 		}
-		cll = cll.revert();
 	}
-	
-	/**
-	 * Initializes instance of AncientOne class by its name put as argument of function
-	 * @param name
-	 */
-	public void setAncientOne(String name)
-	{
-		this.ancientOne = new AncientOne(name);
-		if(name.equals("������"))
-			this.clueNum = 8;
-	}
-	
-	/**
-	 * Sets an limit of monsters in outskirts to positive infinity (in Integer representation) 
-	 * if terror level is 10 or more
-	 */
-	public void cancelOutskirtsLimit()
-	{
-		this.outskirtsLimit = (int) Double.POSITIVE_INFINITY;
-	}
-	
+
 	/**
 	 * Returns Ancient One of this game.
-	 * @return
+	 * @return AncientOne class instance
 	 */
 	public AncientOne getAncientOne()
 	{
@@ -117,12 +90,21 @@ public class ArkhamGame
 	}
 	
 	/**
-	 * Returns the number of clue investigator needs to seal the Gate. It changes, if Ancient One 
-	 * is Hastur.
-	 * @return
+	 * Initializes instance of AncientOne class by its name put as argument of function
+	 * @param name Name of Ancient One
 	 */
-	public int getClueNum() {
-		return clueNum;
+	public void setAncientOne(String name)
+	{
+		this.ancientOne = new AncientOne(name);
+	}
+
+	/**
+	 * Sets Ancient One by instance of class AncientOne
+	 * @param ancientOne instance of AncientOne class
+	 */
+	public void setAncientOne(AncientOne ancientOne)
+	{
+		this.ancientOne = ancientOne;
 	}
 	
 	/**
@@ -131,12 +113,12 @@ public class ArkhamGame
 	 */
 	public CircularLinkedList<Investigator> getCList()
 	{
-		return this.cll;
+		return this.playersList;
 	}
 	
 	/**
 	 * Returns current terror level in Arkham
-	 * @return
+	 * @return Terror level as number
 	 */
 	public int getTerrorLevel() {
 		return this.terrorLevel;
@@ -144,7 +126,7 @@ public class ArkhamGame
 
 	/**
 	 * Returns Gate limit in this game. It depends on number of players
-	 * @return
+	 * @return Gate limit for current game
 	 */
 	public int getGateLimit() {
 		return gateLimit;
@@ -152,40 +134,32 @@ public class ArkhamGame
 
 	/**
 	 * Returns monster limit in this game. It depends on number of players
-	 * @return
+	 * @return Capacity of main map for monsters
 	 */
 	public int getMonsterLimit() {
 		return monsterLimit;
 	}
 
 	/**
-	 * Returns
-	 * @return
+	 * Returns number of monsters on main map
+	 * @return Quantity of monsters on the main map
 	 */
-	public int getMonstersOnMap() {
-		return monstersOnMap;
+	public int getMapMonsterCount() {
+		return mapMonsterCount;
 	}
 
 	/**
-	 * Returns number of monsters on the outskirts
-	 * @return
+	 * Returns number of monsters in the Outskirts
+	 * @return Number of monsters in the Outskirts location
 	 */
-	public int getMonsteronOutskirts()
+	public int getOutMonsterCount()
 	{
-		return this.outskirtsMonsters;
+		return this.outMonsterCount;
 	}
 	
 	/**
-	 * Returns number of monsters, which were created by Monster surge
-	 * @return
-	 */
-	public int getAddedMonsters() {
-		return addedMonsters;
-	}
-
-	/**
 	 * Returns limit of monsters in the Outskirts. Depends on number of players
-	 * @return
+	 * @return Capacity of Outskirts
 	 */
 	public int getOutskirtsLimit() {
 		return outskirtsLimit;
@@ -193,103 +167,53 @@ public class ArkhamGame
 
 	/**
 	 * Returns current state of Doom track. If it exceeds monster Awakening, then the Ancient One is here.
-	 * @return
+	 * @return Number of Doom tokens
 	 */
-	public int getDoomTrack() {
-		return doomTrack;
+	public int getDoomLevel() {
+		return doomLevel;
 	}
 
 	/**
 	 * Returns current number of opened Gates
-	 * @return
+	 * @return Number of opened Gates on map
 	 */
-	public int getGateNum()
+	public int getGateCount()
 	{
-		return this.gateNum;
+		return this.gateCount;
 	}
 	
 	/**
 	 * Returns current number of Elder Signs on map. If number of the exceeds 6, game is won.
-	 * @return
+	 * @return Number of placed Elder Signs
 	 */
 	public int getElderSignsOnMap() {
 		return elderSignsOnMap;
 	}
 	
 	/**
-	 * Returns true, if number of monsters in Arkham exceeds appropriate limit
-	 * @return
-	 */
-	public boolean isMapLimit()
-	{
-		if(this.mapLimitBreached)
-		{
-			this.mapLimitBreached = false;
-			return true;
-		}
-		else
-			return this.mapLimitBreached;
-	}
-	
-	/**
-	 * Returns true, if number of monsters in the Outskirts exceeds relevant limit
-	 * @return
-	 */
-	public boolean isOutskirtsLimit()
-	{
-		if(this.outskirtsLimitBreached)
-		{
-			this.outskirtsLimitBreached = false;
-			return true;
-		}
-		return this.outskirtsLimitBreached;
-	}
-	
-	/**
-	 * Returns true, if level of terror raised
-	 * @return
-	 */
-	public boolean isTerrorRaised()
-	{
-		if(this.terrorRaised)
-		{
-			this.terrorRaised = false;
-			return true;
-		}
-		return this.terrorRaised;
-	}
-	
-	/**
-	 * Returns true, if Doom track reaches specific for every Ancient One number, which mean, 
-	 * that Mythos is awakened.
-	 * @return
+	 * Checks condition for awakening of boss
+	 * @return true, if doom track of game equals of exceeds doom track of Ancient One
 	 */
 	public boolean isAwaken()
 	{
-		return this.AncientAwaken;
+		return this.ancientOne.getAwakening() >= this.doomLevel;
 	}
 
 	/**
-	 * Emulates process of creating Gate in Arkham. 
+	 * Creates a Gate
 	 * If there were no Gate, then it increments number of Gates and spawns 1-2 monsters
 	 * If there was a Gate, then in initiates Monster Surge
-	 * @param isThereGate
+	 * @param isThereGate true, if location already has a placed Gate
 	 */
 	public void createGate(boolean isThereGate)
 	{
-		this.addedMonsters = 0;
-		if(isThereGate)
-			for(int i = 0; i < players || i < this.gateNum; i++)
-			{
-				this.addedMonsters++;
-				this.spawnMonster();
-			}
+		if(isThereGate) // Monster Surge
+			for(int i = 0; i < Integer.max(playerCount, gateCount); i++)
+				spawnMonster();
 		else
 		{
-			this.gateNum++;
-			if(gateNum > this.gateLimit)
-				this.AncientAwaken = true;
-			if(players > 4)
+			gateCount++;
+			if(playerCount > 4)
 			{
 				this.spawnMonster();
 			}
@@ -298,81 +222,41 @@ public class ArkhamGame
 	}
 	
 	/**
-	 * This function decrements number of Gates on map (unless it is more than zero)
-	 */
-	public void closeGate()
-	{
-		if(this.gateNum > 0)
-			this.gateNum--;
-	}
-	
-	/**
 	 * This function emulates process of sealing of the Gate. If parameter is true 
 	 * it is the Elder Sign is used to close the Gate.
-	 * @param hasElderSign
+	 * @param elderSign is Elder Sign item used?
 	 */
-	public void sealGate(boolean hasElderSign)
-	{
-		if(hasElderSign)
-		{
-			this.gateNum--;
-			this.elderSignsOnMap++;
-			this.doomTrack--;
-		}
-		else
-		{
-			this.gateNum--;
-			this.elderSignsOnMap++;
+	public void closeGate(boolean elderSign) {
+		if(elderSign) {
+			gateCount--;
+			elderSignsOnMap++;
+			doomLevel--;
+		} else {
+			gateCount--;
 		}
 	}
 	
 	/**
-	 * This function spawns a monster and observes, whether limit of monsters in Arkham or the Outskirts is 
-	 * breached.
+	 * Spawns a monster and observes, whether limit of monsters in Arkham or the Outskirts is breached.
 	 */
 	public void spawnMonster()
 	{
-		this.addedMonsters = 0;
-		if(this.monsterLimit > this.monstersOnMap)
-			this.monstersOnMap++;
-		if(this.monstersOnMap > this.monsterLimit)
-		{
-			this.mapLimitBreached = true;
-			this.addOutskirtsMonster();
+		if(mapMonsterCount > monsterLimit) {
+			if (outMonsterCount >= outskirtsLimit) {
+				outMonsterCount = 0;
+				addTerrorLevel();
+			} else
+				outMonsterCount++;
 		}
-		System.out.println(this.monstersOnMap);
+		mapMonsterCount++;
 	}
 	
 	/**
-	 * This function kill monster in Arkham (monsters in Outskirts are untargetable)
+	 * Kill a monster from the main map
 	 */
 	public void killMonster()
 	{
-		this.monstersOnMap--;
-	}
-	
-	/**
-	 * Increments number of monsters in Outskirts area, unless their number exceeds corresponding limit
-	 */
-	public void addOutskirtsMonster()
-	{
-		this.outskirtsMonsters++;
-		if(this.outskirtsMonsters > this.outskirtsLimit && this.terrorLevel < 10)
-		{
-			this.outskirtsMonsters = 0;
-			this.addTerrorLevel();
-			this.outskirtsLimitBreached = true;
-			System.out.println("Limit breached");
-		}
-	}
-	
-	/**
-	 * This function decrements number of monsters in Outskirts. It is used if Flying monster 
-	 * is returning to the Arkham
-	 */
-	public void minusOutskirtsMonster()
-	{
-		this.outskirtsMonsters--;
+		this.mapMonsterCount--;
 	}
 	
 	/**
@@ -382,7 +266,6 @@ public class ArkhamGame
 	public void addTerrorLevel()
 	{
 		this.terrorLevel++;
-		this.terrorRaised = true;
 		if(this.terrorLevel >= 10)
 			this.addDoom();
 	}
@@ -400,9 +283,7 @@ public class ArkhamGame
 	 */
 	public void addDoom()
 	{
-		this.doomTrack++;
-		if(this.doomTrack >= this.ancientOne.getAwakening())
-			this.AncientAwaken = true;
+		this.doomLevel++;
 	}
 	
 	/**
@@ -410,7 +291,29 @@ public class ArkhamGame
 	 */
 	public void minusDoom()
 	{
-		if(this.doomTrack >= 0)
-			this.doomTrack--;
+		if(this.doomLevel >= 0)
+			this.doomLevel--;
+	}
+
+	public boolean isActiveEnvironment() {
+		return activeEnvironment;
+	}
+
+	public void setActiveEnvironment(boolean activeEnvironment) {
+		this.activeEnvironment = activeEnvironment;
+	}
+
+	public boolean isActiveRumor() {
+		return activeRumor;
+	}
+
+	public void setActiveRumor(boolean activeRumor) {
+		this.activeRumor = activeRumor;
+	}
+
+	@Override
+	public String toString() {
+		// TODO: Достаточное описание игры через toString()
+		return "";
 	}
 }

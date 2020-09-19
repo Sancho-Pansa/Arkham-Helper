@@ -3,6 +3,7 @@ package gui;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import arkham.mechanics.ArkhamGame;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -27,7 +28,7 @@ import mechanics.*;
 
 public final class SetPlayersWindowController 
 {
-	private Framework fw;
+	private ArkhamGame fw;
 	private Scene scene;
 	
 	private BorderPane bPane;
@@ -48,7 +49,7 @@ public final class SetPlayersWindowController
 	 * @param fw
 	 * @param scene
 	 */
-	public SetPlayersWindowController(Framework fw, Scene scene)
+	public SetPlayersWindowController(ArkhamGame fw, Scene scene)
 	{
 		this.fw = fw;
 		this.scene = scene;
@@ -62,33 +63,33 @@ public final class SetPlayersWindowController
 		bPane = new BorderPane();
 		gPane = new GridPane();
 		
-		label = new Label("Введите имена сыщиков и Древнего");
+		label = new Label("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 		label.setFont(new Font(24));
 		label.setPadding(new Insets(20, 20, 40, 300));
 		
 		ARLabel = new ArrayList<>();
 		ARField = new ArrayList<>();
 
-		ancientTField = new TextField("Азатот");
+		ancientTField = new TextField("пїЅпїЅпїЅпїЅпїЅпїЅ");
 		ancientTField.setPrefWidth(250);
 		 
 		for(int i = 0; i < fw.getPlayers(); i++)
 		{
-			ARLabel.add(new Label("Игрок " + (i + 1) + ": "));
+			ARLabel.add(new Label("пїЅпїЅпїЅпїЅпїЅ " + (i + 1) + ": "));
 			gPane.add(ARLabel.get(i), 0, i);
 			//TODO Delete string in constructor after tests!
-			TextField dummy = new TextField("Аманда");
+			TextField dummy = new TextField("пїЅпїЅпїЅпїЅпїЅпїЅ");
 			dummy.setPrefWidth(250);
 			ARField.add(dummy);
 			gPane.add(ARField.get(i), 1, i);
 		}		
 
-		gPane.add(new Label("Древний: "), 0, fw.getPlayers() + 10);
+		gPane.add(new Label("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: "), 0, fw.getPlayers() + 10);
 		gPane.add(ancientTField, 1, fw.getPlayers() + 10);
 		
 		okButton = new Button("OK");
 		okButton.setMinWidth(250);
-		backButton = new Button("Назад");
+		backButton = new Button("пїЅпїЅпїЅпїЅпїЅ");
 		okButton.setOnAction(this::playerNamesEntered);
 		backButton.setOnAction(this::backPressed);
 		gPane.add(backButton, 0, fw.getPlayers() + 15);

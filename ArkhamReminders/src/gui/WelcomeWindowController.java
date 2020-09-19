@@ -1,5 +1,6 @@
 package gui;
 
+import arkham.mechanics.ArkhamGame;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -15,7 +16,7 @@ import mechanics.*;
 
 public class WelcomeWindowController
 {	
-	private Framework fw; 
+	private ArkhamGame fw;
 	
 	@FXML
 	private TextField numField;
@@ -37,7 +38,7 @@ public class WelcomeWindowController
 			return;
 		else
 		{
-			this.fw = new Framework(new Integer(this.numField.getText()));
+			this.fw = new ArkhamGame(new Integer(this.numField.getText()));
 			new SetPlayersWindowController(this.fw, this.numField.getScene()).arrangeWindow();
 		}
 		System.out.println("Correct input");
