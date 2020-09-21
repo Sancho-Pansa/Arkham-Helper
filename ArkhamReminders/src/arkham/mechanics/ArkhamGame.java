@@ -26,6 +26,8 @@ public class ArkhamGame {
 	// Flags and game states
 	private boolean activeEnvironment = false;
 	private boolean activeRumor = false;
+
+	private boolean closedLocation = false;
 	//private int monstersPerGate;
 	
 	// Victory conditions
@@ -199,6 +201,14 @@ public class ArkhamGame {
 		return this.ancientOne.getAwakening() >= this.doomLevel;
 	}
 
+	public boolean isClosedLocation() {
+		return closedLocation;
+	}
+
+	public void setClosedLocation(boolean closedLocation) {
+		this.closedLocation = closedLocation;
+	}
+
 	/**
 	 * Creates a Gate
 	 * If there were no Gate, then it increments number of Gates and spawns 1-2 monsters
@@ -266,8 +276,10 @@ public class ArkhamGame {
 	public void addTerrorLevel()
 	{
 		this.terrorLevel++;
-		if(this.terrorLevel >= 10)
+		if(this.terrorLevel >= 10) {
+			monsterLimit = Integer.MAX_VALUE;
 			this.addDoom();
+		}
 	}
 	
 	/**
@@ -309,6 +321,37 @@ public class ArkhamGame {
 
 	public void setActiveRumor(boolean activeRumor) {
 		this.activeRumor = activeRumor;
+	}
+
+	/**
+	 * Returns String with comprehensive information about current state of the game.
+	 * This includes: Number of Gates, Number of Monsters both on Map and in Outskirts, Terror Track and collateral
+	 * info about closed Locations, Doom Track, active Process and/or Rumor. Every piece of info is separated via
+	 * return symbol.
+	 * @return String with current game state description
+	 */
+	public String getState() {
+		StringBuilder info = new StringBuilder();
+
+		// Doom Track:
+		info.append(String.format("Уровень безысходности: %d / %d\n", this.doomLevel, this.ancientOne.getAwakening()));
+		info.append(String.format("Врат: %d / %d\n", this.gateCount, this.gateLimit));
+		info.append(String.format("Монстров на карте: %d / %d\n", this.mapMonsterCount, this.monsterLimit));
+		info.append(String.format("Монстров на Окраинах: %d / %d\n", this.outMonsterCount, this.outskirtsLimit));
+		info.append(String.format("Уровень ужаса: %d / 10\n", this.terrorLevel));
+		if(terrorLevel >= 3)
+			info.append("Магазин закрыт\n");
+		if(terrorLevel >= 6)
+			info.append("Лавка древностей закрыта\n");
+		if(terrorLevel >= 9)
+			info.append("Старинная лавка волшбы закрыта\n");
+		if(terrorLevel >= 10)
+			info.append("Лимит монстров снят\n");
+		if(this.activeEnvironment)
+			info.append("Активный Процесс\n");
+		if(this.activeRumor)
+			info.append("Активный Слух\n");
+		return info.toString();
 	}
 
 	@Override
