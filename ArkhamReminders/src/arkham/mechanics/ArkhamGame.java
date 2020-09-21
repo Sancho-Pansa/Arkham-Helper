@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class ArkhamGame {
 	private int playerCount;
 	private CircularLinkedList<Investigator> playersList;
-	private AncientOne ancientOne;
+	private AncientOne ancientOne = new AncientOne("Азатот");
 	
 	private int gateCount = 0;
 	private int mapMonsterCount = 0;
@@ -198,7 +198,7 @@ public class ArkhamGame {
 	 */
 	public boolean isAwaken()
 	{
-		return this.ancientOne.getAwakening() >= this.doomLevel;
+		return this.ancientOne.getAwakening() <= this.doomLevel;
 	}
 
 	public boolean isClosedLocation() {
@@ -223,6 +223,7 @@ public class ArkhamGame {
 		else
 		{
 			gateCount++;
+			addDoom();
 			if(playerCount > 4)
 			{
 				this.spawnMonster();
