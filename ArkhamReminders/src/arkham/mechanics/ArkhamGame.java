@@ -41,7 +41,11 @@ public class ArkhamGame {
 	{
 		setPlayersList(players);
 	}
-	
+
+	public ArkhamGame(int players, AncientOne ancientOne) {
+		setPlayersList(players);
+		this.ancientOne = ancientOne;
+	}
 	/**
 	 * Returns the number of players in game
 	 * @return Number of players
