@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class ArkhamGame {
 	private int playerCount;
 	private CircularLinkedList<Investigator> playersList;
-	private AncientOne ancientOne = new AncientOne("Азатот");
+	private AncientOne ancientOne;
 	
 	private int gateCount = 0;
 	private int mapMonsterCount = 0;
@@ -101,7 +101,7 @@ public class ArkhamGame {
 	 */
 	public void setAncientOne(String name)
 	{
-		this.ancientOne = new AncientOne(name);
+		//this.ancientOne = new AncientOne();
 	}
 
 	/**

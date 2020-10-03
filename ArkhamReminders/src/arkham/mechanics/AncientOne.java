@@ -16,17 +16,25 @@ public class AncientOne
 	private String followers;
 	private String featName;
 	private String featDesc;
-	
-	
-	public AncientOne(String name)
-	{
-		this.setName(name);
-	}
 
 	public AncientOne(String name, int awakening, Set<AncientTypes> types) {
 		this.name = name;
 		this.awakening = awakening;
 		this.types = types;
+	}
+
+	public AncientOne(String name,
+					  int awakening,
+					  Set<AncientTypes> types,
+					  String followers,
+					  String featName,
+					  String featDesc) {
+		this.name = name;
+		this.awakening = awakening;
+		this.types = types;
+		this.followers = followers;
+		this.featName = featName;
+		this.featDesc = featDesc;
 	}
 
 	public void setName(String name)
@@ -49,6 +57,10 @@ public class AncientOne
 		return types;
 	}
 
+	public void setTypes(Set<AncientTypes> types) {
+		this.types = types;
+	}
+
 	public String getFollowers()
 	{
 		return followers;
@@ -64,14 +76,15 @@ public class AncientOne
 		return featDesc;
 	}
 
-	public enum AncientTypes {
-		NONE,
-		SPAWN,
-		INVESTIGATOR_RELATED,
-		MONSTER_RELATED,
-		GATE_RELATED,
-		MAP_RELATED,
-		ENVIRONMENT_RELATED
+	public void setFollowers(String followers) {
+		this.followers = followers;
 	}
 
+	public void setFeatName(String featName) {
+		this.featName = featName;
+	}
+
+	public void setFeatDesc(String featDesc) {
+		this.featDesc = featDesc;
+	}
 }

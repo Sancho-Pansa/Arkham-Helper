@@ -6,6 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/ArkhamReminders/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/test/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/resources" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/ArkhamReminders/src/gui" />
       <excludeFolder url="file://$MODULE_DIR$/ArkhamReminders/src/sql" />
     </content>

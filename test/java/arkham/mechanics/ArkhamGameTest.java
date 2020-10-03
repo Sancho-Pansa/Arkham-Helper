@@ -22,11 +22,11 @@ public class ArkhamGameTest {
         ArkhamGame ag = new ArkhamGame(5, new AncientOne(
                 "Азатот",
                 16,
-                new HashSet<>(Arrays.asList(AncientOne.AncientTypes.NONE))
+                new HashSet<>(Arrays.asList(AncientTypes.NONE))
         ));
-        AncientOne.AncientTypes a = null;
-        for(AncientOne.AncientTypes x: ag.getAncientOne().getTypes())
+        AncientTypes a = null;
+        for(AncientTypes x: ag.getAncientOne().getTypes())
             a = x;
-        assertEquals(a, AncientOne.AncientTypes.NONE);
+        assertEquals(a, AncientTypes.NONE);
     }
 }
