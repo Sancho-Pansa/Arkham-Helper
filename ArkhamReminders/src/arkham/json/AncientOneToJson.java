@@ -17,10 +17,11 @@ public class AncientOneToJson {
 
         String result = gson.toJson(ao);
 
-        try(FileWriter fw = new FileWriter("AncientOnes.json", true)) {
+        try(FileWriter fw = new FileWriter("resources/AncientOnes.json", true)) {
             fw.write(result);
             fw.append(',');
             fw.append('\n');
+            fw.flush();
         } catch (IOException e) {
             System.err.println("Error occurred during writing into AncientOnes.json");
             e.printStackTrace();

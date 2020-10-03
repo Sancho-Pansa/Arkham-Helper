@@ -9,14 +9,11 @@ import java.util.HashSet;
 
 import static org.junit.Assert.*;
 
-public class AncientOneToJsonTest {
+public class AncientOneFromJsonTest {
 
     @Test
     public void convertAncientOne() {
-        AncientOne ao = new AncientOne(
-                "Хастур",
-                12,
-                new HashSet<>(Arrays.asList(AncientTypes.MAP_RELATED)));
-        assertTrue(AncientOneToJson.convertAncientOne(ao));
+        AncientOne ao = AncientOneFromJson.getAncientOne();
+        assertEquals("Хастур", ao.getName());
     }
 }
