@@ -2,6 +2,6 @@
 /.metadata/
 */.gitignore
 */.*
-!*/.project
-!*/.classpath
+!.project
+!.classpath
 *.jar
