@@ -19,7 +19,6 @@ public class AncientOneToJson {
 
         try(FileWriter fw = new FileWriter("resources/AncientOnes.json", true)) {
             fw.write(result);
-            fw.append(',');
             fw.append('\n');
             fw.flush();
         } catch (IOException e) {
