@@ -87,4 +87,28 @@ public class AncientOne
 	public void setFeatDesc(String featDesc) {
 		this.featDesc = featDesc;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder sbuilder = new StringBuilder();
+		sbuilder
+				.append(getClass().getName())
+				.append("@")
+				.append(Integer.toHexString(hashCode()))
+				.append(this.hashCode())
+				.append("\n")
+				.append("Name: ")
+				.append(this.name)
+				.append("\nDoom track: ")
+				.append(this.awakening)
+				.append("\nTypes: ")
+				.append(this.types.toString())
+				.append("\nFollowers: ")
+				.append(this.followers)
+				.append("\nFeature name: ")
+				.append(this.featName)
+				.append("\nFeature description: ")
+				.append(this.featDesc);
+		return sbuilder.toString();
+	}
 }

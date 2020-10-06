@@ -43,6 +43,6 @@ public class AncientEditor {
                 featureDesc
         );
 
-        AncientOneToJson.convertAncientOne(ao);
+        System.out.println(ao.toString());
     }
 }
