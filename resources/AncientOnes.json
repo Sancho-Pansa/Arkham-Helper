@@ -11,9 +11,22 @@
   },
   {
     "name": "Хастур",
-    "awakening": 12,
+    "awakening": 13,
     "types": [
-      "MAP_RELATED"
-    ]
+      "GATE_RELATED"
+    ],
+    "followers": "Культисты",
+    "featName": "Король в желтом",
+    "featDesc": "Сыщикам нужны 8 улик (вместо 5), чтобы запечатать врата."
+  },
+  {
+    "name": "Ктулху",
+    "awakening": 13,
+    "types": [
+      "INVESTIGATOR_RELATED"
+    ],
+    "followers": "Культисты",
+    "featName": "Сны безумия",
+    "featDesc": "Предельные значения рассудка и здоровья сыщиков на 1 меньше обычного."
   }
 ]
