@@ -1,6 +1,5 @@
 package arkham.mechanics;
 
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -11,7 +10,7 @@ import java.util.Set;
 public class AncientOne
 {
 	private String name;
-	private int awakening;
+	private final int awakening;
 	private Set<AncientTypes> types;
 	private String followers;
 	private String featName;
@@ -90,8 +89,8 @@ public class AncientOne
 
 	@Override
 	public String toString() {
-		StringBuilder sbuilder = new StringBuilder();
-		sbuilder
+		StringBuilder sBuilder = new StringBuilder();
+		sBuilder
 				.append(getClass().getName())
 				.append("@")
 				.append(Integer.toHexString(hashCode()))
@@ -109,6 +108,6 @@ public class AncientOne
 				.append(this.featName)
 				.append("\nFeature description: ")
 				.append(this.featDesc);
-		return sbuilder.toString();
+		return sBuilder.toString();
 	}
 }

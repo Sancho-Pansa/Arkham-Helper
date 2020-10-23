@@ -1,7 +1,6 @@
 /.recommenders
 /.metadata/
 */.gitignore
-*/.*
 !.project
 !.classpath
 *.jar

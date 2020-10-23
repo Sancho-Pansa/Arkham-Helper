@@ -17,6 +17,6 @@ public class AncientOneToJsonTest {
                 "Хастур",
                 12,
                 new HashSet<>(Arrays.asList(AncientTypes.MAP_RELATED)));
-        assertTrue(AncientOneToJson.convertAncientOne(ao));
+        assertTrue(AncientOneToJson.convertAncientOne(ao, null));
     }
 }
