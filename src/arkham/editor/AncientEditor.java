@@ -75,7 +75,8 @@ public class AncientEditor {
         sc.close();
 
         // JSON part
-        boolean resultFlag = AncientOneToJson.convertAncientOne(ao, filepath);
+        AncientOneJson aoJson = new AncientOneJson(filepath);
+        boolean resultFlag = aoJson.add(ao);
         System.out.println(resultFlag);
     }
 }

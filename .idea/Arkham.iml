@@ -8,7 +8,6 @@
       <sourceFolder url="file://$MODULE_DIR$/test/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/resources" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/src/gui" />
-      <excludeFolder url="file://$MODULE_DIR$/src/sql" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -16,5 +15,6 @@
     <orderEntry type="library" name="junit:junit:4.13" level="project" />
     <orderEntry type="library" name="com.google.code.gson:gson:2.8.6" level="project" />
     <orderEntry type="library" name="commons-cli:commons-cli:1.4" level="project" />
+    <orderEntry type="library" name="org.jetbrains:annotations:20.0.0" level="project" />
   </component>
 </module>
