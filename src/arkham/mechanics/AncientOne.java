@@ -1,5 +1,6 @@
 package arkham.mechanics;
 
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -109,5 +110,19 @@ public class AncientOne
 				.append("\nFeature description: ")
 				.append(this.featDesc);
 		return sBuilder.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		AncientOne that = (AncientOne) o;
+		return awakening == that.awakening &&
+				name.equals(that.name);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, awakening);
 	}
 }
