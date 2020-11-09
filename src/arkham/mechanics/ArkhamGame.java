@@ -1,7 +1,7 @@
 package arkham.mechanics;
 
 import sanchopansa.list.CircularLinkedList;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class represents a game instance and contains most of its features: players, monsters, 
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class ArkhamGame {
 	private int playerCount;
 	private CircularLinkedList<Investigator> playersList;
-	private AncientOne ancientOne;
+	private final AncientOne ancientOne;
 	
 	private int gateCount = 0;
 	private int mapMonsterCount = 0;
@@ -32,15 +32,6 @@ public class ArkhamGame {
 	
 	// Victory conditions
 	private int elderSignsOnMap = 0;
-	
-	/**
-	 * Constructs an instance of Arkham Horror game
-	 * @param players Number of players in instance of Game
-	 */
-	public ArkhamGame(int players)
-	{
-		setPlayersList(players);
-	}
 
 	public ArkhamGame(int players, AncientOne ancientOne) {
 		setPlayersList(players);
@@ -77,10 +68,10 @@ public class ArkhamGame {
 	 * Investigator class into circular linked list
 	 * @param names Array of Investigator's names
 	 */
-	public void setInvestigators(ArrayList<String> names)
+	public void setInvestigators(List<String> names)
 	{
 		playersList = new CircularLinkedList<>();
-		for(String x : names)
+		for(String x: names)
 		{
 			playersList.push(new Investigator(x));
 		}
@@ -93,24 +84,6 @@ public class ArkhamGame {
 	public AncientOne getAncientOne()
 	{
 		return this.ancientOne;
-	}
-	
-	/**
-	 * Initializes instance of AncientOne class by its name put as argument of function
-	 * @param name Name of Ancient One
-	 */
-	public void setAncientOne(String name)
-	{
-		//this.ancientOne = new AncientOne();
-	}
-
-	/**
-	 * Sets Ancient One by instance of class AncientOne
-	 * @param ancientOne instance of AncientOne class
-	 */
-	public void setAncientOne(AncientOne ancientOne)
-	{
-		this.ancientOne = ancientOne;
 	}
 	
 	/**
@@ -257,7 +230,7 @@ public class ArkhamGame {
 	public void spawnMonster()
 	{
 		if(mapMonsterCount > monsterLimit) {
-			if (outMonsterCount >= outskirtsLimit) {
+			if(outMonsterCount >= outskirtsLimit) {
 				outMonsterCount = 0;
 				addTerrorLevel();
 			} else
@@ -267,7 +240,7 @@ public class ArkhamGame {
 	}
 	
 	/**
-	 * Kill a monster from the main map
+	 * Kill a monster in the main map
 	 */
 	public void killMonster()
 	{
