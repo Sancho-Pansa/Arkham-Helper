@@ -1,7 +1,8 @@
-package arkham.editor;
+package io.sanchopansa.arkham.editor;
 
-import arkham.json.*;
-import arkham.mechanics.*;
+import io.sanchopansa.arkham.json.AncientOneJson;
+import io.sanchopansa.arkham.mechanics.AncientOne;
+import io.sanchopansa.arkham.mechanics.AncientTypes;
 import org.apache.commons.cli.*;
 
 import java.util.HashSet;

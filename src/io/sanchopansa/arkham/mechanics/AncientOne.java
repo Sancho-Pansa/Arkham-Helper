@@ -1,4 +1,4 @@
-package arkham.mechanics;
+package io.sanchopansa.arkham.mechanics;
 
 import java.util.Objects;
 import java.util.Set;

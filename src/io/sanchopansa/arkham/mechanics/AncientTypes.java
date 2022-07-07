@@ -1,4 +1,4 @@
-package arkham.mechanics;
+package io.sanchopansa.arkham.mechanics;
 
 public enum AncientTypes {
     NONE,

@@ -1,4 +1,4 @@
-package arkham.mechanics;
+package io.sanchopansa.arkham.mechanics;
 
 /**
  * Данный класс-перечисление перечисляет все возможные состояния благословения

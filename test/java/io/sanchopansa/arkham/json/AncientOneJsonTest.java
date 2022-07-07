@@ -1,7 +1,7 @@
-package arkham.json;
+package io.sanchopansa.arkham.json;
 
-import arkham.mechanics.AncientOne;
-import arkham.mechanics.AncientTypes;
+import io.sanchopansa.arkham.mechanics.AncientOne;
+import io.sanchopansa.arkham.mechanics.AncientTypes;
 import org.junit.Before;
 import org.junit.Test;
 

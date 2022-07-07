@@ -1,6 +1,7 @@
-package arkham.mechanics;
+package io.sanchopansa.arkham.mechanics;
 
 import sanchopansa.list.CircularLinkedList;
+
 import java.util.List;
 
 /**
@@ -300,6 +301,8 @@ public class ArkhamGame {
 	public void setActiveRumor(boolean activeRumor) {
 		this.activeRumor = activeRumor;
 	}
+
+
 
 	/**
 	 * Returns String with comprehensive information about current state of the game.

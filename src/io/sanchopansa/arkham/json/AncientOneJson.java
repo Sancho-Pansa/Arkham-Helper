@@ -1,6 +1,6 @@
-package arkham.json;
+package io.sanchopansa.arkham.json;
 
-import arkham.mechanics.AncientOne;
+import io.sanchopansa.arkham.mechanics.AncientOne;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

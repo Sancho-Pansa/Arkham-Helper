@@ -1,4 +1,4 @@
-package arkham.mechanics;
+package io.sanchopansa.arkham.mechanics;
 
 /**
  * This class describes a single investigator (representative of Player in the world of Arkham Horror)
@@ -132,49 +132,5 @@ public class Investigator
 	public void killInvest()
 	{
 		this.alive = true;
-	}
-
-	/**
-	 * Обозначает объект характеристики Сыщика и операции с ними
-	 */
-	public class Statistic {
-
-		private int current;
-		private int maximum;
-
-		Statistic(int initialValue) {
-			maximum = initialValue;
-			current = maximum;
-		}
-
-		public int getCurrent() {
-			return current;
-		}
-
-		public void setCurrent(int current) {
-			this.current = current;
-		}
-
-		public int getMaximum() {
-			return maximum;
-		}
-
-		public void setMaximum(int maximum) {
-			this.maximum = maximum;
-		}
-
-		// Математическое суммирование. Текущее значение не может превысить максимум или быть меньше нуля
-		public void add(int value) {
-			current += value;
-			if(current >= maximum)
-				current = maximum;
-			if(current < 0)
-				current = 0;
-		}
-
-		@Override
-		public String toString() {
-			return String.format("%d / %d", current, maximum);
-		}
 	}
 }
