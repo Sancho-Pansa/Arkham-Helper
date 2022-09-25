@@ -95,7 +95,6 @@ public class AncientOne
 				.append(getClass().getName())
 				.append("@")
 				.append(Integer.toHexString(hashCode()))
-				.append(this.hashCode())
 				.append("\n")
 				.append("Name: ")
 				.append(this.name)

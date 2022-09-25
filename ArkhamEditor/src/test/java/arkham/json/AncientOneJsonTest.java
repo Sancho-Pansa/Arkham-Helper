@@ -1,7 +1,9 @@
-package io.sanchopansa.arkham.json;
+package arkham.json;
 
+import io.sanchopansa.arkham.json.AncientOneJson;
 import io.sanchopansa.arkham.mechanics.AncientOne;
 import io.sanchopansa.arkham.mechanics.AncientTypes;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,7 +34,7 @@ public class AncientOneJsonTest {
                 "Предельные значения рассудка и здоровья сыщиков на 1 меньше обычного."
         );
         Collection<AncientOne> aoCollection = aojson.extractCollection();
-        assertTrue(aoCollection.contains(ao));
+        Assert.assertTrue(aoCollection.contains(ao));
     }
 
     @Test
@@ -49,7 +51,7 @@ public class AncientOneJsonTest {
         );
         aojson.add(ao);
         Set<AncientOne> aoSet = new HashSet<>(aojson.extractCollection());
-        assertTrue(aoSet.contains(ao));
+        Assert.assertTrue(aoSet.contains(ao));
     }
 
     @Test
