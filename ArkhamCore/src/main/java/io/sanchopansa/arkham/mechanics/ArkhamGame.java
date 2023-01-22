@@ -1,7 +1,8 @@
 package io.sanchopansa.arkham.mechanics;
 
-import sanchopansa.list.CircularLinkedList;
+import io.sanchopansa.list.CircularLinkedList;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -34,8 +35,10 @@ public class ArkhamGame {
 	// Victory conditions
 	private int elderSignsOnMap = 0;
 
+	private static final CircularLinkedList<Phase> phases = new CircularLinkedList<>(Arrays.asList(Phase.values()));
+
 	public ArkhamGame(int players, AncientOne ancientOne) {
-		setPlayersList(players);
+		this.setPlayersList(players);
 		this.ancientOne = ancientOne;
 	}
 	/**
@@ -74,7 +77,7 @@ public class ArkhamGame {
 		playersList = new CircularLinkedList<>();
 		for(String x: names)
 		{
-			playersList.push(new Investigator(x));
+			playersList.add(new Investigator(x));
 		}
 	}
 
@@ -337,7 +340,7 @@ public class ArkhamGame {
 
 	@Override
 	public String toString() {
-		// TODO: Достаточное описание игры через toString()
-		return "";
+		StringBuilder result = new StringBuilder("Arkham Game:\r\n");
+		return result.toString();
 	}
 }
