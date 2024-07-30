@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * This class describes the main monster - one of the Ancient Ones
+ * Класс, описывающий Древнего
  * @author SanchoPansa
  */
 
@@ -13,7 +13,7 @@ public class AncientOne
 	private String name;
 	private final int awakening;
 	private Set<AncientTypes> types;
-	private String followers;
+	private Monster followers;
 	private String featName;
 	private String featDesc;
 
@@ -26,7 +26,7 @@ public class AncientOne
 	public AncientOne(String name,
 					  int awakening,
 					  Set<AncientTypes> types,
-					  String followers,
+					  Monster followers,
 					  String featName,
 					  String featDesc) {
 		this.name = name;
@@ -61,7 +61,7 @@ public class AncientOne
 		this.types = types;
 	}
 
-	public String getFollowers()
+	public Monster getFollowers()
 	{
 		return followers;
 	}
@@ -76,7 +76,7 @@ public class AncientOne
 		return featDesc;
 	}
 
-	public void setFollowers(String followers) {
+	public void setFollowers(Monster followers) {
 		this.followers = followers;
 	}
 
