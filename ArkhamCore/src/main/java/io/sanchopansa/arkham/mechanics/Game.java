@@ -1,18 +1,16 @@
 package io.sanchopansa.arkham.mechanics;
 
-import sanchopansa.list.CircularLinkedList;
-
+import java.util.LinkedList;
 import java.util.List;
 
 /**
- * This class represents a game instance and contains most of its features: players, monsters, 
- * open gates, and various mechanisms created to control these parameters.
+ * Этот класс описывает состояние партии.
  * @author SanchoPansa
  */
 
-public class ArkhamGame {
+public class Game {
 	private int playerCount;
-	private CircularLinkedList<Investigator> playersList;
+	private LinkedList<Investigator> playersList;
 	private final AncientOne ancientOne;
 	
 	private int gateCount = 0;
@@ -34,7 +32,7 @@ public class ArkhamGame {
 	// Victory conditions
 	private int elderSignsOnMap = 0;
 
-	public ArkhamGame(int players, AncientOne ancientOne) {
+	public Game(int players, AncientOne ancientOne) {
 		setPlayersList(players);
 		this.ancientOne = ancientOne;
 	}
@@ -71,7 +69,7 @@ public class ArkhamGame {
 	 */
 	public void setInvestigators(List<String> names)
 	{
-		playersList = new CircularLinkedList<>();
+		playersList = new LinkedList<>();
 		for(String x: names)
 		{
 			playersList.push(new Investigator(x));
@@ -91,7 +89,7 @@ public class ArkhamGame {
 	 * Returns circular linked list of investigators
 	 * @return CircularLinkedList<Investigator>
 	 */
-	public CircularLinkedList<Investigator> getCList()
+	public LinkedList<Investigator> getCList()
 	{
 		return this.playersList;
 	}
