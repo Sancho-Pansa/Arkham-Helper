@@ -1,7 +1,7 @@
 package io.sanchopansa.arkham.mechanics;
 
 /**
- * Represents phases of the game
+ * Фазы игры: Подготовка, Движение, Контакты в городе, Контакты в Иных мирах, Миф
  */
 public enum Phase {
     UPKEEP,

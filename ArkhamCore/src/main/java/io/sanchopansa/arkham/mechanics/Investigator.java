@@ -1,7 +1,7 @@
 package io.sanchopansa.arkham.mechanics;
 
 /**
- * This class describes a single investigator (representative of Player in the world of Arkham Horror)
+ * Класс для описания Сыщика
  * @author SanchoPansa
  *
  */
