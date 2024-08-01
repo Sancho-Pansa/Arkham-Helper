@@ -129,7 +129,7 @@ public class Investigator
 		this.canLoan = false;
 	}
 	
-	public void killInvest()
+	public void kill()
 	{
 		this.alive = true;
 	}

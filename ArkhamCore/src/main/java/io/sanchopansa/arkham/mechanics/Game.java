@@ -1,6 +1,5 @@
 package io.sanchopansa.arkham.mechanics;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -9,8 +8,7 @@ import java.util.List;
  */
 
 public class Game {
-	private int playerCount;
-	private LinkedList<Investigator> playersList;
+	private final List<Investigator> playersList;
 	private final AncientOne ancientOne;
 	
 	private int gateCount = 0;
@@ -32,48 +30,18 @@ public class Game {
 	// Victory conditions
 	private int elderSignsOnMap = 0;
 
-	public Game(int players, AncientOne ancientOne) {
-		setPlayersList(players);
+	public Game(List<Investigator> players, AncientOne ancientOne) {
+		playersList = players;
 		this.ancientOne = ancientOne;
 	}
+
 	/**
 	 * Returns the number of players in game
-	 * @return Number of players
+	 * @return Current list of players
 	 */
-	public int getPlayersList()
+	public List<Investigator> getPlayersList()
 	{
-		return playerCount;
-	}
-	
-	/**
-	 * Sets the number of players. Depending on number of player sets gate and monster limits
-	 * There can be from 1 to 8 players. Any other value will throw an error
-	 * @param playersList Number of Players
-	 * @throws IllegalArgumentException If player count is not between 1 and 8
-	 */
-	public void setPlayersList(int playersList)
-	{
-		if(playersList <= 0 || playersList > 8)
-			throw new IllegalArgumentException("Incorrect number of players");
-		this.playerCount = playersList;
-		
-		this.monsterLimit = this.playerCount + 3;
-		this.outskirtsLimit = 8 - this.playerCount;
-		this.gateLimit = 9 - (int) (Math.ceil((this.playerCount) / 2.0));
-	}
-	
-	/**
-	 * This function initializes Investigators by their names and then puts instances of 
-	 * Investigator class into circular linked list
-	 * @param names Array of Investigator's names
-	 */
-	public void setInvestigators(List<String> names)
-	{
-		playersList = new LinkedList<>();
-		for(String x: names)
-		{
-			playersList.push(new Investigator(x));
-		}
+		return playersList;
 	}
 
 	/**
@@ -83,15 +51,6 @@ public class Game {
 	public AncientOne getAncientOne()
 	{
 		return this.ancientOne;
-	}
-	
-	/**
-	 * Returns circular linked list of investigators
-	 * @return CircularLinkedList<Investigator>
-	 */
-	public LinkedList<Investigator> getCList()
-	{
-		return this.playersList;
 	}
 	
 	/**
@@ -193,14 +152,15 @@ public class Game {
 	 */
 	public void createGate(boolean isThereGate)
 	{
+		int players = this.playersList.size();
 		if(isThereGate) // Monster Surge
-			for(int i = 0; i < Integer.max(playerCount, gateCount); i++)
+			for(int i = 0; i < Integer.max(players, gateCount); i++)
 				spawnMonster();
 		else
 		{
 			gateCount++;
 			addDoom();
-			if(playerCount > 4)
+			if(players > 4)
 			{
 				this.spawnMonster();
 			}
