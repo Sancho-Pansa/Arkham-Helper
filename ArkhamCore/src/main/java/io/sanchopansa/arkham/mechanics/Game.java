@@ -1,6 +1,8 @@
 package io.sanchopansa.arkham.mechanics;
 
+import java.util.ArrayDeque;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * Этот класс описывает состояние партии.
@@ -10,6 +12,7 @@ import java.util.List;
 public class Game {
 	private final List<Investigator> playersList;
 	private final AncientOne ancientOne;
+	private final Queue<Gate> gates;
 	
 	private int gateCount = 0;
 	private int mapMonsterCount = 0;
@@ -20,133 +23,78 @@ public class Game {
 	private int terrorLevel = 0;
 	private int doomLevel = 0;
 
-	// Flags and game states
+	// Флажки состояний игры
 	private boolean activeEnvironment = false;
 	private boolean activeRumor = false;
 
 	private boolean closedLocation = false;
 	//private int monstersPerGate;
 	
-	// Victory conditions
+	// Условия победы
 	private int elderSignsOnMap = 0;
 
 	public Game(List<Investigator> players, AncientOne ancientOne) {
-		playersList = players;
+		this.playersList = players;
 		this.ancientOne = ancientOne;
+		this.gates = new ArrayDeque<>(); // STUB
 	}
 
-	/**
-	 * Returns the number of players in game
-	 * @return Current list of players
-	 */
 	public List<Investigator> getPlayersList()
 	{
 		return playersList;
 	}
 
-	/**
-	 * Returns Ancient One of this game.
-	 * @return AncientOne class instance
-	 */
 	public AncientOne getAncientOne()
 	{
 		return this.ancientOne;
 	}
 	
-	/**
-	 * Returns current terror level in Arkham
-	 * @return Terror level as number
-	 */
 	public int getTerrorLevel() {
 		return this.terrorLevel;
 	}
 
-	/**
-	 * Returns Gate limit in this game. It depends on number of players
-	 * @return Gate limit for current game
-	 */
 	public int getGateLimit() {
 		return gateLimit;
 	}
 
-	/**
-	 * Returns monster limit in this game. It depends on number of players
-	 * @return Capacity of main map for monsters
-	 */
 	public int getMonsterLimit() {
 		return monsterLimit;
 	}
 
-	/**
-	 * Returns number of monsters on main map
-	 * @return Quantity of monsters on the main map
-	 */
 	public int getMapMonsterCount() {
 		return mapMonsterCount;
 	}
 
-	/**
-	 * Returns number of monsters in the Outskirts
-	 * @return Number of monsters in the Outskirts location
-	 */
 	public int getOutMonsterCount()
 	{
 		return this.outMonsterCount;
 	}
 	
-	/**
-	 * Returns limit of monsters in the Outskirts. Depends on number of players
-	 * @return Capacity of Outskirts
-	 */
 	public int getOutskirtsLimit() {
 		return outskirtsLimit;
 	}
 
-	/**
-	 * Returns current state of Doom track. If it exceeds monster Awakening, then the Ancient One is here.
-	 * @return Number of Doom tokens
-	 */
 	public int getDoomLevel() {
 		return doomLevel;
 	}
 
-	/**
-	 * Returns current number of opened Gates
-	 * @return Number of opened Gates on map
-	 */
 	public int getGateCount()
 	{
 		return this.gateCount;
 	}
 	
-	/**
-	 * Returns current number of Elder Signs on map. If number of the exceeds 6, game is won.
-	 * @return Number of placed Elder Signs
-	 */
 	public int getElderSignsOnMap() {
 		return elderSignsOnMap;
 	}
 	
-	/**
-	 * Checks condition for awakening of boss
-	 * @return true, if doom track of game equals of exceeds doom track of Ancient One
-	 */
 	public boolean isAwaken()
 	{
 		return this.ancientOne.getAwakening() <= this.doomLevel;
 	}
 
-	public boolean isClosedLocation() {
-		return closedLocation;
-	}
-
-	public void setClosedLocation(boolean closedLocation) {
-		this.closedLocation = closedLocation;
-	}
-
 	/**
-	 * Creates a Gate
-	 * If there were no Gate, then it increments number of Gates and spawns 1-2 monsters
+	 * Создает врата на карте.
+	 * Если
 	 * If there was a Gate, then in initiates Monster Surge
 	 * @param isThereGate true, if location already has a placed Gate
 	 */
