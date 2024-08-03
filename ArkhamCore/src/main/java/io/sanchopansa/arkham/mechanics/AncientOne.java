@@ -8,7 +8,7 @@ import java.util.Set;
  * @author SanchoPansa
  */
 
-public class AncientOne
+public class AncientOne extends AbstractCard
 {
 	private String name;
 	private final int awakening;
@@ -17,8 +17,9 @@ public class AncientOne
 	private String featName;
 	private String featDesc;
 
-	public AncientOne(String name, int awakening, Set<AncientTypes> types) {
-		this.name = name;
+	public AncientOne(String name, int awakening, Set<AncientTypes> types, Expansion expansion) {
+        super(expansion);
+        this.name = name;
 		this.awakening = awakening;
 		this.types = types;
 	}
@@ -28,8 +29,10 @@ public class AncientOne
 					  Set<AncientTypes> types,
 					  Monster followers,
 					  String featName,
-					  String featDesc) {
-		this.name = name;
+					  String featDesc,
+					  Expansion expansion) {
+        super(expansion);
+        this.name = name;
 		this.awakening = awakening;
 		this.types = types;
 		this.followers = followers;
@@ -123,5 +126,15 @@ public class AncientOne
 	@Override
 	public int hashCode() {
 		return Objects.hash(name, awakening);
+	}
+
+	public enum AncientTypes {
+		NONE,
+		SPAWN,
+		INVESTIGATOR_RELATED,
+		MONSTER_RELATED,
+		GATE_RELATED,
+		MAP_RELATED,
+		ENVIRONMENT_RELATED
 	}
 }

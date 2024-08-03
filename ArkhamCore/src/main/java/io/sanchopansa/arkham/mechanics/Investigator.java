@@ -5,12 +5,12 @@ package io.sanchopansa.arkham.mechanics;
  * @author SanchoPansa
  *
  */
-public class Investigator 
+public class Investigator extends AbstractCard
 {
 	// Основные характеристики
 	private final String name;     // Имя
-	private Statistic stamina;     // Максимальное Здоровье
-	private Statistic sanity;      // Максимальный Рассудок
+	private Statistic stamina;     // Здоровье
+	private Statistic sanity;      // Рассудок
 	private Statistic money;       // Капитал
 	private boolean alive = true;  // Статус: Жив?
 
@@ -23,8 +23,9 @@ public class Investigator
 	private boolean sheriff = false;                // Статус шерифа
 
 	
-	public Investigator(String name)
+	public Investigator(String name, Expansion e)
 	{
+		super(e);
 		this.name = name;
 	}
 
@@ -131,6 +132,6 @@ public class Investigator
 	
 	public void kill()
 	{
-		this.alive = true;
+		this.alive = false;
 	}
 }
