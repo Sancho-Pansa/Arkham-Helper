@@ -2,7 +2,6 @@ package io.sanchopansa.arkham.editor;
 
 import io.sanchopansa.arkham.json.AncientOneJson;
 import io.sanchopansa.arkham.mechanics.AncientOne;
-import io.sanchopansa.arkham.mechanics.AncientTypes;
 import org.apache.commons.cli.*;
 
 import java.util.HashSet;
@@ -43,7 +42,7 @@ public class AncientEditor {
         System.out.print("Воздействие (None, Spawn, Investigator_related, Monster_related, Gate_related, Map_related, Environment_related): ");
         String aoType = sc.nextLine();
         String[] aoTypes = aoType.split(", ");
-        Set<AncientTypes> aoSet = new HashSet<>();
+        Set<AncientOne.AncientTypes> aoSet = new HashSet<>();
         for(String x: aoTypes) {
             aoSet.add(AncientTypes.valueOf(x.toUpperCase()));
         }
