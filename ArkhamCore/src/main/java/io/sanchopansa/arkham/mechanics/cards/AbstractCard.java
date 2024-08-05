@@ -5,20 +5,26 @@ import io.sanchopansa.arkham.mechanics.Expansion;
 
 public abstract class AbstractCard extends AbstractGameElement {
     private final String name;
-    private final CardType type;
+    private final CardType cardType;
+    private final String description;
 
-    public AbstractCard(Expansion e, String name, CardType type) {
+    public AbstractCard(Expansion e, String name, CardType cardType, String description) {
         super(e);
         this.name = name;
-        this.type = type;
+        this.cardType = cardType;
+        this.description = description;
     }
 
     public String getName() {
         return name;
     }
 
-    public CardType getType() {
-        return type;
+    public CardType getCardType() {
+        return cardType;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public enum CardType {
