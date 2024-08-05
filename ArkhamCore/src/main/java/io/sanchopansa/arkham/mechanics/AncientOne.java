@@ -8,7 +8,7 @@ import java.util.Set;
  * @author SanchoPansa
  */
 
-public class AncientOne extends AbstractCard
+public class AncientOne extends AbstractGameElement
 {
 	private String name;
 	private final int awakening;

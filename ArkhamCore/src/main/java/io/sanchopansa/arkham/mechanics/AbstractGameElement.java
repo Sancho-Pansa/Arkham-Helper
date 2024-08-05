@@ -1,9 +1,9 @@
 package io.sanchopansa.arkham.mechanics;
 
-public abstract class AbstractCard {
+public abstract class AbstractGameElement {
     protected Expansion expansion;
 
-    public AbstractCard(Expansion e) {
+    public AbstractGameElement(Expansion e) {
         this.expansion = e;
     }
 

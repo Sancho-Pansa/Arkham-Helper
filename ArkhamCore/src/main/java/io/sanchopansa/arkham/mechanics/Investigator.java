@@ -5,7 +5,7 @@ package io.sanchopansa.arkham.mechanics;
  * @author SanchoPansa
  *
  */
-public class Investigator extends AbstractCard
+public class Investigator extends AbstractGameElement
 {
 	// Основные характеристики
 	private final String name;     // Имя
