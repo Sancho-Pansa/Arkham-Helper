@@ -1,4 +1,7 @@
-package io.sanchopansa.arkham.mechanics;
+package io.sanchopansa.arkham.mechanics.investigators;
+
+import io.sanchopansa.arkham.mechanics.AbstractGameElement;
+import io.sanchopansa.arkham.mechanics.Expansion;
 
 /**
  * Класс для описания Сыщика

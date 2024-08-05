@@ -1,4 +1,4 @@
-package io.sanchopansa.arkham.mechanics;
+package io.sanchopansa.arkham.mechanics.investigators;
 
 /**
  * Данный класс используется для описания одного ползунка навыка сыщика,

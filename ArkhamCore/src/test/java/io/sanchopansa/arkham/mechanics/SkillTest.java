@@ -1,7 +1,7 @@
 package io.sanchopansa.arkham.mechanics;
 
+import io.sanchopansa.arkham.mechanics.investigators.Skill;
 import org.junit.Test;
-import org.junit.Assert.*;
 
 import static org.junit.Assert.assertEquals;
 

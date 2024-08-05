@@ -1,7 +1,7 @@
 package arkham.json;
 
 import io.sanchopansa.arkham.json.AncientOneJson;
-import io.sanchopansa.arkham.mechanics.AncientOne;
+import io.sanchopansa.arkham.mechanics.monsters.AncientOne;
 import io.sanchopansa.arkham.mechanics.AncientTypes;
 import org.junit.Assert;
 import org.junit.Before;

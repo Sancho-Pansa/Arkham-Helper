@@ -1,4 +1,7 @@
-package io.sanchopansa.arkham.mechanics;
+package io.sanchopansa.arkham.mechanics.monsters;
+
+import io.sanchopansa.arkham.mechanics.AbstractGameElement;
+import io.sanchopansa.arkham.mechanics.Expansion;
 
 import java.util.List;
 

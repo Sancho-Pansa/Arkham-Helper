@@ -1,4 +1,8 @@
-package io.sanchopansa.arkham.mechanics;
+package io.sanchopansa.arkham;
+
+import io.sanchopansa.arkham.mechanics.investigators.*;
+import io.sanchopansa.arkham.mechanics.monsters.AncientOne;
+import io.sanchopansa.arkham.mechanics.monsters.Gate;
 
 import java.util.ArrayDeque;
 import java.util.List;
