@@ -7,10 +7,11 @@ package io.sanchopansa.arkham.mechanics.investigators;
 public class Skill {
     private static final int SKILL_VALUES = 4; // Один навык принимает четыре значения
 
-    private int[] blueSkill = new int[SKILL_VALUES];
-    private int[] redSkill = new int[SKILL_VALUES];
+    private final int[] blueSkill = new int[SKILL_VALUES];
+    private final int[] redSkill = new int[SKILL_VALUES];
+    private final Stat focus;
 
-    private int skillSliderPosition = 0;
+    private int sliderIndex = 0;
 
     /**
      * Создает одну спаренную полосу навыков. "Синяя" полоса находится наверху и возрастает. "Красная" располагается
@@ -18,12 +19,18 @@ public class Skill {
      * Одна шкала всегда состоит из 4 значений "Синих" и "Красных" навыков.
      * @param leftBlue Самое левое (наименьшее) значение "синей" полосы
      * @param leftRed Самое левое (наибольшее) значение "красной" полосы
+     * @param focus Значение Концентрации Сыщика
      */
-    Skill(int leftBlue, int leftRed) {
+    Skill(int leftBlue, int leftRed, Stat focus) {
         for (int i = 0; i < SKILL_VALUES; i++) {
             blueSkill[i] = leftBlue + i;
             redSkill[i] = leftRed - i;
         }
+        this.focus = focus;
+    }
+
+    Skill(int leftBlue, int leftRed) {
+        this(leftBlue, leftRed, new Stat(2));
     }
 
     public int getLeftBlue() {
@@ -43,21 +50,28 @@ public class Skill {
     }
 
     public int getBlueValue() {
-        return blueSkill[skillSliderPosition];
+        return blueSkill[sliderIndex];
     }
 
     public int getRedValue() {
-        return redSkill[skillSliderPosition];
+        return redSkill[sliderIndex];
     }
 
     /**
      * Сдвигает ползунок навыка на одну позицию влево. Не может выйти за пределы массива.
-     * @return Статус операции. Если 0 - ползунок попытался выйти за пределы массива. Если 1 - всё в порядке.
+     * @return Статус операции.<br />
+     * <code>-1</code> - недостаточно Концентрации<br />
+     * <code>0</code> - ползунок попытался выйти за пределы массива.<br />
+     * <code>+1</code> - всё в порядке.
      */
     public int moveLeft() {
-        skillSliderPosition--;
-        if(skillSliderPosition <= 0) {
-            skillSliderPosition = 0;
+        if(focus.getValue() <= 0) {
+            return -1;
+        }
+        sliderIndex--;
+        focus.add(-1);
+        if(sliderIndex <= 0) {
+            sliderIndex = 0;
             return 0;
         }
         else
@@ -66,12 +80,19 @@ public class Skill {
 
     /**
      * Сдвигает ползунок навыка на одну позицию вправо. Не может выйти за пределы массива.
-     * @return Статус операции. Если 0 - ползунок попытался выйти за пределы массива. Если 1 - всё в порядке.
+     * @return Статус операции.<br />
+     * <code>-1</code> - недостаточно Концентрации<br />
+     * <code>0</code> - ползунок попытался выйти за пределы массива.<br />
+     * <code>+1</code> - всё в порядке.
      */
     public int moveRight() {
-        skillSliderPosition++;
-        if(skillSliderPosition >= SKILL_VALUES) {
-            skillSliderPosition = SKILL_VALUES - 1;
+        if(focus.getValue() <= 0) {
+            return -1;
+        }
+        sliderIndex++;
+        focus.add(-1);
+        if(sliderIndex >= SKILL_VALUES) {
+            sliderIndex = SKILL_VALUES - 1;
             return 0;
         }
         else
@@ -79,10 +100,11 @@ public class Skill {
     }
 
     public int setSkillPosition(int value) {
-        if(value < 0)
-            throw new IllegalArgumentException("Skill Slider cannot have negative position");
-        this.skillSliderPosition = value % SKILL_VALUES;
-        return skillSliderPosition;
+        if(value < 0 || value >= SKILL_VALUES) {
+            throw new IllegalArgumentException("Skill Slider overflow");
+        }
+        this.sliderIndex = value;
+        return sliderIndex;
     }
 
     @Override
@@ -90,7 +112,7 @@ public class Skill {
         String blueRow = "";
         String redRow = "";
         for(int i = 0; i < SKILL_VALUES; i++) {
-            if(i == skillSliderPosition) {
+            if(i == sliderIndex) {
                 blueRow += String.format(" [%d] ", blueSkill[i]);
                 redRow += String.format(" [%d] ", redSkill[i]);
             }
