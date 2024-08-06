@@ -3,6 +3,8 @@ package io.sanchopansa.arkham.mechanics.cards;
 import io.sanchopansa.arkham.mechanics.AbstractGameElement;
 import io.sanchopansa.arkham.mechanics.Expansion;
 
+import java.util.Objects;
+
 public abstract class AbstractCard extends AbstractGameElement {
     private final String name;
     private final CardType cardType;
@@ -21,6 +23,18 @@ public abstract class AbstractCard extends AbstractGameElement {
 
     public CardType getCardType() {
         return cardType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AbstractCard that)) return false;
+        return Objects.equals(name, that.name) && cardType == that.cardType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, cardType);
     }
 
     public String getDescription() {
