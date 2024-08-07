@@ -2,6 +2,7 @@ package io.sanchopansa.arkham.mechanics.investigators;
 
 import io.sanchopansa.arkham.mechanics.AbstractGameElement;
 import io.sanchopansa.arkham.mechanics.Expansion;
+import io.sanchopansa.arkham.mechanics.Phase;
 import io.sanchopansa.arkham.mechanics.cards.*;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class Investigator extends AbstractGameElement {
     private final Skill FW; // Fight-Will
     private final Skill LL; // Lore-Luck
     private final Stat focus;
+    private final InvestigatorAbility ability;
     private boolean alive = true;
 
     // Вторичные характеристики
@@ -53,7 +55,11 @@ public class Investigator extends AbstractGameElement {
                         int minFight,
                         int maxWill,
                         int minLore,
-                        int maxLuck
+                        int maxLuck,
+                        String abilityName,
+                        String abilityDescription,
+                        Phase abilityPhase
+
     ) {
         super(e);
         this.name = name;
@@ -64,6 +70,7 @@ public class Investigator extends AbstractGameElement {
         this.SS = new Skill(minSpeed, maxSneak);
         this.FW = new Skill(minFight, maxWill);
         this.LL = new Skill(minLore, maxLuck);
+        this.ability = new InvestigatorAbility(this, abilityName, abilityDescription, abilityPhase);
     }
 
     public Investigator(String name,
@@ -76,7 +83,10 @@ public class Investigator extends AbstractGameElement {
                         int minFight,
                         int maxWill,
                         int minLore,
-                        int maxLuck
+                        int maxLuck,
+                        String abilityName,
+                        String abilityDescription,
+                        Phase abilityPhase
     ) {
         super(Expansion.VANILLA);
         this.name = name;
@@ -87,6 +97,7 @@ public class Investigator extends AbstractGameElement {
         this.SS = new Skill(minSpeed, maxSneak, this.focus);
         this.FW = new Skill(minFight, maxWill, this.focus);
         this.LL = new Skill(minLore, maxLuck, this.focus);
+        this.ability = new InvestigatorAbility(this, abilityName, abilityDescription, abilityPhase);
     }
 
     public String getName() {
@@ -331,12 +342,6 @@ public class Investigator extends AbstractGameElement {
         CURSED   // Проклят
     }
 
-    /**
-     * Заготовка для класса, описывающего способность Сыщика
-     *
-     * @param name
-     * @param description
-     */
-    public record Ability(String name, String description) {
+    public record InvestigatorAbility(Investigator investigator, String name, String description, Phase phase) {
     }
 }
