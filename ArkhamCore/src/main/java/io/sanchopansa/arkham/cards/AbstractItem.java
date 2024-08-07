@@ -1,7 +1,7 @@
-package io.sanchopansa.arkham.mechanics.cards;
+package io.sanchopansa.arkham.cards;
 
-import io.sanchopansa.arkham.mechanics.Expansion;
-import io.sanchopansa.arkham.mechanics.Phase;
+import io.sanchopansa.arkham.Expansion;
+import io.sanchopansa.arkham.Phase;
 
 public abstract class AbstractItem extends AbstractCard {
     private final int price;

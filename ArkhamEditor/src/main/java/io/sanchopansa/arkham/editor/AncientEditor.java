@@ -1,7 +1,7 @@
 package io.sanchopansa.arkham.editor;
 
 import io.sanchopansa.arkham.json.AncientOneJson;
-import io.sanchopansa.arkham.mechanics.monsters.AncientOne;
+import io.sanchopansa.arkham.monsters.AncientOne;
 import org.apache.commons.cli.*;
 
 import java.util.HashSet;

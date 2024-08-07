@@ -1,6 +1,6 @@
-package io.sanchopansa.arkham.mechanics.monsters;
+package io.sanchopansa.arkham.monsters;
 
-import io.sanchopansa.arkham.mechanics.Expansion;
+import io.sanchopansa.arkham.Expansion;
 
 /**
  * Класс-рекорд, описывающий жетон Врат

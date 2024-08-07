@@ -1,4 +1,4 @@
-package io.sanchopansa.arkham.mechanics;
+package io.sanchopansa.arkham;
 
 /**
  * Фазы игры: Подготовка, Движение, Контакты в городе, Контакты в Иных мирах, Миф

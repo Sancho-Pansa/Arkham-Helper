@@ -1,4 +1,4 @@
-package io.sanchopansa.arkham.mechanics.investigators;
+package io.sanchopansa.arkham.investigators;
 
 /**
  * Обозначает объект характеристики Сыщика и операции с ними.<br />

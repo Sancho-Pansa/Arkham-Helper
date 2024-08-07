@@ -1,4 +1,4 @@
-package io.sanchopansa.arkham.mechanics;
+package io.sanchopansa.arkham;
 
 public enum Expansion {
     VANILLA,

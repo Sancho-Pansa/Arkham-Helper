@@ -1,9 +1,9 @@
-package io.sanchopansa.arkham.mechanics.investigators;
+package io.sanchopansa.arkham.investigators;
 
-import io.sanchopansa.arkham.mechanics.AbstractGameElement;
-import io.sanchopansa.arkham.mechanics.Expansion;
-import io.sanchopansa.arkham.mechanics.Phase;
-import io.sanchopansa.arkham.mechanics.cards.*;
+import io.sanchopansa.arkham.cards.*;
+import io.sanchopansa.arkham.AbstractGameElement;
+import io.sanchopansa.arkham.Expansion;
+import io.sanchopansa.arkham.Phase;
 
 import java.util.ArrayList;
 import java.util.List;

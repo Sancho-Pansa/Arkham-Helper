@@ -1,7 +1,7 @@
-package io.sanchopansa.arkham.mechanics.cards;
+package io.sanchopansa.arkham.cards;
 
-import io.sanchopansa.arkham.mechanics.Expansion;
-import io.sanchopansa.arkham.mechanics.Phase;
+import io.sanchopansa.arkham.Expansion;
+import io.sanchopansa.arkham.Phase;
 
 public class Spell extends AbstractItem {
     private static final AbstractCard.CardType CARD_TYPE = CardType.SPELL;

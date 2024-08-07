@@ -1,4 +1,4 @@
-package io.sanchopansa.arkham.mechanics.monsters;
+package io.sanchopansa.arkham.monsters;
 
 /**
  * Список символов Иных миров у монстров и врат, а также у карт Мифа и др. механик

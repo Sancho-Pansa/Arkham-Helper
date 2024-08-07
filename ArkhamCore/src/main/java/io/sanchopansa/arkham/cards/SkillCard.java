@@ -1,6 +1,6 @@
-package io.sanchopansa.arkham.mechanics.cards;
+package io.sanchopansa.arkham.cards;
 
-import io.sanchopansa.arkham.mechanics.Expansion;
+import io.sanchopansa.arkham.Expansion;
 
 public class SkillCard extends AbstractCard {
     private static final AbstractCard.CardType CARD_TYPE = CardType.SKILL;

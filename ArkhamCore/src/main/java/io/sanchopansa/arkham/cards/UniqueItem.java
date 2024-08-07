@@ -1,12 +1,12 @@
-package io.sanchopansa.arkham.mechanics.cards;
+package io.sanchopansa.arkham.cards;
 
-import io.sanchopansa.arkham.mechanics.Expansion;
-import io.sanchopansa.arkham.mechanics.Phase;
+import io.sanchopansa.arkham.Expansion;
+import io.sanchopansa.arkham.Phase;
 
-public class CommonItem extends AbstractItem {
-    private static final AbstractCard.CardType ITEM_TYPE = CardType.COMMON_ITEM;
+public class UniqueItem extends AbstractItem {
+    private static final AbstractCard.CardType ITEM_TYPE = CardType.UNIQUE_ITEM;
 
-    public CommonItem(Expansion e,
+    public UniqueItem(Expansion e,
                       String name,
                       int price,
                       ItemType itemType,
