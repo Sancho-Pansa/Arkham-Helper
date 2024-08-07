@@ -116,6 +116,10 @@ public class Investigator extends AbstractGameElement {
         return sanity;
     }
 
+    public InvestigatorAbility getAbility() {
+        return ability;
+    }
+
     public Skill getSS() {
         return SS;
     }
