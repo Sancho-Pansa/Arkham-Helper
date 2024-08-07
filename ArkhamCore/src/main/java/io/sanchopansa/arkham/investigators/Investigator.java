@@ -1,12 +1,16 @@
 package io.sanchopansa.arkham.investigators;
 
-import io.sanchopansa.arkham.cards.*;
 import io.sanchopansa.arkham.AbstractGameElement;
 import io.sanchopansa.arkham.Expansion;
 import io.sanchopansa.arkham.Phase;
+import io.sanchopansa.arkham.cards.*;
+import io.sanchopansa.arkham.monsters.Gate;
+import io.sanchopansa.arkham.monsters.Monster;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * Класс для описания Сыщика
@@ -43,6 +47,8 @@ public class Investigator extends AbstractGameElement {
     private final List<SkillCard> skills = new ArrayList<>();
     private final List<Ally> allies = new ArrayList<>();
     private final List<AbstractCard> specials = new ArrayList<>();
+    private final Queue<Monster> monsterTrophies = new ArrayDeque<>();
+    private final Queue<Gate> gateTrophies = new ArrayDeque<>();
 
     public Investigator(Expansion e,
                         String name,
@@ -313,7 +319,7 @@ public class Investigator extends AbstractGameElement {
         this.allies.add(ally);
     }
 
-    public boolean removeCommonItem(Ally ally) {
+    public boolean removeAlly(Ally ally) {
         return this.allies.remove(ally);
     }
 
@@ -327,6 +333,30 @@ public class Investigator extends AbstractGameElement {
 
     public boolean removeSpecials(AbstractCard card) {
         return this.specials.remove(card);
+    }
+
+    public Queue<Monster> getMonsterTrophies() {
+        return monsterTrophies;
+    }
+
+    public void addMonsterTrophy(Monster monster) {
+        this.monsterTrophies.add(monster);
+    }
+
+    public boolean removeMonsterTrophy(Monster monster) {
+        return this.monsterTrophies.remove(monster);
+    }
+
+    public Queue<Gate> getGateTrophies() {
+        return gateTrophies;
+    }
+
+    public void addGateTrophy(Gate gate) {
+        this.gateTrophies.add(gate);
+    }
+
+    public boolean removeGateTrophy(Gate gate) {
+        return this.gateTrophies.remove(gate);
     }
 
     public boolean isAlive() {
