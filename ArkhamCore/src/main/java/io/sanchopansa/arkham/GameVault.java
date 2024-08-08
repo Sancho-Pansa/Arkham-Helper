@@ -1,0 +1,59 @@
+package io.sanchopansa.arkham;
+
+import com.google.common.graph.Graph;
+import io.sanchopansa.arkham.cards.*;
+import io.sanchopansa.arkham.investigators.Investigator;
+import io.sanchopansa.arkham.monsters.AncientOne;
+import io.sanchopansa.arkham.monsters.Gate;
+import io.sanchopansa.arkham.monsters.Monster;
+
+import java.util.ArrayList;
+import java.util.Set;
+
+/**
+ * Класс, который воплощает "коробку" - список всех карт, жетонов и аксессуаров, которые нужно подготовить к игре.
+ */
+public class GameVault {
+    // TODO: Завершить создание Коробки
+    private final Set<Expansion> usedExpansions;
+    private final Set<Investigator> investigators;
+    private final Graph<Location> gameMap; // TODO: Посмотреть графы в Guava
+    private final ArrayList<Monster> monsterPool;
+    private final ArrayList<Gate> gatePool;
+    private final Set<AncientOne> ancientOnePool;
+
+    private final ArrayList<CommonItem> commonItems;
+    private final ArrayList<UniqueItem> uniqueItems;
+    private final ArrayList<Spell> spells;
+    private final ArrayList<SkillCard> skills;
+    private final Set<Ally> allies;
+
+    public GameVault(Set<Expansion> usedExpansions,
+                     Set<Investigator> investigators,
+                     Graph<Location> gameMap,
+                     ArrayList<Monster> monsterPool,
+                     ArrayList<Gate> gatePool,
+                     Set<AncientOne> ancientOnePool,
+                     ArrayList<CommonItem> commonItems,
+                     ArrayList<UniqueItem> uniqueItems,
+                     ArrayList<Spell> spells,
+                     ArrayList<SkillCard> skills,
+                     Set<Ally> allies
+    ) {
+        this.usedExpansions = usedExpansions;
+        this.investigators = investigators;
+        this.gameMap = gameMap;
+        this.monsterPool = monsterPool;
+        this.gatePool = gatePool;
+        this.ancientOnePool = ancientOnePool;
+        this.commonItems = commonItems;
+        this.uniqueItems = uniqueItems;
+        this.spells = spells;
+        this.skills = skills;
+        this.allies = allies;
+    }
+
+    public static GameVault gameVaultFactory(Expansion expansion) {
+        return null;
+    }
+}

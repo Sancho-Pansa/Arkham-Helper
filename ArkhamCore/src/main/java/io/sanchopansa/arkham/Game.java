@@ -1,12 +1,12 @@
 package io.sanchopansa.arkham;
 
+import com.google.common.graph.Graph;
 import io.sanchopansa.arkham.investigators.Investigator;
 import io.sanchopansa.arkham.monsters.AncientOne;
 import io.sanchopansa.arkham.monsters.Gate;
+import io.sanchopansa.arkham.monsters.Monster;
 
-import java.util.ArrayDeque;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Этот класс описывает состояние партии.
@@ -14,9 +14,12 @@ import java.util.Queue;
  */
 
 public class Game {
-	private final List<Investigator> playersList;
+	private final LinkedList<Investigator> playersList;
 	private final AncientOne ancientOne;
-	private final Queue<Gate> gates;
+	private final ArrayList<Gate> gates;
+	private final Queue<Monster> monstersOnMap;
+	private final Graph<Location> gameMap;
+
 	
 	private int gateCount = 0;
 	private int mapMonsterCount = 0;
@@ -30,9 +33,6 @@ public class Game {
 	// Флажки состояний игры
 	private boolean activeEnvironment = false;
 	private boolean activeRumor = false;
-
-	private boolean closedLocation = false;
-	//private int monstersPerGate;
 	
 	// Условия победы
 	private int elderSignsOnMap = 0;
