@@ -1,6 +1,6 @@
 package io.sanchopansa.arkham;
 
-import com.google.common.graph.Graph;
+import com.google.common.graph.MutableGraph;
 import io.sanchopansa.arkham.cards.*;
 import io.sanchopansa.arkham.investigators.Investigator;
 import io.sanchopansa.arkham.monsters.AncientOne;
@@ -13,11 +13,10 @@ import java.util.Set;
 /**
  * Класс, который воплощает "коробку" - список всех карт, жетонов и аксессуаров, которые нужно подготовить к игре.
  */
+@SuppressWarnings("UnstableApiUsage")
 public class GameVault {
-    // TODO: Завершить создание Коробки
-    private final Set<Expansion> usedExpansions;
     private final Set<Investigator> investigators;
-    private final Graph<Location> gameMap; // TODO: Посмотреть графы в Guava
+    private final MutableGraph<Location> gameMap;
     private final ArrayList<Monster> monsterPool;
     private final ArrayList<Gate> gatePool;
     private final Set<AncientOne> ancientOnePool;
@@ -28,9 +27,8 @@ public class GameVault {
     private final ArrayList<SkillCard> skills;
     private final Set<Ally> allies;
 
-    public GameVault(Set<Expansion> usedExpansions,
-                     Set<Investigator> investigators,
-                     Graph<Location> gameMap,
+    public GameVault(Set<Investigator> investigators,
+                     MutableGraph<Location> gameMap,
                      ArrayList<Monster> monsterPool,
                      ArrayList<Gate> gatePool,
                      Set<AncientOne> ancientOnePool,
@@ -40,7 +38,6 @@ public class GameVault {
                      ArrayList<SkillCard> skills,
                      Set<Ally> allies
     ) {
-        this.usedExpansions = usedExpansions;
         this.investigators = investigators;
         this.gameMap = gameMap;
         this.monsterPool = monsterPool;
