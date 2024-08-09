@@ -3,7 +3,6 @@
     <output-path>$PROJECT_DIR$/out/artifacts/ArkhamCore</output-path>
     <root id="archive" name="ArkhamCore.jar">
       <element id="module-output" name="ArkhamCore" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/lib/CircularLinkedList.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>
