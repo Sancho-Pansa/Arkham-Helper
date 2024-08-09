@@ -50,7 +50,43 @@ public class GameVault {
         this.allies = allies;
     }
 
-    public static GameVault gameVaultFactory(Expansion expansion) {
-        return null;
+    public Set<Investigator> getInvestigators() {
+        return investigators;
+    }
+
+    public MutableGraph<Location> getGameMap() {
+        return gameMap;
+    }
+
+    public ArrayList<Monster> getMonsterPool() {
+        return monsterPool;
+    }
+
+    public ArrayList<Gate> getGatePool() {
+        return gatePool;
+    }
+
+    public Set<AncientOne> getAncientOnePool() {
+        return ancientOnePool;
+    }
+
+    public ArrayList<CommonItem> getCommonItems() {
+        return commonItems;
+    }
+
+    public ArrayList<UniqueItem> getUniqueItems() {
+        return uniqueItems;
+    }
+
+    public ArrayList<Spell> getSpells() {
+        return spells;
+    }
+
+    public ArrayList<SkillCard> getSkills() {
+        return skills;
+    }
+
+    public Set<Ally> getAllies() {
+        return allies;
     }
 }
