@@ -1,6 +1,5 @@
 {
   "name": "arkham-fetcher",
-  "type": "module",
   "version": "1.0.0",
   "description": "NodeJS app to automatically fetch data about Arkham Horro tabletop game from open sources (fandom.com)",
   "main": "index.js",
@@ -8,7 +7,8 @@
     "lib": "lib"
   },
   "scripts": {
-    "dev": "node index.js",
+    "build": "tsc",
+    "dev": "node out/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,5 +24,10 @@
   "bugs": {
     "url": "https://github.com/Sancho-Pansa/Arkham-Helper/issues"
   },
-  "homepage": "https://github.com/Sancho-Pansa/Arkham-Helper#readme"
+  "homepage": "https://github.com/Sancho-Pansa/Arkham-Helper#readme",
+  "devDependencies": {
+    "@types/node": "^22.2.0",
+    "tsc": "^2.0.4",
+    "typescript": "^5.5.4"
+  }
 }

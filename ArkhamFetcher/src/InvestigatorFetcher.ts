@@ -5,20 +5,21 @@ const DEFAULT_URL = "https://arkhamhorror.fandom.com/ru/api.php";
 
 export default async function getInvestigatorsJson() {
   let investigatorList = await fs.readFile(LIST, { encoding: "utf-8" });
-  investigatorList.split(/\r?\n/g).forEach((s) => {
-    fetchInvestigatorPage(s).then(console.log);
+  investigatorList.split(/\r?\n/g).forEach(async (s) => {
+    let wikipage = await fetchInvestigatorPage(s);
+
   });
 }
 
-async function fetchInvestigatorPage(investigator) {
+async function fetchInvestigatorPage(investigator: string): Promise<string> {
   const requestOptions = {
     method: "GET",
     redirect: "follow"
-  };
+  } as Request;
   let searchParams = new URLSearchParams({
     action: "parse",
     format: "json",
-    formatversion: 2,
+    formatversion: "2",
     prop: "wikitext",
     page: investigator
   });
@@ -30,4 +31,8 @@ async function fetchInvestigatorPage(investigator) {
   }
   let wikitext = (await response.json()).parse.wikitext;
   return wikitext;
+}
+
+function parseWikiPage(wikitext: string) {
+  let a;
 }
