@@ -1,8 +1,7 @@
 import getInvestigatorsJson from "./InvestigatorFetcher";
 
 function main() {
-  console.log("A");
-  getInvestigatorsJson();
+  getInvestigatorsJson().then(console.log);
 }
 
 
