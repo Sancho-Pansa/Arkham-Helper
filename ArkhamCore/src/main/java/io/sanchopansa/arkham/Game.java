@@ -37,10 +37,12 @@ public class Game {
 	// Условия победы
 	private int elderSignsOnMap = 0;
 
-	public Game(List<Investigator> players, AncientOne ancientOne) {
-		this.playersList = players;
+	public Game(LinkedList<Investigator> playersList, AncientOne ancientOne, ArrayList<Gate> gates, Queue<Monster> monstersOnMap, Graph<Location> gameMap) {
+		this.playersList = playersList;
 		this.ancientOne = ancientOne;
-		this.gates = new ArrayDeque<>(); // STUB
+		this.gates = gates;
+		this.monstersOnMap = monstersOnMap;
+		this.gameMap = gameMap;
 	}
 
 	public List<Investigator> getPlayersList()
