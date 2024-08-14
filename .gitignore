@@ -35,6 +35,7 @@ replay_pid*
 # JavaScript / TypeScript .gitignore
 node_modules/
 ArkhamFetcher/out/
+ArkhamFetcher/dist/
 
 .vscode/*
 !.vscode/settings.json
