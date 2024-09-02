@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
 public class GameFactoryTest {
     @Test
     public void ioTest() {
-        String s = "1.json";
+        String s = "Ancients.json";
         try(
                 InputStream is = this.getClass().getClassLoader().getResourceAsStream(s);
                 InputStreamReader isr = new InputStreamReader(is);
@@ -24,7 +24,7 @@ public class GameFactoryTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Path p = Paths.get("src/main/resources/1.json");
+        Path p = Paths.get("src/main/resources/Ancients.json");
         assertTrue(true);
     }
 

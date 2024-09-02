@@ -10,7 +10,7 @@ public class GameFactory {
     // TODO: Файлы для хранилища
     private /*final*/ GameVault gameVault;
     //private Game gameInstance;
-    private final static Path RESOURCES_DIR = Paths.get("resources/1.json");
+    private final static Path RESOURCES_DIR = Paths.get("resources/Ancients.json");
 
     // TODO: Определить относительное положение ресурсов
     public GameFactory() {
