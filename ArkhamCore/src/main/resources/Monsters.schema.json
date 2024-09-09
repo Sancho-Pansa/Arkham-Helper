@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "sanchopansa.io/schemas/arkham/ancients.schema.json",
+  "title": "Ancients List Schema",
+  "type": "array",
+  "items": {
+    "$ref": "#/definitions/Monster"
+  },
+  "definitions": {
+    "Monster": {
+      "title": "Monster JSON",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "expansion": {
+          "$ref": "Expansions.schema.json"
+        },
+        "symbol": {
+          "$ref": "Symbol.schema.json"
+        },
+        "movement": {
+          "type": "string",
+          "enum": [
+            "NORMAL",
+            "STATIONARY",
+            "FAST",
+            "UNIQUE",
+            "FLYING",
+            "STALKER",
+            "AQUATIC"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "USUAL",
+            "MASK",
+            "SPAWN"
+          ]
+        },
+        "awareness": {
+          "type": "integer"
+        },
+        "abilities": {
+          "type": "array",
+          "items": {
+            "$ref": "MonsterAbility.schema.json"
+          }
+        },
+        "stats": {
+          "type": "object",
+          "properties": {
+            "hp": {
+              "type": "integer"
+            },
+            "horrorDamage": {
+              "type": "integer"
+            },
+            "horrorRating": {
+              "type": "integer"
+            },
+            "combatDamage": {
+              "type": "integer"
+            },
+            "combatRating": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "hp"
+          ]
+        },
+        "flavor": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "expansion",
+        "symbol",
+        "movement",
+        "awareness",
+        "abilities",
+        "stats"
+      ]
+    }
+  }
+}
