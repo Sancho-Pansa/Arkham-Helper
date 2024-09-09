@@ -1,0 +1,48 @@
+[
+  {
+    "name": "Кнут",
+    "expansion": "Ужас Аркхэма",
+    "itemType": "PHYSICAL",
+    "stats": {
+      "combat": 1
+    },
+    "cost": 2,
+    "hands": 1,
+    "active": {
+      "description": "Задействуйте эту карту после проверки битвы, чтобы перебросить 1 кубик.",
+      "phase": "ANY"
+    }
+  },
+  {
+    "name": "Мотоцикл",
+    "expansion": "Ужас Аркхэма",
+    "hands": 0,
+    "itemType": "NONE",
+    "cost": 4,
+    "active": {
+      "description": "Задействуйте эту карту, чтобы получить 2 добавочные единицы движения.",
+      "phase": "MOVEMENT"
+    }
+  },
+  {
+    "name": "«Дерринджер» 18-го калибра",
+    "expansion": "Ужас Аркхэма",
+    "itemType": "PHYSICAL",
+    "cost": 3,
+    "hands": 0,
+    "stats": {
+      "combat": 2
+    },
+    "passive": "«Дерринджер» нельзя потерять или украсть, если только вы сами не разрешите."
+  },
+  {
+    "name": "Фонарь",
+    "expansion": "Ужас Аркхэма",
+    "itemType": "NONE",
+    "cost": 3,
+    "hands": 0,
+    "stats": {
+      "luck": 1
+    }
+  }
+]

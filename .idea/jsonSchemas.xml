@@ -3,6 +3,23 @@
   <component name="JsonSchemaMappingsProjectConfiguration">
     <state>
       <map>
+        <entry key="Common Item Schema">
+          <value>
+            <SchemaInfo>
+              <option name="generatedName" value="New Schema" />
+              <option name="name" value="Common Item Schema" />
+              <option name="relativePathToSchema" value="ArkhamCore/src/main/resources/CommonItem.schema.json" />
+              <option name="schemaVersion" value="JSON Schema version 6" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="path" value="ArkhamCore/src/main/resources/CommonItems.json" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
         <entry key="Investigator Schema">
           <value>
             <SchemaInfo>
