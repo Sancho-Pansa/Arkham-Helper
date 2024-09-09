@@ -66,6 +66,12 @@
             },
             "combatRating": {
               "type": "integer"
+            },
+            "overwhelming": {
+              "type": "integer"
+            },
+            "nightmarish": {
+              "type": "integer"
             }
           },
           "required": [

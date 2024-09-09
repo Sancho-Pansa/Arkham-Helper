@@ -1,0 +1,66 @@
+[
+  {
+    "name": "Культист",
+    "expansion": "Ужас Аркхэма",
+    "awareness": -3,
+    "symbol": "CRESCENT",
+    "movement": "NORMAL",
+    "stats": {
+      "hp": 1,
+      "horrorDamage": 0,
+      "combatRating": 1,
+      "combatDamage": 1
+    },
+    "abilities": [],
+    "flavor": "Йа! Йа! Ктулху фхтагн! Пх'нглуи мглв'нафх Ктулху Р'льех вгах'нагл фхтагхн!"
+  },
+  {
+    "name": "Маньяк",
+    "expansion": "Ужас Аркхэма",
+    "awareness": -1,
+    "symbol": "CRESCENT",
+    "movement": "NORMAL",
+    "stats": {
+      "hp": 1,
+      "horrorDamage": 0,
+      "combatRating": 1,
+      "combatDamage": 1
+    },
+    "abilities": []
+  },
+  {
+    "name": "Тёмная молодь",
+    "expansion": "Ужас Аркхэма",
+    "awareness": -2,
+    "symbol": "HEXAGON",
+    "movement": "STATIONARY",
+    "stats": {
+      "hp": 3,
+      "horrorDamage": 3,
+      "horrorRating": 0,
+      "combatRating": -1,
+      "combatDamage": 3,
+      "nightmarish": 1
+    },
+    "abilities": [
+      "PHYSICAL_RESISTANCE"
+    ],
+    "flavor": "Деревья дрожали, осыпая нас листьями. Земля сотрясалась под приближающимися шагами гигантских копыт..."
+  },
+  {
+    "name": "Бьяхи",
+    "expansion": "Ужас Аркхэма",
+    "awareness": -2,
+    "symbol": "CIRCLE",
+    "movement": "FLYING",
+    "stats": {
+      "hp": 1,
+      "horrorDamage": 1,
+      "horrorRating": -1,
+      "combatRating": 0,
+      "combatDamage": 2
+    },
+    "abilities": [],
+    "flavor": "Он завизжадл и взмахнул крыльями. Я подумал о пустой жучиной оболочке и рыхлом коме перегноя. Покрытая панцирем голова склонилась надо мной, щелкая черными зубами."
+  }
+]

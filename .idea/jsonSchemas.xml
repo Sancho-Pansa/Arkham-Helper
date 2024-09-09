@@ -54,6 +54,23 @@
             </SchemaInfo>
           </value>
         </entry>
+        <entry key="Monsters Schema">
+          <value>
+            <SchemaInfo>
+              <option name="generatedName" value="New Schema" />
+              <option name="name" value="Monsters Schema" />
+              <option name="relativePathToSchema" value="ArkhamCore/src/main/resources/Monsters.schema.json" />
+              <option name="schemaVersion" value="JSON Schema version 7" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="path" value="ArkhamCore/src/main/resources/Monsters.json" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
       </map>
     </state>
   </component>
