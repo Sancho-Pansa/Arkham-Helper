@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "sanchopansa.io/schemas/arkham/common-item.schema.json",
+  "title": "Common Item List Schema",
+  "type": "array",
+  "items": {
+    "$ref": "#/definitions/CommonItem"
+  },
+  "definitions": {
+    "CommonItem": {
+      "type": "object",
+      "title": "CommonItemList",
+      "description": "Common item JSON",
+
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "expansion": {
+          "$ref": "Expansions.schema.json"
+        },
+        "cost": {
+          "type": "integer"
+        },
+        "stats": {
+          "type": "object",
+          "properties": {
+            "speed": {
+              "type": "integer"
+            },
+            "sneak": {
+              "type": "integer"
+            },
+            "fight": {
+              "type": "integer"
+            },
+            "will": {
+              "type": "integer"
+            },
+            "lore": {
+              "type": "integer"
+            },
+            "luck": {
+              "type": "integer"
+            },
+            "flee": {
+              "type": "integer"
+            },
+            "combat": {
+              "type": "integer"
+            },
+            "horror": {
+              "type": "integer"
+            },
+            "spell": {
+              "type": "integer"
+            }
+          }
+        },
+        "hands": {
+          "type": "integer",
+          "enum": [0, 1, 2]
+        },
+        "itemType": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "MAGICAL",
+            "PHYSICAL",
+            "TASK",
+            "MISSION",
+            "TOME"
+          ]
+        },
+        "active": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string"
+            },
+            "phase": {
+              "$ref": "Phases.schema.json"
+            }
+          },
+          "required": [
+            "description",
+            "phase"
+          ]
+        },
+        "passive": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "expansion",
+        "itemType",
+        "cost",
+        "hands"
+      ]
+    }
+
+  }
+}
