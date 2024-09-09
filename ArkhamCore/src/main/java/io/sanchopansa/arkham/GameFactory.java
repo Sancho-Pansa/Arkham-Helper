@@ -16,6 +16,15 @@ public class GameFactory {
 
     public GameVault createVault() {
         GameVaultBuilder vaultBuilder = new GameVaultBuilder();
+        try {
+            var stream = getStreamFromResourcesFile("Ancients.json");
+            Gson gson = new Gson();
+            //AncientOne ao = gson.fromJson(stream.collect(Collectors.joining()));
+        } catch(NullPointerException e) {
+            System.err.println("Error in JSON filename - Requested file was not found!");
+        } catch(IOException e) {
+            System.err.println("Error during file reading process!");
+        }
 
         //vaultBuilder.createDefaultLayout();
         return null;
