@@ -21,7 +21,7 @@ public class Skill {
      * @param leftRed Самое левое (наибольшее) значение "красной" полосы
      * @param focus Значение Концентрации Сыщика
      */
-    Skill(int leftBlue, int leftRed, Stat focus) {
+    public Skill(int leftBlue, int leftRed, Stat focus) {
         for (int i = 0; i < SKILL_VALUES; i++) {
             blueSkill[i] = leftBlue + i;
             redSkill[i] = leftRed - i;
@@ -29,7 +29,7 @@ public class Skill {
         this.focus = focus;
     }
 
-    Skill(int leftBlue, int leftRed) {
+    public Skill(int leftBlue, int leftRed) {
         this(leftBlue, leftRed, new Stat(2));
     }
 
