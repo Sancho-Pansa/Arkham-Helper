@@ -8,5 +8,6 @@ public enum Phase {
     MOVEMENT,
     ARKHAM_ENCOUNTER,
     OTHER_WORLD_ENCOUNTER,
-    MYTHOS
+    MYTHOS,
+    ANY
 }
