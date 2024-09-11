@@ -111,6 +111,6 @@ public class Stat {
 
     @Override
     public String toString() {
-        return String.format("Stat: [ %d / %d / %d ]", currentMinimum, value, currentMaximum);
+        return String.format("Stat {\n[ %d / %d / %d ]\n}", currentMinimum, value, currentMaximum);
     }
 }

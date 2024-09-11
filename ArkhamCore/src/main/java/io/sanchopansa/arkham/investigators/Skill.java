@@ -109,19 +109,20 @@ public class Skill {
 
     @Override
     public String toString() {
-        String blueRow = "";
-        String redRow = "";
+        final StringBuilder sb = new StringBuilder("Skill {\n");
+        final StringBuilder blueRow = new StringBuilder();
+        final StringBuilder redRow = new StringBuilder();
         for(int i = 0; i < SKILL_VALUES; i++) {
             if(i == sliderIndex) {
-                blueRow += String.format(" [%d] ", blueSkill[i]);
-                redRow += String.format(" [%d] ", redSkill[i]);
+                blueRow.append(String.format("[ %d ] ", blueSkill[i]));
+                redRow.append(String.format("[ %d ] ", redSkill[i]));
             }
             else {
-                blueRow += " " + blueSkill[i] + " ";
-                redRow += " " + redSkill[i] + " ";
+                blueRow.append(blueSkill[i]).append(" ");
+                redRow.append(redSkill[i]).append(" ");
             }
 
         }
-        return blueRow + "\n" + redRow;
+        return sb.append(blueRow).append("\n").append(redRow).append("\n}").toString();
     }
 }
