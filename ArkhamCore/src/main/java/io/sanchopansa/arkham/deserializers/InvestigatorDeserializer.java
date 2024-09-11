@@ -6,6 +6,7 @@ import io.sanchopansa.arkham.Phase;
 import io.sanchopansa.arkham.investigators.Investigator;
 
 import java.lang.reflect.Type;
+import java.util.Optional;
 
 public class InvestigatorDeserializer implements JsonDeserializer<Investigator> {
     @Override
@@ -49,11 +50,30 @@ public class InvestigatorDeserializer implements JsonDeserializer<Investigator> 
                 abilityDescription,
                 abilityPhase
         );
-        // TODO: Как передать инфо о предметах?
+
         JsonObject possessions = jsonInvestigator.get("possessions").getAsJsonObject();
         investigator.setMoney(possessions.get("money").getAsInt());
         investigator.setClueTokens(possessions.get("clues").getAsInt());
 
+
         return investigator;
+    }
+
+    private int getRandomsFromJson(JsonObject items) {
+        return Optional.ofNullable(items).isEmpty() ? 0 : items.get("random").getAsInt();
+    }
+
+    private String[] getFixedFromJson(JsonObject items) {
+        String[] result = new String[0];
+        if(Optional.ofNullable(items).isPresent()) {
+            result = items
+                    .get("fixed")
+                    .getAsJsonArray()
+                    .asList()
+                    .stream()
+                    .map(JsonElement::getAsString)
+                    .toArray(String[]::new);
+        }
+        return result;
     }
 }

@@ -42,12 +42,18 @@ public class Investigator extends AbstractGameElement {
     private int money = 0;
     private int clueTokens = 0;
     private final List<CommonItem> commonItems = new ArrayList<>();
+    private InitialPossessions initialCommons;
     private final List<UniqueItem> uniqueItems = new ArrayList<>();
+    private InitialPossessions initialUniques;
     private final List<Spell> spells = new ArrayList<>();
+    private InitialPossessions initialSpells;
     private final List<SkillCard> skills = new ArrayList<>();
+    private InitialPossessions initialSkills;
     private final List<Ally> allies = new ArrayList<>();
+    private InitialPossessions initialAllies;
     private final List<AbstractCard> specials = new ArrayList<>();
     private final Queue<Monster> monsterTrophies = new ArrayDeque<>();
+    private InitialPossessions initialMonsters;
     private final Queue<Gate> gateTrophies = new ArrayDeque<>();
 
     public Investigator(Expansion e,
@@ -259,16 +265,16 @@ public class Investigator extends AbstractGameElement {
         return focus;
     }
 
-    public void refillFocus() {
-        this.focus.refill();
-    }
-
     public List<CommonItem> getCommonItems() {
         return commonItems;
     }
 
     public void addCommonItem(CommonItem item) {
         this.commonItems.add(item);
+    }
+
+    public void setInitialCommonItems(int random, String[] fixed) {
+        this.initialCommons = new InitialPossessions(random, fixed);
     }
 
     public boolean removeCommonItem(CommonItem item) {
@@ -283,6 +289,10 @@ public class Investigator extends AbstractGameElement {
         this.uniqueItems.add(item);
     }
 
+    public void setInitialUniqueItems(int random, String[] fixed) {
+        this.initialUniques = new InitialPossessions(random, fixed);
+    }
+
     public boolean removeUniqueItem(UniqueItem item) {
         return this.uniqueItems.remove(item);
     }
@@ -293,6 +303,10 @@ public class Investigator extends AbstractGameElement {
 
     public void addSpell(Spell spell) {
         this.spells.add(spell);
+    }
+
+    public void setInitialSpells(int random, String[] fixed) {
+        this.initialSpells = new InitialPossessions(random, fixed);
     }
 
     public boolean removeSpell(Spell spell) {
@@ -307,6 +321,10 @@ public class Investigator extends AbstractGameElement {
         this.skills.add(skill);
     }
 
+    public void setInitialSkills(int random, String[] fixed) {
+        this.initialSkills = new InitialPossessions(random, fixed);
+    }
+
     public boolean removeSkill(SkillCard skill) {
         return this.skills.remove(skill);
     }
@@ -317,6 +335,10 @@ public class Investigator extends AbstractGameElement {
 
     public void addAlly(Ally ally) {
         this.allies.add(ally);
+    }
+
+    public void setInitialAllies(int random, String[] fixed) {
+        this.initialAllies = new InitialPossessions(random, fixed);
     }
 
     public boolean removeAlly(Ally ally) {
@@ -341,6 +363,10 @@ public class Investigator extends AbstractGameElement {
 
     public void addMonsterTrophy(Monster monster) {
         this.monsterTrophies.add(monster);
+    }
+
+    public void setInitialMonsters(int random, String[] fixed) {
+        this.initialSkills = new InitialPossessions(random, fixed);
     }
 
     public boolean removeMonsterTrophy(Monster monster) {
@@ -420,5 +446,5 @@ public class Investigator extends AbstractGameElement {
         }
     }
 
-
+    public record InitialPossessions(int randomItems, String[] fixedItems) { }
 }
