@@ -1,12 +1,10 @@
 package io.sanchopansa.arkham;
 
 import com.google.gson.*;
+import io.sanchopansa.arkham.deserializers.InvestigatorDeserializer;
 import io.sanchopansa.arkham.investigators.Investigator;
-import io.sanchopansa.arkham.investigators.Skill;
-import io.sanchopansa.arkham.investigators.Stat;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -28,18 +26,7 @@ public class GameFactory {
             var stream = getStreamFromResourcesFile("Investigators.json");
             //TypeToken<Collection<AncientOne>> typeToken = new TypeToken<>() { }; // These curly braces define an anonymous inner class.
             GsonBuilder gson = new GsonBuilder();
-            gson.registerTypeAdapter(Stat.class, new JsonDeserializer<>() {
-                @Override
-                public Object deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-                    return new Stat(jsonElement.getAsInt());
-                }
-            });
-            gson.registerTypeAdapter(Skill.class, new JsonDeserializer<>() {
-                @Override
-                public Object deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-                    return new Skill(jsonElement.getAsInt(), jsonElement.getAsInt());
-                }
-            });
+            gson.registerTypeAdapter(Investigator.class, new InvestigatorDeserializer());
             Investigator[] investigators = gson.create().fromJson(stream.collect(Collectors.joining()), Investigator[].class);
             Arrays.stream(investigators).forEach(System.out::println);
             //stream.forEach(System.out::println);
