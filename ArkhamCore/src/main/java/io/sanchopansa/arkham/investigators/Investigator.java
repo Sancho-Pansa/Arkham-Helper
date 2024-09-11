@@ -367,6 +367,40 @@ public class Investigator extends AbstractGameElement {
         this.alive = false;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Investigator{");
+        sb.append("\n\tname='").append(name).append('\'');
+        sb.append(",\n\ttitle='").append(title).append('\'');
+        sb.append(",\n\texpansion=").append(expansion);
+        sb.append(",\n\tstamina=").append(stamina);
+        sb.append(",\n\tsanity=").append(sanity);
+        sb.append(",\n\tSS=").append(SS);
+        sb.append(",\n\tFW=").append(FW);
+        sb.append(",\n\tLL=").append(LL);
+        sb.append(",\n\tfocus=").append(focus);
+        sb.append(",\n\tability=").append(ability);
+        sb.append(",\n\talive=").append(alive);
+        sb.append(",\n\tblessing=").append(blessing);
+        sb.append(",\n\thasRetainer=").append(hasRetainer);
+        sb.append(",\n\tloan=").append(loan);
+        sb.append(",\n\tcanLoan=").append(canLoan);
+        sb.append(",\n\tsilverTwilight=").append(silverTwilight);
+        sb.append(",\n\tsheriff=").append(sheriff);
+        sb.append(",\n\tmoney=").append(money);
+        sb.append(",\n\tclueTokens=").append(clueTokens);
+        sb.append(",\n\tcommonItems=").append(commonItems);
+        sb.append(",\n\tuniqueItems=").append(uniqueItems);
+        sb.append(",\n\tspells=").append(spells);
+        sb.append(",\n\tskills=").append(skills);
+        sb.append(",\n\tallies=").append(allies);
+        sb.append(",\n\tspecials=").append(specials);
+        sb.append(",\n\tmonsterTrophies=").append(monsterTrophies);
+        sb.append(",\n\tgateTrophies=").append(gateTrophies);
+        sb.append('}');
+        return sb.toString();
+    }
+
     /**
      * Троичное состояние Благословения у игрока
      */
@@ -377,5 +411,13 @@ public class Investigator extends AbstractGameElement {
     }
 
     public record InvestigatorAbility(Investigator investigator, String name, String description, Phase phase) {
+        @Override
+        public String toString() {
+            return "InvestigatorAbility{" +
+                    "name='" + name + '\'' +
+                    ", description='" + description + '\'' +
+                    ", phase=" + phase +
+                    '}';
+        }
     }
 }
