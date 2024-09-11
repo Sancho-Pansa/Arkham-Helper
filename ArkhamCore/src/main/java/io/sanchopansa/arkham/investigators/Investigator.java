@@ -31,9 +31,9 @@ public class Investigator extends AbstractGameElement {
     private boolean alive = true;
 
     // Вторичные характеристики
-    private Blessing blessing = Blessing.NO_EFFECT; // Благословение
+    private Blessing blessing = Blessing.NONE; // Благословение
     private boolean hasRetainer = false;            // Гонорар
-    private boolean loan = false;                   // Ссуда
+    private boolean hasLoan = false;                   // Ссуда
     private boolean canLoan = true;                 // Возможность брать ссуду
     private boolean silverTwilight = false;         // Членство в ЛСС
     private boolean sheriff = false;                // Статус шерифа
@@ -199,11 +199,11 @@ public class Investigator extends AbstractGameElement {
     }
 
     public boolean hasLoan() {
-        return this.loan;
+        return this.hasLoan;
     }
 
     public void setLoan(boolean flag) {
-        this.loan = flag;
+        this.hasLoan = flag;
     }
 
     public boolean canLoan() {
@@ -211,11 +211,11 @@ public class Investigator extends AbstractGameElement {
     }
 
     public void returnLoan() {
-        this.loan = false;
+        this.hasLoan = false;
     }
 
     public void discardLoan() {
-        this.loan = false;
+        this.hasLoan = false;
         this.canLoan = false;
     }
 
@@ -240,11 +240,11 @@ public class Investigator extends AbstractGameElement {
     }
 
     public void bless() {
-        this.blessing = this.blessing == Blessing.CURSED ? Blessing.NO_EFFECT : Blessing.BLESSED;
+        this.blessing = this.blessing == Blessing.CURSED ? Blessing.NONE : Blessing.BLESSED;
     }
 
     public void curse() {
-        this.blessing = this.blessing == Blessing.BLESSED ? Blessing.NO_EFFECT : Blessing.CURSED;
+        this.blessing = this.blessing == Blessing.BLESSED ? Blessing.NONE : Blessing.CURSED;
     }
 
     public void joinSilverTwilight() {
@@ -369,35 +369,34 @@ public class Investigator extends AbstractGameElement {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Investigator{");
+        final StringBuilder sb = new StringBuilder("Investigator {");
         sb.append("\n\tname='").append(name).append('\'');
         sb.append(",\n\ttitle='").append(title).append('\'');
         sb.append(",\n\texpansion=").append(expansion);
         sb.append(",\n\tstamina=").append(stamina);
         sb.append(",\n\tsanity=").append(sanity);
-        sb.append(",\n\tSS=").append(SS);
-        sb.append(",\n\tFW=").append(FW);
-        sb.append(",\n\tLL=").append(LL);
+        sb.append(",\n\tSneak/Speed=").append(SS);
+        sb.append(",\n\tFight/Will=").append(FW);
+        sb.append(",\n\tLore/Luck=").append(LL);
         sb.append(",\n\tfocus=").append(focus);
         sb.append(",\n\tability=").append(ability);
-        sb.append(",\n\talive=").append(alive);
         sb.append(",\n\tblessing=").append(blessing);
-        sb.append(",\n\thasRetainer=").append(hasRetainer);
-        sb.append(",\n\tloan=").append(loan);
-        sb.append(",\n\tcanLoan=").append(canLoan);
-        sb.append(",\n\tsilverTwilight=").append(silverTwilight);
-        sb.append(",\n\tsheriff=").append(sheriff);
+        sb.append(",\n\thas retainer=").append(hasRetainer);
+        sb.append(",\n\thas loan=").append(hasLoan);
+        sb.append(",\n\tcan loan=").append(canLoan);
+        sb.append(",\n\tis cultist=").append(silverTwilight);
+        sb.append(",\n\tis sheriff=").append(sheriff);
         sb.append(",\n\tmoney=").append(money);
-        sb.append(",\n\tclueTokens=").append(clueTokens);
-        sb.append(",\n\tcommonItems=").append(commonItems);
-        sb.append(",\n\tuniqueItems=").append(uniqueItems);
+        sb.append(",\n\tclue tokens=").append(clueTokens);
+        sb.append(",\n\tcommon items=").append(commonItems);
+        sb.append(",\n\tunique items=").append(uniqueItems);
         sb.append(",\n\tspells=").append(spells);
         sb.append(",\n\tskills=").append(skills);
         sb.append(",\n\tallies=").append(allies);
         sb.append(",\n\tspecials=").append(specials);
-        sb.append(",\n\tmonsterTrophies=").append(monsterTrophies);
-        sb.append(",\n\tgateTrophies=").append(gateTrophies);
-        sb.append('}');
+        sb.append(",\n\tmonster trophies=").append(monsterTrophies);
+        sb.append(",\n\tgate trophies=").append(gateTrophies);
+        sb.append("\n}");
         return sb.toString();
     }
 
@@ -405,7 +404,7 @@ public class Investigator extends AbstractGameElement {
      * Троичное состояние Благословения у игрока
      */
     private enum Blessing {
-        NO_EFFECT,    // Нет эффекта
+        NONE,    // Нет эффекта
         BLESSED, // Благословлен
         CURSED   // Проклят
     }
@@ -413,11 +412,13 @@ public class Investigator extends AbstractGameElement {
     public record InvestigatorAbility(Investigator investigator, String name, String description, Phase phase) {
         @Override
         public String toString() {
-            return "InvestigatorAbility{" +
-                    "name='" + name + '\'' +
-                    ", description='" + description + '\'' +
-                    ", phase=" + phase +
-                    '}';
+            return "InvestigatorAbility {" +
+                    "\t\nname='" + name + '\'' +
+                    ",\t\ndescription='" + description + '\'' +
+                    ",\t\nphase=" + phase +
+                    "\n}";
         }
     }
+
+
 }
