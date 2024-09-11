@@ -19,9 +19,9 @@ public class GameFactory {
     private final GameVault gameVault = null;
     private final Game gameInstance = null;
 
-
     public GameVault createVault() {
         GameVaultBuilder vaultBuilder = new GameVaultBuilder();
+
         try {
             var stream = getStreamFromResourcesFile("Investigators.json");
             //TypeToken<Collection<AncientOne>> typeToken = new TypeToken<>() { }; // These curly braces define an anonymous inner class.

@@ -25,13 +25,14 @@ public class InvestigatorDeserializer implements JsonDeserializer<Investigator> 
         int minLore = jsonInvestigator.get("minLore").getAsInt();
         int maxLuck = jsonInvestigator.get("maxLuck").getAsInt();
 
-        int focus = jsonInvestigator.get("maxLuck").getAsInt();
+        int focus = jsonInvestigator.get("focus").getAsInt();
 
         JsonObject ability = jsonInvestigator.get("ability").getAsJsonObject();
         String abilityName = ability.get("name").getAsString();
         String abilityDescription = ability.get("description").getAsString();
         Phase abilityPhase = Phase.valueOf(ability.get("phase").getAsString());
-        return new Investigator(
+
+        Investigator investigator = new Investigator(
                 e,
                 name,
                 title,
@@ -48,5 +49,11 @@ public class InvestigatorDeserializer implements JsonDeserializer<Investigator> 
                 abilityDescription,
                 abilityPhase
         );
+        // TODO: Как передать инфо о предметах?
+        JsonObject possessions = jsonInvestigator.get("possessions").getAsJsonObject();
+        investigator.setMoney(possessions.get("money").getAsInt());
+        investigator.setClueTokens(possessions.get("clues").getAsInt());
+
+        return investigator;
     }
 }
