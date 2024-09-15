@@ -9,8 +9,8 @@ public class CommonItem extends AbstractItem {
     public CommonItem(Expansion e,
                       String name,
                       int price,
-                      ItemType itemType,
-                      Hands hands,
+                      String itemType,
+                      byte hands,
                       Phase phaseToUse,
                       String description
     ) {

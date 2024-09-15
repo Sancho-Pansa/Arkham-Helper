@@ -1,20 +1,37 @@
 package io.sanchopansa.arkham.cards;
 
+import com.google.common.base.Enums;
 import io.sanchopansa.arkham.Expansion;
 import io.sanchopansa.arkham.Phase;
 
 public abstract class AbstractItem extends AbstractCard {
     private final int price;
     private final ItemType itemType;
-    private final Hands hands;
+    private final byte hands;
     private final Phase phaseToUse;
 
     public AbstractItem(Expansion e,
                         String name,
                         CardType cardType,
                         int price,
+                        String itemType,
+                        byte hands,
+                        Phase phaseToUse,
+                        String description
+    ) {
+        super(e, name, cardType, description);
+        this.price = price;
+        this.itemType = ItemType.from(itemType);
+        this.hands = hands;
+        this.phaseToUse = phaseToUse;
+    }
+
+    public AbstractItem(Expansion e,
+                        String name,
+                        CardType cardType,
+                        int price,
                         ItemType itemType,
-                        Hands hands,
+                        byte hands,
                         Phase phaseToUse,
                         String description
     ) {
@@ -33,7 +50,7 @@ public abstract class AbstractItem extends AbstractCard {
         return itemType;
     }
 
-    public Hands getHands() {
+    public byte getHands() {
         return hands;
     }
 
@@ -41,17 +58,16 @@ public abstract class AbstractItem extends AbstractCard {
         return phaseToUse;
     }
 
-    public enum Hands {
-        NONE,
-        ONE,
-        BOTH
-    }
     public enum ItemType {
         NONE,
         MAGICAL,
         PHYSICAL,
         TASK,
         MISSION,
-        TOME
+        TOME;
+
+        public static ItemType from(String value) {
+            return Enums.getIfPresent(ItemType.class, value).or(ItemType.NONE);
+        }
     }
 }

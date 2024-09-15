@@ -13,7 +13,7 @@ public class Spell extends AbstractItem {
 
     public Spell(Expansion e,
                  String name,
-                 Hands hands,
+                 byte hands,
                  Phase phaseToUse,
                  String description,
                  int castingMod,

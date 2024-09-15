@@ -9,8 +9,8 @@ public class UniqueItem extends AbstractItem {
     public UniqueItem(Expansion e,
                       String name,
                       int price,
-                      ItemType itemType,
-                      Hands hands,
+                      String itemType,
+                      byte hands,
                       Phase phaseToUse,
                       String description
     ) {
