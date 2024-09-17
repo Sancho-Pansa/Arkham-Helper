@@ -2,10 +2,10 @@
   {
     "name": "Культист",
     "expansion": "Ужас Аркхэма",
-    "awareness": -3,
     "symbol": "CRESCENT",
     "movement": "NORMAL",
     "stats": {
+      "awareness": -3,
       "hp": 1,
       "horrorDamage": 0,
       "combatRating": 1,
@@ -13,28 +13,26 @@
     },
     "abilities": [],
     "flavor": "Йа! Йа! Ктулху фхтагн! Пх'нглуи мглв'нафх Ктулху Р'льех вгах'нагл фхтагхн!"
-  },
-  {
+  }, {
     "name": "Маньяк",
     "expansion": "Ужас Аркхэма",
-    "awareness": -1,
     "symbol": "CRESCENT",
     "movement": "NORMAL",
     "stats": {
+      "awareness": -1,
       "hp": 1,
       "horrorDamage": 0,
       "combatRating": 1,
       "combatDamage": 1
     },
     "abilities": []
-  },
-  {
+  }, {
     "name": "Тёмная молодь",
     "expansion": "Ужас Аркхэма",
-    "awareness": -2,
     "symbol": "HEXAGON",
     "movement": "STATIONARY",
     "stats": {
+      "awareness": -2,
       "hp": 3,
       "horrorDamage": 3,
       "horrorRating": 0,
@@ -46,14 +44,13 @@
       "PHYSICAL_RESISTANCE"
     ],
     "flavor": "Деревья дрожали, осыпая нас листьями. Земля сотрясалась под приближающимися шагами гигантских копыт..."
-  },
-  {
+  }, {
     "name": "Бьяхи",
     "expansion": "Ужас Аркхэма",
-    "awareness": -2,
     "symbol": "CIRCLE",
     "movement": "FLYING",
     "stats": {
+      "awareness": -2,
       "hp": 1,
       "horrorDamage": 1,
       "horrorRating": -1,

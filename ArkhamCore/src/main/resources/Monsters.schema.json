@@ -40,9 +40,6 @@
             "SPAWN"
           ]
         },
-        "awareness": {
-          "type": "integer"
-        },
         "abilities": {
           "type": "array",
           "items": {
@@ -53,6 +50,9 @@
           "type": "object",
           "properties": {
             "hp": {
+              "type": "integer"
+            },
+            "awareness": {
               "type": "integer"
             },
             "horrorDamage": {
@@ -75,7 +75,8 @@
             }
           },
           "required": [
-            "hp"
+            "hp",
+            "awareness"
           ]
         },
         "flavor": {
@@ -87,7 +88,6 @@
         "expansion",
         "symbol",
         "movement",
-        "awareness",
         "abilities",
         "stats"
       ]
