@@ -3,7 +3,7 @@ package io.sanchopansa.arkham;
 import com.google.common.graph.MutableGraph;
 import io.sanchopansa.arkham.cards.*;
 import io.sanchopansa.arkham.investigators.Investigator;
-import io.sanchopansa.arkham.monsters.AncientOne;
+import io.sanchopansa.arkham.monsters.Ancient;
 import io.sanchopansa.arkham.monsters.Gate;
 import io.sanchopansa.arkham.monsters.Monster;
 
@@ -19,7 +19,7 @@ public class GameVault {
     private final MutableGraph<Location> gameMap;
     private final ArrayList<Monster> monsterPool;
     private final ArrayList<Gate> gatePool;
-    private final Set<AncientOne> ancientOnePool;
+    private final Set<Ancient> ancientPool;
 
     private final ArrayList<CommonItem> commonItems;
     private final ArrayList<UniqueItem> uniqueItems;
@@ -31,7 +31,7 @@ public class GameVault {
                      MutableGraph<Location> gameMap,
                      ArrayList<Monster> monsterPool,
                      ArrayList<Gate> gatePool,
-                     Set<AncientOne> ancientOnePool,
+                     Set<Ancient> ancientPool,
                      ArrayList<CommonItem> commonItems,
                      ArrayList<UniqueItem> uniqueItems,
                      ArrayList<Spell> spells,
@@ -42,7 +42,7 @@ public class GameVault {
         this.gameMap = gameMap;
         this.monsterPool = monsterPool;
         this.gatePool = gatePool;
-        this.ancientOnePool = ancientOnePool;
+        this.ancientPool = ancientPool;
         this.commonItems = commonItems;
         this.uniqueItems = uniqueItems;
         this.spells = spells;
@@ -66,8 +66,8 @@ public class GameVault {
         return gatePool;
     }
 
-    public Set<AncientOne> getAncientOnePool() {
-        return ancientOnePool;
+    public Set<Ancient> getAncientOnePool() {
+        return ancientPool;
     }
 
     public ArrayList<CommonItem> getCommonItems() {

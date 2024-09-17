@@ -12,17 +12,17 @@ import java.util.Optional;
 public class UniqueItemDeserializer implements JsonDeserializer<UniqueItem>  {
     @Override
     public UniqueItem deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-        JsonObject jsonCommonItem = jsonElement.getAsJsonObject();
-        String name = jsonCommonItem.get("name").getAsString();
-        Expansion e = Expansion.fromString(jsonCommonItem.get("expansion").getAsString());
-        String itemType = jsonCommonItem.get("itemType").getAsString();
-        byte hands = Optional.of(jsonCommonItem.get("hands").getAsByte()).orElse((byte) 0);
-        int cost = jsonCommonItem.get("cost").getAsInt();
-        String passive = Optional.of(jsonCommonItem.get("hands").getAsString()).orElse("");
+        JsonObject jsonUniqueItem = jsonElement.getAsJsonObject();
+        String name = jsonUniqueItem.get("name").getAsString();
+        Expansion e = Expansion.fromString(jsonUniqueItem.get("expansion").getAsString());
+        String itemType = jsonUniqueItem.get("itemType").getAsString();
+        byte hands = Optional.of(jsonUniqueItem.get("hands").getAsByte()).orElse((byte) 0);
+        int cost = jsonUniqueItem.get("cost").getAsInt();
+        String passive = Optional.of(jsonUniqueItem.get("hands").getAsString()).orElse("");
         Phase usablePhase = Phase.ANY;
         String activeDescription = "";
 
-        Optional<JsonObject> active = Optional.ofNullable(jsonCommonItem.getAsJsonObject("active"));
+        Optional<JsonObject> active = Optional.ofNullable(jsonUniqueItem.getAsJsonObject("active"));
         if(active.isPresent()) {
             usablePhase = Phase.from(active.get().get("phase").getAsString());
             activeDescription = active.get().get("description").getAsString();

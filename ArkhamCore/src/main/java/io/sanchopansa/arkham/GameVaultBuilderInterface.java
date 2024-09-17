@@ -27,7 +27,7 @@ public interface GameVaultBuilderInterface {
      * @return Строитель коробки
      */
     GameVaultBuilder createDefaultLayout(MutableGraph<Location> map,
-                                         Set<AncientOne> ancients,
+                                         Set<Ancient> ancients,
                                          Set<Investigator> investigators,
                                          ArrayList<CommonItem> commonItems,
                                          ArrayList<UniqueItem> uniqueItems,
@@ -49,7 +49,7 @@ public interface GameVaultBuilderInterface {
 
     GameVaultBuilder addInvestigators(Set<Investigator> investigators);
 
-    GameVaultBuilder addAncients(Set<AncientOne> ancients);
+    GameVaultBuilder addAncients(Set<Ancient> ancients);
 
     GameVaultBuilder addCommonItems(ArrayList<CommonItem> commonItems);
 

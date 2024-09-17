@@ -11,7 +11,7 @@ import java.util.Set;
  * @author SanchoPansa
  */
 
-public class AncientOne extends AbstractGameElement
+public class Ancient extends AbstractGameElement
 {
 	private String name;
 	private final int awakening;
@@ -20,20 +20,20 @@ public class AncientOne extends AbstractGameElement
 	private String featName;
 	private String featDesc;
 
-	public AncientOne(String name, int awakening, Set<AncientTypes> types, Expansion expansion) {
+	public Ancient(String name, int awakening, Set<AncientTypes> types, Expansion expansion) {
         super(expansion);
         this.name = name;
 		this.awakening = awakening;
 		this.types = types;
 	}
 
-	public AncientOne(String name,
-					  int awakening,
-					  Set<AncientTypes> types,
-					  Monster followers,
-					  String featName,
-					  String featDesc,
-					  Expansion expansion) {
+	public Ancient(String name,
+				   int awakening,
+				   Set<AncientTypes> types,
+				   Monster followers,
+				   String featName,
+				   String featDesc,
+				   Expansion expansion) {
         super(expansion);
         this.name = name;
 		this.awakening = awakening;
@@ -121,7 +121,7 @@ public class AncientOne extends AbstractGameElement
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		AncientOne that = (AncientOne) o;
+		Ancient that = (Ancient) o;
 		return awakening == that.awakening &&
 				name.equals(that.name);
 	}

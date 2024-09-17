@@ -11,7 +11,7 @@ import java.util.Set;
 @SuppressWarnings("UnstableApiUsage")
 public class GameVaultBuilder implements GameVaultBuilderInterface {
     private MutableGraph<Location> map;
-    private Set<AncientOne> ancients;
+    private Set<Ancient> ancients;
     private Set<Investigator> investigators;
 
     private ArrayList<CommonItem> commonItems;
@@ -25,7 +25,7 @@ public class GameVaultBuilder implements GameVaultBuilderInterface {
 
     @Override
     public GameVaultBuilder createDefaultLayout(MutableGraph<Location> map,
-                                                Set<AncientOne> ancients,
+                                                Set<Ancient> ancients,
                                                 Set<Investigator> investigators,
                                                 ArrayList<CommonItem> commonItems,
                                                 ArrayList<UniqueItem> uniqueItems,
@@ -66,7 +66,7 @@ public class GameVaultBuilder implements GameVaultBuilderInterface {
     }
 
     @Override
-    public GameVaultBuilder addAncients(Set<AncientOne> ancients) {
+    public GameVaultBuilder addAncients(Set<Ancient> ancients) {
         this.ancients.addAll((ancients));
         return this;
     }

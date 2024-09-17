@@ -2,7 +2,7 @@ package io.sanchopansa.arkham;
 
 import com.google.common.graph.Graph;
 import io.sanchopansa.arkham.investigators.Investigator;
-import io.sanchopansa.arkham.monsters.AncientOne;
+import io.sanchopansa.arkham.monsters.Ancient;
 import io.sanchopansa.arkham.monsters.Gate;
 import io.sanchopansa.arkham.monsters.Monster;
 
@@ -15,7 +15,7 @@ import java.util.*;
 
 public class Game {
 	private final LinkedList<Investigator> playersList;
-	private final AncientOne ancientOne;
+	private final Ancient ancient;
 	private final ArrayList<Gate> gates;
 	private final Queue<Monster> monstersOnMap;
 	private final Graph<Location> gameMap;
@@ -37,9 +37,9 @@ public class Game {
 	// Условия победы
 	private int elderSignsOnMap = 0;
 
-	public Game(LinkedList<Investigator> playersList, AncientOne ancientOne, ArrayList<Gate> gates, Queue<Monster> monstersOnMap, Graph<Location> gameMap) {
+	public Game(LinkedList<Investigator> playersList, Ancient ancient, ArrayList<Gate> gates, Queue<Monster> monstersOnMap, Graph<Location> gameMap) {
 		this.playersList = playersList;
-		this.ancientOne = ancientOne;
+		this.ancient = ancient;
 		this.gates = gates;
 		this.monstersOnMap = monstersOnMap;
 		this.gameMap = gameMap;
@@ -50,9 +50,9 @@ public class Game {
 		return playersList;
 	}
 
-	public AncientOne getAncientOne()
+	public Ancient getAncientOne()
 	{
-		return this.ancientOne;
+		return this.ancient;
 	}
 	
 	public int getTerrorLevel() {
@@ -95,7 +95,7 @@ public class Game {
 	
 	public boolean isAwaken()
 	{
-		return this.ancientOne.getAwakening() <= this.doomLevel;
+		return this.ancient.getAwakening() <= this.doomLevel;
 	}
 
 	/**
@@ -227,7 +227,7 @@ public class Game {
 		StringBuilder info = new StringBuilder();
 
 		// Doom Track:
-		info.append(String.format("Уровень безысходности: %d / %d\n", this.doomLevel, this.ancientOne.getAwakening()));
+		info.append(String.format("Уровень безысходности: %d / %d\n", this.doomLevel, this.ancient.getAwakening()));
 		info.append(String.format("Врат: %d / %d\n", this.gateCount, this.gateLimit));
 		info.append(String.format("Монстров на карте: %d / %d\n", this.mapMonsterCount, this.monsterLimit));
 		info.append(String.format("Монстров на Окраинах: %d / %d\n", this.outMonsterCount, this.outskirtsLimit));
