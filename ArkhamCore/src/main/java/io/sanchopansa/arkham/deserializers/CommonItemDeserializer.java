@@ -8,6 +8,10 @@ import io.sanchopansa.arkham.cards.CommonItem;
 import java.lang.reflect.Type;
 import java.util.Optional;
 
+/*
+    NB: Попробовал сделать более широкий десериализатор, чтобы не дублировать код для UniqueItem, но он выходит слишком
+        грузным, так что пришлось отказаться от этой идеи.
+ */
 public class CommonItemDeserializer implements JsonDeserializer<CommonItem> {
 
     @Override
