@@ -2,52 +2,58 @@ package io.sanchopansa.arkham.monsters;
 
 import io.sanchopansa.arkham.AbstractGameElement;
 import io.sanchopansa.arkham.Expansion;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
-public class Monster extends AbstractGameElement {
+public final class Monster extends AbstractGameElement {
     private final String name;
     private final Behavior behavior;
-    private final int fleeModifier;
-    private final boolean isElusive;
     private final Type type;
     private final DimensionSymbol dimension;
+    private final int awareness;
     private final int health;
-    private final int sanityDamage;
-    private final int compulsorySanityDamage;
-    private final int healthDamage;
-    private final int compulsoryHealthDamage;
+    private final int horrorRating;
+    private final int horrorDamage;
+    private final int compulsoryHorrorDamage;
+    private final int combatRating;
+    private final int combatDamage;
+    private final int compulsoryCombatDamage;
     private final List<Ability> abilities;
     private final String flavor;
 
     public Monster(Expansion e,
                    String name,
-                   Behavior behavior,
-                   int fleeModifier,
-                   boolean isElusive,
-                   Type type,
-                   DimensionSymbol dimension,
+                   String behavior,
+                   int awareness,
+                   String type,
+                   String dimension,
                    int health,
-                   int sanityDamage,
-                   int compulsorySanityDamage,
-                   int healthDamage,
-                   int compulsoryHealthDamage,
-                   List<Ability> abilities,
+                   int horrorRating,
+                   int horrorDamage,
+                   int compulsoryHorrorDamage,
+                   int combatRating,
+                   int combatDamage,
+                   int compulsoryCombatDamage,
+                   List<String> abilities,
                    String flavor
     ) {
         super(e);
         this.name = name;
-        this.behavior = behavior;
-        this.fleeModifier = fleeModifier;
-        this.isElusive = isElusive;
-        this.type = type;
-        this.dimension = dimension;
+        this.behavior = Behavior.of(behavior);
+        this.awareness = awareness;
+        this.type = Type.valueOf(type);
+        this.dimension = DimensionSymbol.of(dimension);
         this.health = health;
-        this.sanityDamage = sanityDamage;
-        this.compulsorySanityDamage = compulsorySanityDamage;
-        this.healthDamage = healthDamage;
-        this.compulsoryHealthDamage = compulsoryHealthDamage;
-        this.abilities = abilities;
+        this.horrorRating = horrorRating;
+        this.horrorDamage = horrorDamage;
+        this.compulsoryHorrorDamage = compulsoryHorrorDamage;
+        this.combatRating = combatRating;
+        this.combatDamage = combatDamage;
+        this.compulsoryCombatDamage = compulsoryCombatDamage;
+        this.abilities = abilities.stream().map(Ability::valueOf).toList();
         this.flavor = flavor;
     }
 
@@ -59,12 +65,8 @@ public class Monster extends AbstractGameElement {
         return behavior;
     }
 
-    public int getFleeModifier() {
-        return fleeModifier;
-    }
-
-    public boolean isElusive() {
-        return isElusive;
+    public int getAwareness() {
+        return awareness;
     }
 
     public Type getType() {
@@ -79,20 +81,28 @@ public class Monster extends AbstractGameElement {
         return health;
     }
 
-    public int getSanityDamage() {
-        return sanityDamage;
+    public int getHorrorRating() {
+        return horrorRating;
     }
 
-    public int getCompulsorySanityDamage() {
-        return compulsorySanityDamage;
+    public int getHorrorDamage() {
+        return horrorDamage;
     }
 
-    public int getHealthDamage() {
-        return healthDamage;
+    public int getCompulsoryHorrorDamage() {
+        return compulsoryHorrorDamage;
     }
 
-    public int getCompulsoryHealthDamage() {
-        return compulsoryHealthDamage;
+    public int getCombatRating() {
+        return combatRating;
+    }
+
+    public int getCombatDamage() {
+        return combatDamage;
+    }
+
+    public int getCompulsoryCombatDamage() {
+        return compulsoryCombatDamage;
     }
 
     public List<Ability> getAbilities() {
@@ -103,6 +113,27 @@ public class Monster extends AbstractGameElement {
         return flavor;
     }
 
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("\n\tname", name)
+                .append("\n\texpansion", expansion)
+                .append("\n\tbehavior", behavior)
+                .append("\n\ttype", type)
+                .append("\n\tdimension", dimension)
+                .append("\n\tawareness", awareness)
+                .append("\n\thealth", health)
+                .append("\n\thorrorRating", horrorRating)
+                .append("\n\thorrorDamage", horrorDamage)
+                .append("\n\tcompulsoryHorrorDamage", compulsoryHorrorDamage)
+                .append("\n\tcombatRating", combatRating)
+                .append("\n\tcombatDamage", combatDamage)
+                .append("\n\tcompulsoryCombatDamage", compulsoryCombatDamage)
+                .append("\n\tabilities", abilities)
+                .append("\n\tflavor", flavor)
+                .toString();
+    }
+
     public enum Behavior {
         NORMAL,
         STATIONARY,
@@ -110,13 +141,21 @@ public class Monster extends AbstractGameElement {
         UNIQUE,
         FLYING,
         STALKER,
-        AQUATIC
+        AQUATIC;
+
+        public static Behavior of(String name) {
+            return Optional.of(Behavior.valueOf(name)).orElse(Behavior.NORMAL);
+        }
     }
 
     public enum Type {
         NORMAL,
         SPAWN,
-        MASK
+        MASK;
+
+        public static Type of(String name) {
+            return Optional.of(Type.valueOf(name)).orElse(Type.NORMAL);
+        }
     }
 
     public enum Ability {
