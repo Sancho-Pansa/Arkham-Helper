@@ -19,7 +19,7 @@ public class Spell extends AbstractItem {
                  int castingMod,
                  int sanityCost
     ) {
-        super(e, name, CARD_TYPE, PRICE, ITEM_TYPE, hands, phaseToUse, description);
+        super(e, name, CARD_TYPE, PRICE, ITEM_TYPE, hands, description, phaseToUse, "");
         this.castingMod = castingMod;
         this.sanityCost = sanityCost;
     }
