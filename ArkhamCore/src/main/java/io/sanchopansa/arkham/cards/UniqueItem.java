@@ -11,9 +11,10 @@ public class UniqueItem extends AbstractItem {
                       int price,
                       String itemType,
                       byte hands,
+                      String active,
                       Phase phaseToUse,
-                      String description
+                      String passive
     ) {
-        super(e, name, ITEM_TYPE, price, itemType, hands, phaseToUse, description);
+        super(e, name, ITEM_TYPE, price, itemType, hands, active, phaseToUse, passive);
     }
 }
