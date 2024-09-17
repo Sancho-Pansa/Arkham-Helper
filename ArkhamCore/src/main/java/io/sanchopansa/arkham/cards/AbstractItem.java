@@ -8,7 +8,8 @@ public abstract class AbstractItem extends AbstractCard {
     private final int price;
     private final ItemType itemType;
     private final byte hands;
-    private final Phase phaseToUse;
+    private final ItemActive active;
+    private final String passive;
 
     public AbstractItem(Expansion e,
                         String name,
@@ -16,14 +17,16 @@ public abstract class AbstractItem extends AbstractCard {
                         int price,
                         String itemType,
                         byte hands,
+                        String active,
                         Phase phaseToUse,
-                        String description
+                        String passive
     ) {
-        super(e, name, cardType, description);
+        super(e, name, cardType, active);
         this.price = price;
         this.itemType = ItemType.from(itemType);
         this.hands = hands;
-        this.phaseToUse = phaseToUse;
+        this.active = new ItemActive(active, phaseToUse);
+        this.passive = passive;
     }
 
     public AbstractItem(Expansion e,
@@ -32,14 +35,16 @@ public abstract class AbstractItem extends AbstractCard {
                         int price,
                         ItemType itemType,
                         byte hands,
+                        String active,
                         Phase phaseToUse,
-                        String description
+                        String passive
     ) {
-        super(e, name, cardType, description);
+        super(e, name, cardType, active);
         this.price = price;
         this.itemType = itemType;
         this.hands = hands;
-        this.phaseToUse = phaseToUse;
+        this.active = new ItemActive(active, phaseToUse);
+        this.passive = passive;
     }
 
     public int getPrice() {
@@ -54,8 +59,16 @@ public abstract class AbstractItem extends AbstractCard {
         return hands;
     }
 
+    public String getActive() {
+        return active.description;
+    }
+
     public Phase getPhaseToUse() {
-        return phaseToUse;
+        return this.active.usablePhase;
+    }
+
+    public String getPassive() {
+        return passive;
     }
 
     public enum ItemType {
@@ -70,4 +83,6 @@ public abstract class AbstractItem extends AbstractCard {
             return Enums.getIfPresent(ItemType.class, value).or(ItemType.NONE);
         }
     }
+
+    private record ItemActive(String description, Phase usablePhase) { };
 }
