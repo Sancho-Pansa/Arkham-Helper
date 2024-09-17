@@ -24,12 +24,10 @@ public class GameFactory {
 
         try {
             var stream = getStreamFromResourcesFile("Investigators.json");
-            //TypeToken<Collection<AncientOne>> typeToken = new TypeToken<>() { }; // These curly braces define an anonymous inner class.
             GsonBuilder gson = new GsonBuilder();
             gson.registerTypeAdapter(Investigator.class, new InvestigatorDeserializer());
             Investigator[] investigators = gson.create().fromJson(stream.collect(Collectors.joining()), Investigator[].class);
             Arrays.stream(investigators).forEach(System.out::println);
-            //stream.forEach(System.out::println);
 
         } catch(IOException e) {
             System.err.println("Error during file reading process!");
