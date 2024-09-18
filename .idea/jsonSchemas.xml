@@ -9,7 +9,7 @@
               <option name="generatedName" value="New Schema" />
               <option name="name" value="Ancients Schema" />
               <option name="relativePathToSchema" value="ArkhamCore/src/main/resources/Ancients.schema.json" />
-              <option name="schemaVersion" value="JSON Schema version 7" />
+              <option name="schemaVersion" />
               <option name="patterns">
                 <list>
                   <Item>
@@ -25,8 +25,8 @@
             <SchemaInfo>
               <option name="generatedName" value="New Schema" />
               <option name="name" value="Common Item Schema" />
-              <option name="relativePathToSchema" value="ArkhamCore/src/main/resources/CommonItem.schema.json" />
-              <option name="schemaVersion" value="JSON Schema version 6" />
+              <option name="relativePathToSchema" value="ArkhamCore/src/main/resources/Item.schema.json" />
+              <option name="schemaVersion" />
               <option name="patterns">
                 <list>
                   <Item>
@@ -43,7 +43,7 @@
               <option name="generatedName" value="New Schema" />
               <option name="name" value="Investigator Schema" />
               <option name="relativePathToSchema" value="ArkhamCore/src/main/resources/Investigator.schema.json" />
-              <option name="schemaVersion" value="JSON Schema version 7" />
+              <option name="schemaVersion" />
               <option name="patterns">
                 <list>
                   <Item>
@@ -60,7 +60,7 @@
               <option name="generatedName" value="New Schema" />
               <option name="name" value="Monsters Schema" />
               <option name="relativePathToSchema" value="ArkhamCore/src/main/resources/Monsters.schema.json" />
-              <option name="schemaVersion" value="JSON Schema version 7" />
+              <option name="schemaVersion" />
               <option name="patterns">
                 <list>
                   <Item>

@@ -1,17 +1,16 @@
 {
   "$schema": "http://json-schema.org/draft-06/schema#",
-  "$id": "sanchopansa.io/schemas/arkham/common-item.schema.json",
-  "title": "Common Item List Schema",
+  "$id": "sanchopansa.io/schemas/arkham/item.schema.json",
+  "title": "Item List Schema",
   "type": "array",
   "items": {
-    "$ref": "#/definitions/CommonItem"
+    "$ref": "#/definitions/Item"
   },
   "definitions": {
-    "CommonItem": {
+    "Item": {
       "type": "object",
-      "title": "CommonItemList",
-      "description": "Common item JSON",
-
+      "title": "Instance of Item",
+      "description": "Item JSON",
       "properties": {
         "name": {
           "type": "string"
@@ -23,39 +22,7 @@
           "type": "integer"
         },
         "stats": {
-          "type": "object",
-          "properties": {
-            "speed": {
-              "type": "integer"
-            },
-            "sneak": {
-              "type": "integer"
-            },
-            "fight": {
-              "type": "integer"
-            },
-            "will": {
-              "type": "integer"
-            },
-            "lore": {
-              "type": "integer"
-            },
-            "luck": {
-              "type": "integer"
-            },
-            "flee": {
-              "type": "integer"
-            },
-            "combat": {
-              "type": "integer"
-            },
-            "horror": {
-              "type": "integer"
-            },
-            "spell": {
-              "type": "integer"
-            }
-          }
+          "$ref": "Stats.schema.json"
         },
         "hands": {
           "type": "integer",
