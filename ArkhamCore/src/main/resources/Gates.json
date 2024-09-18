@@ -1,0 +1,58 @@
+[
+  {
+    "world": "Бездна",
+    "expansion": "Ужас Аркхэма",
+    "modifier": -1,
+    "symbol": "STAR",
+    "count": 2
+  },
+  {
+    "world": "Великий зал Целено",
+    "expansion": "Ужас Аркхэма",
+    "modifier": -1,
+    "symbol": "STAR",
+    "count": 2
+  },
+  {
+    "world": "Город великой расы",
+    "expansion": "Ужас Аркхэма",
+    "modifier": 0,
+    "symbol": "TRIANGLE",
+    "count": 2
+  },
+  {
+    "world": "Другое измерение",
+    "expansion": "Ужас Аркхэма",
+    "modifier": 0,
+    "symbol": "SQUARE",
+    "count": 2
+  },
+  {
+    "world": "Мир грез",
+    "expansion": "Ужас Аркхэма",
+    "modifier": 1,
+    "symbol": "SLASH",
+    "count": 2
+  },
+  {
+    "world": "Плато Лэнг",
+    "expansion": "Ужас Аркхэма",
+    "modifier": -1,
+    "symbol": "DIAMOND",
+    "count": 2
+  },
+  {
+    "world": "Р'Льех",
+    "expansion": "Ужас Аркхэма",
+    "modifier": -3,
+    "symbol": "CROSS",
+    "count": 2
+  },
+  {
+    "world": "Юггот",
+    "expansion": "Ужас Аркхэма",
+    "modifier": -2,
+    "symbol": "CIRCLE",
+    "count": 2
+  }
+]

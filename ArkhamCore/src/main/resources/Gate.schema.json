@@ -23,13 +23,17 @@
         },
         "modifier": {
           "type": "integer"
+        },
+        "count": {
+          "type": "integer"
         }
       },
       "required": [
         "world",
         "expansion",
         "symbol",
-        "modifier"
+        "modifier",
+        "count"
       ]
     }
 
