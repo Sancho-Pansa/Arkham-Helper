@@ -3,6 +3,7 @@ package io.sanchopansa.arkham.cards;
 import com.google.common.base.Enums;
 import io.sanchopansa.arkham.Expansion;
 import io.sanchopansa.arkham.Phase;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public abstract class AbstractItem extends AbstractCard {
     private final int price;
@@ -69,6 +70,21 @@ public abstract class AbstractItem extends AbstractCard {
 
     public String getPassive() {
         return passive;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("\n\tname", super.getName())
+                .append("\n\texpansion", expansion)
+                .append("\n\tcardType", super.getCardType())
+                .append("\n\tprice", price)
+                .append("\n\titemType", itemType)
+                .append("\n\thands", hands)
+                .append("\n\tactive", active)
+                .append("\n\tpassive", passive)
+                .append("\n")
+                .toString();
     }
 
     public enum ItemType {

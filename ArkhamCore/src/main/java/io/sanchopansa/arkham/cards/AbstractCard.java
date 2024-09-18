@@ -25,6 +25,10 @@ public abstract class AbstractCard extends AbstractGameElement {
         return cardType;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -35,10 +39,6 @@ public abstract class AbstractCard extends AbstractGameElement {
     @Override
     public int hashCode() {
         return Objects.hash(name, cardType);
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public enum CardType {
