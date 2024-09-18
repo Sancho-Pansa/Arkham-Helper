@@ -1,0 +1,35 @@
+{
+  "graph": {
+    "label": "Arkham",
+    "directed": true
+  },
+  "nodes": {
+    "Arkham Asylum": {},
+    "Bank of Arkham": {},
+    "Independence Square": {},
+    "Hibb's Roadhouse": {},
+    "Police Station": {},
+    "Velma's Diner": {},
+    "Inner Sanctum": {},
+    "Silver Twilight Lodge": {},
+    "The Witch House": {},
+    "River Docks": {},
+    "The Unnamable": {},
+    "Unvisited Isle": {},
+    "Administration Building": {},
+    "Library": {},
+    "Science Building": {},
+    "Curiositie Shoppe": {},
+    "Newspaper": {},
+    "Train Station": {},
+    "Black Cave": {},
+    "General Store": {},
+    "Graveyard": {},
+    "Historical Society": {},
+    "Ma's Boarding House": {},
+    "South Church": {},
+    "St. Mary's Hospital": {},
+    "Woods": {},
+    "Ye Olde Magick Shoppe": {}
+  }
+}

@@ -56,6 +56,9 @@
         },
         "passive": {
           "type": "string"
+        },
+        "count": {
+          "type": "integer"
         }
       },
       "required": [
@@ -63,7 +66,8 @@
         "expansion",
         "itemType",
         "cost",
-        "hands"
+        "hands",
+        "count"
       ]
     }
 

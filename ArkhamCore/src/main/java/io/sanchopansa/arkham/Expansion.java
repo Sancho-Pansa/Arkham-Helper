@@ -4,7 +4,7 @@ public enum Expansion {
     VANILLA("Ужас Аркхэма"),
     CotDP("Проклятие Тёмного Фараона"), // Curse of the Dark Pharaoh
     DUNWICH("Ужас Данвича"),
-    TKiY("Корлоль в Жёлтом"), // The King in Yellow
+    TKiY("Король в Жёлтом"), // The King in Yellow
     KINGSPORT("Ужас Кингспорта"),
     INNSMOUTH("Ужас Иннсмута"),
     MISKATONIC("Ужас Мискатоника"),
