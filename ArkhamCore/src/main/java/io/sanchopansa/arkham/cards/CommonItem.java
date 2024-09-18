@@ -3,7 +3,7 @@ package io.sanchopansa.arkham.cards;
 import io.sanchopansa.arkham.Expansion;
 import io.sanchopansa.arkham.Phase;
 
-public class CommonItem extends AbstractItem {
+public final class CommonItem extends AbstractItem {
     private static final AbstractCard.CardType ITEM_TYPE = CardType.COMMON_ITEM;
 
     public CommonItem(Expansion e,
