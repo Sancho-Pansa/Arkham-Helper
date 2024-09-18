@@ -3,13 +3,23 @@
   <component name="JsonSchemaMappingsProjectConfiguration">
     <state>
       <map>
+        <entry key="Ally Schema">
+          <value>
+            <SchemaInfo>
+              <option name="generatedName" value="New Schema" />
+              <option name="name" value="Ally Schema" />
+              <option name="relativePathToSchema" value="ArkhamCore/src/main/resources/Ally.schema.json" />
+              <option name="schemaVersion" value="JSON Schema version 7" />
+            </SchemaInfo>
+          </value>
+        </entry>
         <entry key="Ancients Schema">
           <value>
             <SchemaInfo>
               <option name="generatedName" value="New Schema" />
               <option name="name" value="Ancients Schema" />
               <option name="relativePathToSchema" value="ArkhamCore/src/main/resources/Ancients.schema.json" />
-              <option name="schemaVersion" />
+              <option name="schemaVersion" value="JSON Schema version 7" />
               <option name="patterns">
                 <list>
                   <Item>
@@ -20,17 +30,26 @@
             </SchemaInfo>
           </value>
         </entry>
-        <entry key="Common Item Schema">
+        <entry key="Gate Schema">
           <value>
             <SchemaInfo>
               <option name="generatedName" value="New Schema" />
-              <option name="name" value="Common Item Schema" />
-              <option name="relativePathToSchema" value="ArkhamCore/src/main/resources/Item.schema.json" />
-              <option name="schemaVersion" />
+              <option name="name" value="Gate Schema" />
+              <option name="relativePathToSchema" value="ArkhamCore/src/main/resources/Gate.schema.json" />
+            </SchemaInfo>
+          </value>
+        </entry>
+        <entry key="Gates Schema">
+          <value>
+            <SchemaInfo>
+              <option name="generatedName" value="New Schema" />
+              <option name="name" value="Gates Schema" />
+              <option name="relativePathToSchema" value="ArkhamCore/src/main/resources/Gate.schema.json" />
+              <option name="schemaVersion" value="JSON Schema version 7" />
               <option name="patterns">
                 <list>
                   <Item>
-                    <option name="path" value="ArkhamCore/src/main/resources/CommonItems.json" />
+                    <option name="path" value="ArkhamCore/src/main/resources/Gates.json" />
                   </Item>
                 </list>
               </option>
@@ -43,7 +62,7 @@
               <option name="generatedName" value="New Schema" />
               <option name="name" value="Investigator Schema" />
               <option name="relativePathToSchema" value="ArkhamCore/src/main/resources/Investigator.schema.json" />
-              <option name="schemaVersion" />
+              <option name="schemaVersion" value="JSON Schema version 7" />
               <option name="patterns">
                 <list>
                   <Item>
@@ -54,20 +73,33 @@
             </SchemaInfo>
           </value>
         </entry>
-        <entry key="JSON Schema 7">
+        <entry key="Item Schema">
           <value>
             <SchemaInfo>
-              <option name="name" value="JSON Schema 7" />
-              <option name="relativePathToSchema" value="http://json-schema.org/draft-07/schema" />
-              <option name="schemaVersion" value="JSON Schema 7" />
-              <option name="applicationDefined" value="true" />
+              <option name="generatedName" value="New Schema" />
+              <option name="name" value="Item Schema" />
+              <option name="relativePathToSchema" value="ArkhamCore/src/main/resources/Item.schema.json" />
+              <option name="schemaVersion" value="JSON Schema version 7" />
               <option name="patterns">
                 <list>
                   <Item>
-                    <option name="path" value="ArkhamCore/src/main/resources/Location.schema.json" />
+                    <option name="path" value="ArkhamCore/src/main/resources/CommonItems.json" />
+                  </Item>
+                  <Item>
+                    <option name="path" value="ArkhamCore/src/main/resources/UniqueItems.json" />
                   </Item>
                 </list>
               </option>
+            </SchemaInfo>
+          </value>
+        </entry>
+        <entry key="Location.schema">
+          <value>
+            <SchemaInfo>
+              <option name="generatedName" value="New Schema" />
+              <option name="name" value="Location.schema" />
+              <option name="relativePathToSchema" value="ArkhamCore/src/main/resources/Location.schema.json" />
+              <option name="schemaVersion" value="JSON Schema version 7" />
             </SchemaInfo>
           </value>
         </entry>
@@ -77,11 +109,28 @@
               <option name="generatedName" value="New Schema" />
               <option name="name" value="Monsters Schema" />
               <option name="relativePathToSchema" value="ArkhamCore/src/main/resources/Monsters.schema.json" />
-              <option name="schemaVersion" />
+              <option name="schemaVersion" value="JSON Schema version 7" />
               <option name="patterns">
                 <list>
                   <Item>
                     <option name="path" value="ArkhamCore/src/main/resources/Monsters.json" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
+        <entry key="json-graph-schema">
+          <value>
+            <SchemaInfo>
+              <option name="generatedName" value="New Schema" />
+              <option name="name" value="json-graph-schema" />
+              <option name="relativePathToSchema" value="ArkhamCore/src/main/resources/json-graph-schema.json" />
+              <option name="schemaVersion" value="JSON Schema version 7" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="path" value="ArkhamCore/src/main/resources/ArkhamMap.json" />
                   </Item>
                 </list>
               </option>

@@ -16,12 +16,24 @@
     },
     "description": {
       "type": "string"
+    },
+    "isStreet": {
+      "type": "boolean"
     }
   },
-  "required": [
-    "name",
-    "stable",
-    "neighborhood",
-    "description"
+  "oneOf": [
+    {
+      "required": [
+        "name",
+        "stable",
+        "neighborhood"
+      ]
+    },
+    {
+      "required": [
+        "name",
+        "isStreet"
+      ]
+    }
   ]
 }

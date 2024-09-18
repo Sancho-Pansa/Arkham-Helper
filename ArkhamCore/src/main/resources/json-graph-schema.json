@@ -62,7 +62,8 @@
                 "type": "string"
               },
               "metadata": {
-                "type": "object"
+                "type": "object",
+                "$ref": "Location.schema.json"
               }
             },
             "additionalProperties": false
