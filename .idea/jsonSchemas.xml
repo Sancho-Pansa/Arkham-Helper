@@ -10,6 +10,13 @@
               <option name="name" value="Ally Schema" />
               <option name="relativePathToSchema" value="ArkhamCore/src/main/resources/Ally.schema.json" />
               <option name="schemaVersion" value="JSON Schema version 7" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="path" value="ArkhamCore/src/main/resources/Allies.json" />
+                  </Item>
+                </list>
+              </option>
             </SchemaInfo>
           </value>
         </entry>
