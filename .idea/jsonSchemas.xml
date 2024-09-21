@@ -127,6 +127,23 @@
             </SchemaInfo>
           </value>
         </entry>
+        <entry key="Skill Schema">
+          <value>
+            <SchemaInfo>
+              <option name="generatedName" value="New Schema" />
+              <option name="name" value="Skill Schema" />
+              <option name="relativePathToSchema" value="ArkhamCore/src/main/resources/Skill.schema.json" />
+              <option name="schemaVersion" value="JSON Schema version 7" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="path" value="ArkhamCore/src/main/resources/Skills.json" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
         <entry key="json-graph-schema">
           <value>
             <SchemaInfo>

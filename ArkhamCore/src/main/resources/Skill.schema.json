@@ -42,8 +42,18 @@
       },
       "required": [
         "name",
-        "expansion",
-        "stats"
+        "expansion"
+      ],
+      "anyOf": [
+        {
+          "required": ["active"]
+        },
+        {
+          "required": ["stats"]
+        },
+        {
+          "required": ["passive"]
+        }
       ]
     }
 
