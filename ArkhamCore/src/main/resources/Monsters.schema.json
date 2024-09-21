@@ -79,8 +79,14 @@
             "awareness"
           ]
         },
+        "special": {
+          "type": "string"
+        },
         "flavor": {
           "type": "string"
+        },
+        "count": {
+          "type": "integer"
         }
       },
       "required": [
@@ -89,7 +95,8 @@
         "symbol",
         "movement",
         "abilities",
-        "stats"
+        "stats",
+        "count"
       ]
     }
   }
