@@ -144,6 +144,23 @@
             </SchemaInfo>
           </value>
         </entry>
+        <entry key="Spell Schema">
+          <value>
+            <SchemaInfo>
+              <option name="generatedName" value="New Schema" />
+              <option name="name" value="Spell Schema" />
+              <option name="relativePathToSchema" value="ArkhamCore/src/main/resources/Spell.schema.json" />
+              <option name="schemaVersion" value="JSON Schema version 7" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="path" value="ArkhamCore/src/main/resources/Spells.json" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
         <entry key="json-graph-schema">
           <value>
             <SchemaInfo>

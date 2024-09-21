@@ -43,6 +43,9 @@
             "phase"
           ]
         },
+        "passive": {
+          "type": "string"
+        },
         "count": {
           "type": "integer"
         }
