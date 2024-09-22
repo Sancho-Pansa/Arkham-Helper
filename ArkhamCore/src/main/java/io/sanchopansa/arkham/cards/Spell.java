@@ -3,29 +3,30 @@ package io.sanchopansa.arkham.cards;
 import io.sanchopansa.arkham.Expansion;
 import io.sanchopansa.arkham.Phase;
 
-public class Spell extends AbstractItem {
-    private static final AbstractCard.CardType CARD_TYPE = CardType.SPELL;
+public final class Spell extends AbstractItem {
+    private static final CardType CARD_TYPE = CardType.SPELL;
     private static final ItemType ITEM_TYPE = ItemType.NONE;
     private static final int PRICE = 0;
 
-    private final int castingMod;
-    private final int sanityCost;
+    private final byte modifier;
+    private final byte sanityCost;
 
     public Spell(Expansion e,
                  String name,
+                 byte modifier,
+                 byte sanityCost,
                  byte hands,
-                 Phase phaseToUse,
+                 Phase usablePhase,
                  String description,
-                 int castingMod,
-                 int sanityCost
+                 String passive
     ) {
-        super(e, name, CARD_TYPE, PRICE, ITEM_TYPE, hands, description, phaseToUse, "");
-        this.castingMod = castingMod;
+        super(e, name, CARD_TYPE, PRICE, ITEM_TYPE, hands, description, usablePhase, passive);
+        this.modifier = modifier;
         this.sanityCost = sanityCost;
     }
 
-    public int getCastingMod() {
-        return castingMod;
+    public int getModifier() {
+        return modifier;
     }
 
     public int getSanityCost() {

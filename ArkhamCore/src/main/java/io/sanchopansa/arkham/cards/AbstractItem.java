@@ -9,8 +9,6 @@ public abstract class AbstractItem extends AbstractCard {
     private final int price;
     private final ItemType itemType;
     private final byte hands;
-    private final ItemActive active;
-    private final String passive;
 
     public AbstractItem(Expansion e,
                         String name,
@@ -22,12 +20,10 @@ public abstract class AbstractItem extends AbstractCard {
                         Phase phaseToUse,
                         String passive
     ) {
-        super(e, name, cardType, active);
+        super(e, name, cardType, active, phaseToUse, passive);
         this.price = price;
         this.itemType = ItemType.from(itemType);
         this.hands = hands;
-        this.active = new ItemActive(active, phaseToUse);
-        this.passive = passive;
     }
 
     public AbstractItem(Expansion e,
@@ -40,12 +36,10 @@ public abstract class AbstractItem extends AbstractCard {
                         Phase phaseToUse,
                         String passive
     ) {
-        super(e, name, cardType, active);
+        super(e, name, cardType, active, phaseToUse, passive);
         this.price = price;
         this.itemType = itemType;
         this.hands = hands;
-        this.active = new ItemActive(active, phaseToUse);
-        this.passive = passive;
     }
 
     public int getPrice() {
@@ -60,29 +54,17 @@ public abstract class AbstractItem extends AbstractCard {
         return hands;
     }
 
-    public String getActive() {
-        return active.description;
-    }
-
-    public Phase getPhaseToUse() {
-        return this.active.usablePhase;
-    }
-
-    public String getPassive() {
-        return passive;
-    }
-
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("\n\tname", super.getName())
+                .append("\n\tname", name)
                 .append("\n\texpansion", expansion)
-                .append("\n\tcardType", super.getCardType())
+                .append("\n\tcardType", cardType)
                 .append("\n\tprice", price)
                 .append("\n\titemType", itemType)
                 .append("\n\thands", hands)
                 .append("\n\tactive", active)
-                .append("\n\tpassive", passive)
+                .append("\n\tactive", passive)
                 .append("\n")
                 .toString();
     }
@@ -99,6 +81,4 @@ public abstract class AbstractItem extends AbstractCard {
             return Enums.getIfPresent(ItemType.class, value).or(ItemType.NONE);
         }
     }
-
-    private record ItemActive(String description, Phase usablePhase) { };
 }

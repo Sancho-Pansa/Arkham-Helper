@@ -4,7 +4,7 @@ import io.sanchopansa.arkham.Expansion;
 import io.sanchopansa.arkham.Phase;
 
 public final class CommonItem extends AbstractItem {
-    private static final AbstractCard.CardType ITEM_TYPE = CardType.COMMON_ITEM;
+    private static final CardType ITEM_TYPE = CardType.COMMON_ITEM;
 
     public CommonItem(Expansion e,
                       String name,

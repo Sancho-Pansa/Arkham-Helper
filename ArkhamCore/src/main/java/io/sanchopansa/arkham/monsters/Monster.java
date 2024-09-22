@@ -4,7 +4,6 @@ import io.sanchopansa.arkham.AbstractGameElement;
 import io.sanchopansa.arkham.Expansion;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -166,6 +165,7 @@ public final class Monster extends AbstractGameElement {
         MAGICAL_RESISTANCE,
         PHYSICAL_IMMUNITY,
         PHYSICAL_RESISTANCE,
+        UNDEAD,
         WEAPON_IMMUNITY
     }
 }
