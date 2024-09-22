@@ -18,7 +18,7 @@ public abstract class AbstractCard extends AbstractGameElement {
         this.name = name;
         this.cardType = cardType;
         this.active = null;
-        this. passive = null;
+        this.passive = null;
     }
 
     public AbstractCard(Expansion e, String name, CardType cardType, ActiveEffect active, String passive) {
@@ -26,7 +26,7 @@ public abstract class AbstractCard extends AbstractGameElement {
         this.name = name;
         this.cardType = cardType;
         this.active = active;
-        this. passive = passive;
+        this.passive = passive;
     }
 
     public AbstractCard(
@@ -41,7 +41,7 @@ public abstract class AbstractCard extends AbstractGameElement {
         this.name = name;
         this.cardType = cardType;
         this.active = new ActiveEffect(phaseToUse, active);
-        this. passive = passive;
+        this.passive = passive;
 
     }
 
