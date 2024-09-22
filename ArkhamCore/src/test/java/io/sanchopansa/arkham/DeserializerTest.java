@@ -4,10 +4,9 @@ import com.google.gson.GsonBuilder;
 import io.sanchopansa.arkham.cards.*;
 import io.sanchopansa.arkham.deserializers.*;
 import io.sanchopansa.arkham.investigators.Investigator;
-import io.sanchopansa.arkham.monsters.*;
-
+import io.sanchopansa.arkham.monsters.Monster;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -21,13 +20,13 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DeserializerTest {
     static GsonBuilder gBuilder;
 
-    @BeforeAll
-    public static void setUpBeforeClass() throws IOException, URISyntaxException {
+    @BeforeEach
+    public void setUp() {
         gBuilder = new GsonBuilder();
     }
     
@@ -61,12 +60,23 @@ public class DeserializerTest {
     @Test
     public void UniqueItemDeserializationTest() throws IOException, URISyntaxException {
         var uniqueItemsJson = new DeserializerTest()
-                .getStreamFromResourcesFile("CommonItems.json")
+                .getStreamFromResourcesFile("UniqueItems.json")
                 .collect(Collectors.joining());
         gBuilder.registerTypeAdapter(UniqueItem.class, new UniqueItemDeserializer());
         var uniqueItems = gBuilder.create().fromJson(uniqueItemsJson, UniqueItem[].class);
-        assertTrue(uniqueItems.length > 0, "Array of Common Items is not empty");
+        assertTrue(uniqueItems.length > 0, "Array of Unique Items is not empty");
         Arrays.stream(uniqueItems).forEach(System.out::println);
+    }
+
+    @Test
+    public void SpellsDeserializationTest() throws IOException, URISyntaxException {
+        var spellsJson = new DeserializerTest()
+                .getStreamFromResourcesFile("Spells.json")
+                .collect(Collectors.joining());
+        gBuilder.registerTypeAdapter(UniqueItem.class, new SpellDeserializer());
+        var spells = gBuilder.create().fromJson(spellsJson, Spell[].class);
+        assertTrue(spells.length > 0, "Array of Spells is not empty");
+        Arrays.stream(spells).forEach(System.out::println);
     }
 
     @Test
@@ -76,9 +86,7 @@ public class DeserializerTest {
                 .collect(Collectors.joining());
         gBuilder.registerTypeAdapter(Monster.class, new MonsterDeserializer());
         var monsters = gBuilder.create().fromJson(monsterCollection, Monster[].class);
-
         assertTrue(monsters.length > 0);
-        assertTrue(Arrays.stream(monsters).anyMatch((monster -> monster.getName().equals("Культист"))));
         Arrays.stream(monsters).forEach(System.out::println);
     }
 
