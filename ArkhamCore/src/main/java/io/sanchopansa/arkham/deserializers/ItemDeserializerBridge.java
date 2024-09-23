@@ -21,9 +21,9 @@ public sealed class ItemDeserializerBridge extends AbstractDeserializer implemen
         JsonObject jsonAbstractItem = jsonElement.getAsJsonObject();
         String name = jsonAbstractItem.get("name").getAsString();
         Expansion e = Expansion.fromString(jsonAbstractItem.get("expansion").getAsString());
-        String itemType = jsonAbstractItem.get("itemType").getAsString();
+        String itemType = optionallyDeserialize(jsonAbstractItem, "itemType", "NONE");
         byte hands = (byte) optionallyDeserialize(jsonAbstractItem, "hands", 0);
-        int cost = jsonAbstractItem.get("cost").getAsInt();
+        int cost = optionallyDeserialize(jsonAbstractItem, "cost", 0);
         String passive = optionallyDeserialize(jsonAbstractItem, "passive", "");
         Phase usablePhase = Phase.ANY;
         String activeDescription = "";

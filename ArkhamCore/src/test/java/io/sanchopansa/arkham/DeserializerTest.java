@@ -73,10 +73,21 @@ public class DeserializerTest {
         var spellsJson = new DeserializerTest()
                 .getStreamFromResourcesFile("Spells.json")
                 .collect(Collectors.joining());
-        gBuilder.registerTypeAdapter(UniqueItem.class, new SpellDeserializer());
+        gBuilder.registerTypeAdapter(Spell.class, new SpellDeserializer());
         var spells = gBuilder.create().fromJson(spellsJson, Spell[].class);
         assertTrue(spells.length > 0, "Array of Spells is not empty");
         Arrays.stream(spells).forEach(System.out::println);
+    }
+
+    @Test
+    public void AlliesDeserializationTest() throws IOException, URISyntaxException {
+        var alliesJson = new DeserializerTest()
+                .getStreamFromResourcesFile("Allies.json")
+                .collect(Collectors.joining());
+        gBuilder.registerTypeAdapter(Ally.class, new AllyDeserializer());
+        var allies = gBuilder.create().fromJson(alliesJson, Ally[].class);
+        assertTrue(allies.length > 0, "Array of Allies is not empty");
+        Arrays.stream(allies).forEach(System.out::println);
     }
 
     @Test
