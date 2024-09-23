@@ -137,7 +137,7 @@
     "name": "Туманы Релеха",
     "expansion": "Ужас Аркхэма",
     "hands": 0,
-    "modifier": -254,
+    "modifier": -127,
     "sanityCost": 0,
     "active": {
       "phase": "ANY",

@@ -12,19 +12,22 @@ public abstract class AbstractCard extends AbstractGameElement {
     protected final CardType cardType;
     protected final ActiveEffect active;
     protected final String passive;
+    protected final BonusStats bonusStats;
 
     public AbstractCard(Expansion e, String name, CardType cardType) {
         super(e);
         this.name = name;
         this.cardType = cardType;
+        this.bonusStats = BonusStats.createBuilder().build();
         this.active = null;
         this.passive = null;
     }
 
-    public AbstractCard(Expansion e, String name, CardType cardType, ActiveEffect active, String passive) {
+    public AbstractCard(Expansion e, String name, CardType cardType, BonusStats bonusStats, ActiveEffect active, String passive) {
         super(e);
         this.name = name;
         this.cardType = cardType;
+        this.bonusStats = bonusStats;
         this.active = active;
         this.passive = passive;
     }
@@ -33,6 +36,7 @@ public abstract class AbstractCard extends AbstractGameElement {
             Expansion e,
             String name,
             CardType cardType,
+            BonusStats bonusStats,
             String active,
             Phase phaseToUse,
             String passive
@@ -40,6 +44,7 @@ public abstract class AbstractCard extends AbstractGameElement {
         super(e);
         this.name = name;
         this.cardType = cardType;
+        this.bonusStats = bonusStats;
         this.active = new ActiveEffect(phaseToUse, active);
         this.passive = passive;
 

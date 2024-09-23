@@ -20,7 +20,7 @@ public final class Spell extends AbstractItem {
                  String description,
                  String passive
     ) {
-        super(e, name, CARD_TYPE, PRICE, ITEM_TYPE, hands, description, usablePhase, passive);
+        super(e, name, CARD_TYPE, BonusStats.createBuilder().build(), PRICE, ITEM_TYPE, hands, description, usablePhase, passive);
         this.modifier = modifier;
         this.sanityCost = sanityCost;
     }

@@ -13,6 +13,7 @@ public abstract class AbstractItem extends AbstractCard {
     public AbstractItem(Expansion e,
                         String name,
                         CardType cardType,
+                        BonusStats bonusStats,
                         int price,
                         String itemType,
                         byte hands,
@@ -20,7 +21,7 @@ public abstract class AbstractItem extends AbstractCard {
                         Phase phaseToUse,
                         String passive
     ) {
-        super(e, name, cardType, active, phaseToUse, passive);
+        super(e, name, cardType, bonusStats, active, phaseToUse, passive);
         this.price = price;
         this.itemType = ItemType.from(itemType);
         this.hands = hands;
@@ -29,6 +30,7 @@ public abstract class AbstractItem extends AbstractCard {
     public AbstractItem(Expansion e,
                         String name,
                         CardType cardType,
+                        BonusStats bonusStats,
                         int price,
                         ItemType itemType,
                         byte hands,
@@ -36,7 +38,7 @@ public abstract class AbstractItem extends AbstractCard {
                         Phase phaseToUse,
                         String passive
     ) {
-        super(e, name, cardType, active, phaseToUse, passive);
+        super(e, name, cardType, bonusStats, active, phaseToUse, passive);
         this.price = price;
         this.itemType = itemType;
         this.hands = hands;
@@ -63,8 +65,9 @@ public abstract class AbstractItem extends AbstractCard {
                 .append("\n\tprice", price)
                 .append("\n\titemType", itemType)
                 .append("\n\thands", hands)
+                .append("\n\tstats", bonusStats)
                 .append("\n\tactive", active)
-                .append("\n\tactive", passive)
+                .append("\n\tpassive", passive)
                 .append("\n")
                 .toString();
     }

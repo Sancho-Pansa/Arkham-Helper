@@ -11,10 +11,11 @@ public final class CommonItem extends AbstractItem {
                       int price,
                       String itemType,
                       byte hands,
+                      BonusStats bonusStats,
                       String active,
                       Phase phaseToUse,
                       String passive
     ) {
-        super(e, name, ITEM_TYPE, price, itemType, hands, active, phaseToUse, passive);
+        super(e, name, ITEM_TYPE, bonusStats, price, itemType, hands, active, phaseToUse, passive);
     }
 }
