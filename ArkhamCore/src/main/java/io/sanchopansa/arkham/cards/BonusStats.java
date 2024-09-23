@@ -3,8 +3,14 @@ package io.sanchopansa.arkham.cards;
 /**
  * Дополнительные характеристики, которые могут выдать различные предметы.
  */
-public record BonusStats(byte speed, byte sneak, byte fight, byte will, byte lore, byte luck, byte combat, byte horror,
-                         byte evade, byte spell, byte stamina, byte sanity) {
+public record BonusStats(
+        byte speed, byte sneak, byte fight, byte will, byte lore, byte luck, byte combat, byte horror,
+        byte evade, byte spell, byte stamina, byte sanity
+) {
+    public static Builder createBuilder() {
+        return new Builder();
+    }
+
     public static class Builder {
         private byte speed = 0;
         private byte sneak = 0;
@@ -18,6 +24,10 @@ public record BonusStats(byte speed, byte sneak, byte fight, byte will, byte lor
         private byte spell = 0;
         private byte stamina = 0;
         private byte sanity = 0;
+
+        private Builder() {
+
+        }
 
         public Builder speed(byte speed) {
             this.speed = speed;
