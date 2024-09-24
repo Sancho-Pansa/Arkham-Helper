@@ -6,7 +6,6 @@ import io.sanchopansa.arkham.monsters.Monster;
 
 import java.lang.reflect.Type;
 import java.util.List;
-import java.util.Optional;
 
 public class MonsterDeserializer extends AbstractDeserializer implements JsonDeserializer<Monster> {
     @Override

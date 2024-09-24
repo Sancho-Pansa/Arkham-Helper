@@ -80,6 +80,17 @@ public class DeserializerTest {
     }
 
     @Test
+    public void SkillsDeserializationTest() throws IOException, URISyntaxException {
+        var skillsJson = new DeserializerTest()
+                .getStreamFromResourcesFile("Skills.json")
+                .collect(Collectors.joining());
+        gBuilder.registerTypeAdapter(SkillCard.class, new SkillDeserializer());
+        var skills = gBuilder.create().fromJson(skillsJson, SkillCard[].class);
+        assertTrue(skills.length > 0, "Array of Skills is not empty");
+        Arrays.stream(skills).forEach(System.out::println);
+    }
+
+    @Test
     public void AlliesDeserializationTest() throws IOException, URISyntaxException {
         var alliesJson = new DeserializerTest()
                 .getStreamFromResourcesFile("Allies.json")
