@@ -66,7 +66,7 @@ public class GameVault {
         return gatePool;
     }
 
-    public Set<Ancient> getAncientOnePool() {
+    public Set<Ancient> getAncientsPool() {
         return ancientPool;
     }
 

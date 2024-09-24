@@ -12,6 +12,7 @@ public enum Expansion {
     TLatT("Затаившийся у Порога"); // The Lurker at the Threshold
 
     private final String expansionName;
+
     Expansion(String name) {
         this.expansionName = name;
     }

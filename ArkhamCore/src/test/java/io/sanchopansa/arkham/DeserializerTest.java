@@ -1,5 +1,6 @@
 package io.sanchopansa.arkham;
 
+import com.google.common.reflect.TypeToken;
 import com.google.gson.GsonBuilder;
 import io.sanchopansa.arkham.cards.*;
 import io.sanchopansa.arkham.deserializers.*;
@@ -17,9 +18,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DeserializerTest {
@@ -110,6 +113,18 @@ public class DeserializerTest {
         var monsters = gBuilder.create().fromJson(monsterCollection, Monster[].class);
         assertTrue(monsters.length > 0);
         Arrays.stream(monsters).forEach(System.out::println);
+    }
+
+    @Test
+    public void CountedCollectionTest() throws IOException, URISyntaxException {
+        var monsterCollection = new DeserializerTest()
+                .getStreamFromResourcesFile("Monsters.json")
+                .collect(Collectors.joining());
+        java.lang.reflect.Type type = new TypeToken<Map<String, Integer>>(){ }.getType();
+        gBuilder.registerTypeAdapter(type, new CardCountDeserializer());
+        Map<String, Integer> monsterCountMap = gBuilder.create().fromJson(monsterCollection, type);
+        assertFalse(monsterCountMap.keySet().isEmpty());
+        System.out.println(monsterCountMap);
     }
 
     /**
