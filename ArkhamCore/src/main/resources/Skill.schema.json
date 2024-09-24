@@ -9,8 +9,8 @@
   "definitions": {
     "Ally": {
       "type": "object",
-      "title": "Instance of Ally",
-      "description": "Ally JSON",
+      "title": "Instance of Skill",
+      "description": "Skill JSON",
       "properties": {
         "name": {
           "type": "string"
