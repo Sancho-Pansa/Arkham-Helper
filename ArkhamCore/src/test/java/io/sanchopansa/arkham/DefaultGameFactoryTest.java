@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class GameFactoryTest {
+public class DefaultGameFactoryTest {
     @Test
     public void FactoryTest() {
-        new GameFactory().createVault();
+        new DefaultGameFactory().createVault();
         assertTrue(true);
     }
 }
