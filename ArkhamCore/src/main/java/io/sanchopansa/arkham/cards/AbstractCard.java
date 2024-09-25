@@ -66,6 +66,10 @@ public abstract class AbstractCard extends AbstractGameElement {
         return passive;
     }
 
+    public BonusStats getBonusStats() {
+        return bonusStats;
+    }
+
     @Override
     public final boolean equals(Object o) {
         if(this == o) return true;
