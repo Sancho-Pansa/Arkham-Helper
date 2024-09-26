@@ -1,14 +1,15 @@
 package io.sanchopansa.arkham.cards;
 
 import com.google.common.base.Enums;
+import io.sanchopansa.arkham.ActiveEffect;
 import io.sanchopansa.arkham.Expansion;
 import io.sanchopansa.arkham.Phase;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public abstract class AbstractItem extends AbstractCard {
-    private final int price;
-    private final ItemType itemType;
-    private final byte hands;
+    protected final int price;
+    protected final ItemType itemType;
+    protected final byte hands;
 
     public AbstractItem(Expansion e,
                         String name,
@@ -39,6 +40,22 @@ public abstract class AbstractItem extends AbstractCard {
                         String passive
     ) {
         super(e, name, cardType, bonusStats, active, phaseToUse, passive);
+        this.price = price;
+        this.itemType = itemType;
+        this.hands = hands;
+    }
+
+    public AbstractItem(Expansion e,
+                        String name,
+                        CardType cardType,
+                        BonusStats bonusStats,
+                        int price,
+                        ItemType itemType,
+                        byte hands,
+                        ActiveEffect active,
+                        String passive
+    ) {
+        super(e, name, cardType, bonusStats, active, passive);
         this.price = price;
         this.itemType = itemType;
         this.hands = hands;
