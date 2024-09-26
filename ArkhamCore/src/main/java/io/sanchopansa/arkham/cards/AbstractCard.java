@@ -7,7 +7,7 @@ import io.sanchopansa.arkham.Phase;
 
 import java.util.Objects;
 
-public abstract class AbstractCard extends AbstractGameElement {
+public abstract class AbstractCard extends AbstractGameElement implements Cloneable {
     protected final String name;
     protected final CardType cardType;
     protected final ActiveEffect active;
@@ -69,6 +69,9 @@ public abstract class AbstractCard extends AbstractGameElement {
     public BonusStats getBonusStats() {
         return bonusStats;
     }
+
+    @Override
+    public abstract AbstractCard clone() throws CloneNotSupportedException;
 
     @Override
     public final boolean equals(Object o) {

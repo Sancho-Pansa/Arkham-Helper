@@ -32,4 +32,18 @@ public final class Spell extends AbstractItem {
     public int getSanityCost() {
         return sanityCost;
     }
+
+    @Override
+    public Spell clone() {
+        return new Spell(
+                this.expansion,
+                this.name,
+                this.modifier,
+                this.sanityCost,
+                this.hands,
+                this.active.usablePhase(),
+                this.active.description(),
+                this.passive
+        );
+    }
 }

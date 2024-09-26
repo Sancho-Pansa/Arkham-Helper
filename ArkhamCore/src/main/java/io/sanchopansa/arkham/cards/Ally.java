@@ -25,6 +25,19 @@ public final class Ally extends AbstractCard {
     }
 
     @Override
+    public Ally clone() {
+        return new Ally(
+                this.expansion,
+                this.name,
+                this.bonusStats,
+                this.active,
+                this.passive,
+                this.onDraw,
+                this.onDiscard
+        );
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("\n\tname", name)

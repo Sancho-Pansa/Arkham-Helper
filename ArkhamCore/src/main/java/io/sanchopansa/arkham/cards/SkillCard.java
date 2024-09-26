@@ -27,4 +27,15 @@ public final class SkillCard extends AbstractCard {
                 .append("\n")
                 .toString();
     }
+
+    @Override
+    public SkillCard clone() {
+        return new SkillCard(
+                this.expansion,
+                this.name,
+                this.bonusStats,
+                this.active,
+                this.passive
+        );
+    }
 }
