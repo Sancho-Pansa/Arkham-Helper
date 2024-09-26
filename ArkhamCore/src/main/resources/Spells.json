@@ -122,18 +122,6 @@
     "count": 4
   },
   {
-    "name": "Поиск врат",
-    "expansion": "Ужас Аркхэма",
-    "hands": 0,
-    "modifier": -1,
-    "sanityCost": 1,
-    "active": {
-      "phase": "MOVEMENT",
-      "description": "Прочитайте и задействуйте это заклинание, чтобы вернуться в Аркхэм из Иного мира."
-    },
-    "count": 6
-  },
-  {
     "name": "Туманы Релеха",
     "expansion": "Ужас Аркхэма",
     "hands": 0,
