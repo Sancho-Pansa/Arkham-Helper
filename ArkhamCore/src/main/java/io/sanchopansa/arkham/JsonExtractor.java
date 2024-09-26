@@ -3,6 +3,7 @@ package io.sanchopansa.arkham;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
 import io.sanchopansa.arkham.cards.AbstractCard;
+import io.sanchopansa.arkham.deserializers.CardCountDeserializer;
 import io.sanchopansa.arkham.deserializers.InvestigatorDeserializer;
 import io.sanchopansa.arkham.investigators.Investigator;
 
@@ -15,18 +16,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class JsonExtractor {
-    public List<? extends AbstractCard> extractCardsFromJson(String filename, java.lang.reflect.Type type, java.lang.reflect.Type arrayType, JsonDeserializer<? extends AbstractCard> deserializer) throws IOException, URISyntaxException {
+    public <T extends AbstractCard> Set<T> extractCardsSetByType(String filename, java.lang.reflect.Type type, java.lang.reflect.Type arrayType, JsonDeserializer<T> deserializer) throws IOException, URISyntaxException {
         matchFilename(filename);
 
         String json = getStreamFromResourcesFile(filename).collect(Collectors.joining());
         GsonBuilder gBuilder = new GsonBuilder();
         gBuilder.registerTypeAdapter(type, deserializer);
-        return Arrays.asList(gBuilder.create().fromJson(json, arrayType));
+        return Set.of(gBuilder.create().fromJson(json, arrayType));
     }
 
     public Collection<Investigator> extractInvestigatorsFromJson(String filename) throws IOException, URISyntaxException {
@@ -35,6 +37,15 @@ public class JsonExtractor {
         GsonBuilder gBuilder = new GsonBuilder();
         gBuilder.registerTypeAdapter(Investigator.class, new InvestigatorDeserializer());
         return Arrays.asList(gBuilder.create().fromJson(json, Investigator[].class));
+    }
+
+    public Map<String, Integer> extractCardCountMap(String filename, java.lang.reflect.Type type) throws IOException, URISyntaxException {
+        matchFilename(filename);
+
+        String json = getStreamFromResourcesFile(filename).collect(Collectors.joining());
+        GsonBuilder gBuilder = new GsonBuilder();
+        gBuilder.registerTypeAdapter(type, new CardCountDeserializer());
+        return gBuilder.create().fromJson(json, type);
     }
 
     private void matchFilename(String filename) throws IllegalArgumentException {
@@ -46,7 +57,7 @@ public class JsonExtractor {
     private Stream<String> getStreamFromResourcesFile(String filename) throws NullPointerException, IOException, URISyntaxException {
         URL resource = this.getClass().getClassLoader().getResource(filename);
         if (resource == null) {
-            throw new IOException("Requested file was not found!");
+            throw new IOException(String.format("Requested file \"%s\" was not found!", filename));
         }
         Path p = Paths.get(resource.toURI());
         return Files.lines(p, StandardCharsets.UTF_8);
