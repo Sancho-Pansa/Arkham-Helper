@@ -4,6 +4,7 @@ import com.google.common.graph.MutableGraph;
 import com.google.gson.JsonDeserializer;
 import io.sanchopansa.arkham.cards.*;
 import io.sanchopansa.arkham.deserializers.*;
+import io.sanchopansa.arkham.monsters.Monster;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -21,12 +22,14 @@ public class DefaultGameFactory extends AbstractGameFactory {
             objectCountMap.putAll(jsonExtractor.extractCardCountMap("Spells.json", Spell.class));
             objectCountMap.putAll(jsonExtractor.extractCardCountMap("Skills.json", SkillCard.class));
             objectCountMap.putAll(jsonExtractor.extractCardCountMap("Allies.json", Ally.class));
+            objectCountMap.putAll(jsonExtractor.extractCardCountMap("Monsters.json", Monster.class));
 
             // Создать колоды карт (с повторяющимися элементами)
             Queue<AbstractCard> commonsDeck = createDeckFromCardSet(
                     getSetFromJson("CommonItems.json", CommonItem.class, CommonItem[].class, new CommonItemDeserializer()),
                     objectCountMap
             );
+
             Queue<AbstractCard> uniquesDeck = createDeckFromCardSet(
                     getSetFromJson("UniqueItems.json", UniqueItem.class, UniqueItem[].class, new UniqueItemDeserializer()),
                     objectCountMap
@@ -43,6 +46,10 @@ public class DefaultGameFactory extends AbstractGameFactory {
                     getSetFromJson("Allies.json", Ally.class, Ally[].class, new AllyDeserializer()),
                     objectCountMap
             );
+
+            List<Monster> monstersBag = getMonstersListFromJson("Monsters.json", objectCountMap);
+
+            // TODO: Мешок Врат
         } catch(IOException e) {
             System.err.println("Error during file reading process!");
             e.printStackTrace(System.err);
@@ -57,10 +64,11 @@ public class DefaultGameFactory extends AbstractGameFactory {
      * Эта функция принимает на вход название JSON-а, Java-тип для его преобразования и класс-десериализатор, после
      * обработки возвращая заполненный Сет.
      * Используется для сокращения набора одних и тех же функций для каждого типа малых карт.
-     * @param filename Имя файла с расширением (относительно директории resources/)
-     * @param itemType Класс, в который производится десериализация
+     *
+     * @param filename      Имя файла с расширением (относительно директории resources/)
+     * @param itemType      Класс, в который производится десериализация
      * @param arrayItemType Класс - массив классов, в которые производится десериализация
-     * @param deserializer Класс-десериализатор
+     * @param deserializer  Класс-десериализатор
      * @return Сет экземпляров класса
      */
     private Set<AbstractCard> getSetFromJson(String filename,
@@ -72,9 +80,35 @@ public class DefaultGameFactory extends AbstractGameFactory {
         return new HashSet<>(jsonExtractor.extractCardsSetByType(filename, itemType, arrayItemType, deserializer));
     }
 
+    private List<Monster> getMonstersListFromJson(String filename,
+                                                  Map<String, Integer> cardCountMap
+    ) throws IOException, URISyntaxException {
+        JsonExtractor jsonExtractor = new JsonExtractor();
+        return jsonExtractor.extractMonstersFromJson(filename).stream()
+                .collect(
+                        ArrayList::new,
+                        // l - list
+                        (l, monster) -> {
+                            l.add(monster);
+                            try {
+                                if(cardCountMap.containsKey(monster.getName())) {
+                                    for(int i = 1; i < cardCountMap.get(monster.getName()); i++) {
+
+                                        l.add(monster.clone());
+                                    }
+                                }
+                            } catch(CloneNotSupportedException e) {
+                                throw new RuntimeException(e);
+                            }
+                        },
+                        ArrayList::addAll
+                );
+    }
+
     /**
      * Преобразует поданный Сет в Очередь в соответствии с переданной таблицей соответствий карт и их количества.
-     * @param set Сет карт
+     *
+     * @param set          Сет карт
      * @param cardCountMap Таблица вида "Карта" - "Количество этих карт"
      * @return Очередь из карт (не перемешанная)
      */
@@ -82,6 +116,7 @@ public class DefaultGameFactory extends AbstractGameFactory {
         return set.stream()
                 .collect(
                         ArrayDeque::new,
+                        // q - queue
                         (q, item) -> {
                             q.offer(item);
                             try {
@@ -97,6 +132,35 @@ public class DefaultGameFactory extends AbstractGameFactory {
                         },
                         ArrayDeque::addAll
                 );
+    }
+
+    private List<Monster> createBagFromCardSet(Set<Monster> set, Map<String, Integer> cardCountMap) {
+        return set.stream()
+                .collect(
+                        ArrayList::new,
+                        // l - list
+                        (l, monster) -> {
+                            l.add(monster);
+                            try {
+                                if(cardCountMap.containsKey(monster.getName())) {
+                                    for(int i = 1; i < cardCountMap.get(monster.getName()); i++) {
+
+                                        l.add(monster.clone());
+                                    }
+                                }
+                            } catch(CloneNotSupportedException e) {
+                                throw new RuntimeException(e);
+                            }
+                        },
+                        ArrayList::addAll
+                );
+    }
+
+    private <T extends AbstractCard> Queue<T> shuffleDeck(Queue<T> deck) {
+        var linkedDeck = new LinkedList<>(deck);
+        Collections.shuffle(linkedDeck);
+        Collections.shuffle(linkedDeck);
+        return linkedDeck;
     }
 
     @Override

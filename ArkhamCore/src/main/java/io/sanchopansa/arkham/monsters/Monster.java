@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.util.List;
 import java.util.Optional;
 
-public final class Monster extends AbstractGameElement {
+public final class Monster extends AbstractGameElement implements Cloneable {
     private final String name;
     private final Behavior behavior;
     private final Type type;
@@ -54,6 +54,24 @@ public final class Monster extends AbstractGameElement {
         this.compulsoryCombatDamage = compulsoryCombatDamage;
         this.abilities = abilities.stream().map(Ability::valueOf).toList();
         this.flavor = flavor;
+    }
+
+    public Monster(Monster original) {
+        super(original.expansion);
+        this.name = original.name;
+        this.behavior = original.behavior;
+        this.awareness = original.awareness;
+        this.type = original.type;
+        this.dimension = original.dimension;
+        this.health = original.health;
+        this.horrorRating = original.horrorRating;
+        this.horrorDamage = original.horrorDamage;
+        this.compulsoryHorrorDamage = original.compulsoryHorrorDamage;
+        this.combatRating = original.combatRating;
+        this.combatDamage = original.combatDamage;
+        this.compulsoryCombatDamage = original.compulsoryCombatDamage;
+        this.abilities = original.abilities;
+        this.flavor = original.flavor;
     }
 
     public String getName() {
@@ -131,6 +149,12 @@ public final class Monster extends AbstractGameElement {
                 .append("\n\tabilities", abilities)
                 .append("\n\tflavor", flavor)
                 .toString();
+    }
+
+    @Override
+    public Monster clone() throws CloneNotSupportedException {
+        Monster monster = (Monster) super.clone();
+        return new Monster(this);
     }
 
     public enum Behavior {
