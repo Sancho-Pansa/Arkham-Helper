@@ -7,10 +7,7 @@ import io.sanchopansa.arkham.cards.*;
 import io.sanchopansa.arkham.monsters.Gate;
 import io.sanchopansa.arkham.monsters.Monster;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Класс для описания Сыщика
@@ -33,7 +30,7 @@ public class Investigator extends AbstractGameElement {
     // Вторичные характеристики
     private Blessing blessing = Blessing.NONE; // Благословение
     private boolean hasRetainer = false;            // Гонорар
-    private boolean hasLoan = false;                   // Ссуда
+    private boolean hasLoan = false;                // Ссуда
     private boolean canLoan = true;                 // Возможность брать ссуду
     private boolean silverTwilight = false;         // Членство в ЛСС
     private boolean sheriff = false;                // Статус шерифа
@@ -83,6 +80,49 @@ public class Investigator extends AbstractGameElement {
         this.FW = new Skill(minFight, maxWill);
         this.LL = new Skill(minLore, maxLuck);
         this.ability = new InvestigatorAbility(this, abilityName, abilityDescription, abilityPhase);
+    }
+
+    public Investigator(Expansion e,
+                        String name,
+                        String title,
+                        int stamina,
+                        int sanity,
+                        int focus,
+                        int minSpeed,
+                        int maxSneak,
+                        int minFight,
+                        int maxWill,
+                        int minLore,
+                        int maxLuck,
+                        String abilityName,
+                        String abilityDescription,
+                        Phase abilityPhase,
+                        int randomCommons,
+                        String[] fixedCommons,
+                        int randomUniques,
+                        String[] fixedUniques,
+                        int randomSpells,
+                        String[] fixedSpells,
+                        int randomSkills,
+                        String[] fixedSkills,
+                        int randomAllies,
+                        String[] fixedAllies
+    ) {
+        super(e);
+        this.name = name;
+        this.title = title;
+        this.stamina = new Stat(stamina);
+        this.sanity = new Stat(sanity);
+        this.focus = new Stat(focus);
+        this.SS = new Skill(minSpeed, maxSneak);
+        this.FW = new Skill(minFight, maxWill);
+        this.LL = new Skill(minLore, maxLuck);
+        this.ability = new InvestigatorAbility(this, abilityName, abilityDescription, abilityPhase);
+        this.initialCommons = new InitialPossessions(randomCommons, fixedCommons);
+        this.initialUniques = new InitialPossessions(randomUniques, fixedUniques);
+        this.initialSpells = new InitialPossessions(randomSpells, fixedSpells);
+        this.initialSkills = new InitialPossessions(randomSkills, fixedSkills);
+        this.initialAllies = new InitialPossessions(randomAllies, fixedAllies);
     }
 
     public Investigator(String name,
@@ -188,7 +228,7 @@ public class Investigator extends AbstractGameElement {
         this.clueTokens = clueTokens;
     }
 
-    public void addClueTokens (int clueTokens) {
+    public void addClueTokens(int clueTokens) {
         this.clueTokens += clueTokens;
     }
 
@@ -393,6 +433,37 @@ public class Investigator extends AbstractGameElement {
         this.alive = false;
     }
 
+    /**
+     * Колоды должны быть уже перемешаны.
+     */
+    public void generateStartingItems(
+            Queue<CommonItem> commons,
+            Queue<UniqueItem> uniques,
+            Queue<Spell> spells,
+            Queue<SkillCard> skills,
+            Queue<Ally> allies
+    ) {
+        getCardsFromDecks(commons, initialCommons, this.commonItems);
+        getCardsFromDecks(uniques, initialUniques, this.uniqueItems);
+        getCardsFromDecks(spells, initialSpells, this.spells);
+        getCardsFromDecks(skills, initialSkills, this.skills);
+        getCardsFromDecks(allies, initialAllies, this.allies);
+    }
+
+    private <T extends AbstractCard> void getCardsFromDecks(Queue<T> deck, InitialPossessions initialPossessions, List<T> investigatorList) {
+        for(String itemName : initialPossessions.fixedItems) {
+            for(T current : deck) {
+                if(current.getName().equals(itemName)) {
+                    investigatorList.add(current);
+                    break;
+                }
+            }
+        }
+        for(int i = 0; i < initialPossessions.randomItems; i++) {
+            deck.remove();
+        }
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Investigator {");
@@ -446,5 +517,7 @@ public class Investigator extends AbstractGameElement {
         }
     }
 
-    public record InitialPossessions(int randomItems, String[] fixedItems) { }
+    private record InitialPossessions(int randomItems, String[] fixedItems) {
+    }
+
 }
