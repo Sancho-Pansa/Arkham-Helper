@@ -12,7 +12,7 @@
       "title": "Instance of Gate",
       "description": "Gate JSON",
       "properties": {
-        "world": {
+        "name": {
           "type": "string"
         },
         "expansion": {
