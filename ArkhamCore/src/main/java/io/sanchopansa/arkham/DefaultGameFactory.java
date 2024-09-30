@@ -25,24 +25,24 @@ public class DefaultGameFactory extends AbstractGameFactory {
             objectCountMap.putAll(jsonExtractor.extractCardCountMap("Monsters.json", Monster.class));
 
             // Создать колоды карт (с повторяющимися элементами)
-            Queue<AbstractCard> commonsDeck = createDeckFromCardSet(
+            LinkedList<AbstractCard> commonsDeck = createDeckFromCardSet(
                     getSetFromJson("CommonItems.json", CommonItem.class, CommonItem[].class, new CommonItemDeserializer()),
                     objectCountMap
             );
 
-            Queue<AbstractCard> uniquesDeck = createDeckFromCardSet(
+            LinkedList<AbstractCard> uniquesDeck = createDeckFromCardSet(
                     getSetFromJson("UniqueItems.json", UniqueItem.class, UniqueItem[].class, new UniqueItemDeserializer()),
                     objectCountMap
             );
-            Queue<AbstractCard> spellsDeck = createDeckFromCardSet(
+            LinkedList<AbstractCard> spellsDeck = createDeckFromCardSet(
                     getSetFromJson("Spells.json", Spell.class, Spell[].class, new SpellDeserializer()),
                     objectCountMap
             );
-            Queue<AbstractCard> skillsDeck = createDeckFromCardSet(
+            LinkedList<AbstractCard> skillsDeck = createDeckFromCardSet(
                     getSetFromJson("Skills.json", SkillCard.class, SkillCard[].class, new SkillDeserializer()),
                     objectCountMap
             );
-            Queue<AbstractCard> alliesDeck = createDeckFromCardSet(
+            LinkedList<AbstractCard> alliesDeck = createDeckFromCardSet(
                     getSetFromJson("Allies.json", Ally.class, Ally[].class, new AllyDeserializer()),
                     objectCountMap
             );
@@ -112,25 +112,25 @@ public class DefaultGameFactory extends AbstractGameFactory {
      * @param cardCountMap Таблица вида "Карта" - "Количество этих карт"
      * @return Очередь из карт (не перемешанная)
      */
-    private Queue<AbstractCard> createDeckFromCardSet(Set<AbstractCard> set, Map<String, Integer> cardCountMap) {
+    private LinkedList<AbstractCard> createDeckFromCardSet(Set<AbstractCard> set, Map<String, Integer> cardCountMap) {
         return set.stream()
                 .collect(
-                        ArrayDeque::new,
-                        // q - queue
-                        (q, item) -> {
-                            q.offer(item);
+                        LinkedList::new,
+                        // ll - linked_list
+                        (ll, item) -> {
+                            ll.add(item);
                             try {
                                 if(cardCountMap.containsKey(item.getName())) {
                                     for(int i = 1; i < cardCountMap.get(item.getName()); i++) {
 
-                                        q.offer(item.clone());
+                                        ll.add(item.clone());
                                     }
                                 }
                             } catch(CloneNotSupportedException e) {
                                 throw new RuntimeException(e);
                             }
                         },
-                        ArrayDeque::addAll
+                        LinkedList::addAll
                 );
     }
 
