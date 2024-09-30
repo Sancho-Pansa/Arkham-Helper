@@ -2,142 +2,141 @@ package io.sanchopansa.arkham.monsters;
 
 import io.sanchopansa.arkham.AbstractGameElement;
 import io.sanchopansa.arkham.Expansion;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.Objects;
 import java.util.Set;
 
 /**
  * Класс, описывающий Древнего
+ *
  * @author SanchoPansa
  */
 
-public class Ancient extends AbstractGameElement
-{
-	private String name;
-	private final int awakening;
-	private Set<AncientTypes> types;
-	private Monster followers;
-	private String featName;
-	private String featDesc;
+public class Ancient extends AbstractGameElement {
+    private final String name;
+    private final int doomTrack;
+    private final int combat;
+    private final Set<MonsterAbility> monsterAbilities;
+    private final Set<Worshipper> worshippers;
+    private final String powerName;
+    private final String powerDescription;
+    private final String battleStart;
+    private final String attackDescription;
 
-	public Ancient(String name, int awakening, Set<AncientTypes> types, Expansion expansion) {
-        super(expansion);
+    public Ancient(Expansion e,
+                   String name,
+                   int doomTrack,
+                   int combat,
+                   Set<Worshipper> worshipper,
+                   Set<MonsterAbility> monsterAbilities,
+                   String powerName,
+                   String powerDescription,
+                   String battleStart,
+                   String attackDescription) {
+        super(e);
         this.name = name;
-		this.awakening = awakening;
-		this.types = types;
-	}
+        this.doomTrack = doomTrack;
+        this.combat = combat;
+        this.worshippers = worshipper;
+        this.monsterAbilities = monsterAbilities;
+        this.powerName = powerName;
+        this.powerDescription = powerDescription;
+        this.battleStart = battleStart;
+        this.attackDescription = attackDescription;
+    }
 
-	public Ancient(String name,
-				   int awakening,
-				   Set<AncientTypes> types,
-				   Monster followers,
-				   String featName,
-				   String featDesc,
-				   Expansion expansion) {
-        super(expansion);
-        this.name = name;
-		this.awakening = awakening;
-		this.types = types;
-		this.followers = followers;
-		this.featName = featName;
-		this.featDesc = featDesc;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name)
-	{
-		this.name = name;
-	}
-	
-	public String getName() 
-	{
-		return name;
-	}
+    public int getDoomTrack() {
+        return doomTrack;
+    }
 
+    public int getCombat() {
+        return combat;
+    }
 
-	public int getAwakening()
-	{
-		return awakening;
-	}
+    public Set<Worshipper> getWorshippers() {
+        return worshippers;
+    }
 
-	public Set<AncientTypes> getTypes() {
-		return types;
-	}
+    public Set<MonsterAbility> getMonsterAbilities() {
+        return monsterAbilities;
+    }
 
-	public void setTypes(Set<AncientTypes> types) {
-		this.types = types;
-	}
+    public String getPowerName() {
+        return powerName;
+    }
 
-	public Monster getFollowers()
-	{
-		return followers;
-	}
+    public String getPowerDescription() {
+        return powerDescription;
+    }
 
+    public String getBattleStart() {
+        return battleStart;
+    }
 
-	public String getFeatName() {
-		return featName;
-	}
+    public String getAttackDescription() {
+        return attackDescription;
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+        Ancient that = (Ancient) o;
+        return name.equals(that.name);
+    }
 
-	public String getFeatDesc() {
-		return featDesc;
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, doomTrack);
+    }
 
-	public void setFollowers(Monster followers) {
-		this.followers = followers;
-	}
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("\n\tname", name)
+                .append("\n\texpansion", expansion)
+                .append("\n\tdoomTrack", doomTrack)
+                .append("\n\tcombat", combat)
+                .append("\n\tworshipper", worshippers)
+                .append("\n\tpowerName", powerName)
+                .append("\n\tpowerDescription", powerDescription)
+                .append("\n\tbattleStart", battleStart)
+                .append("\n\tattackDescription", attackDescription)
+                .append("\n")
+                .toString();
+    }
 
-	public void setFeatName(String featName) {
-		this.featName = featName;
-	}
+    /**
+     * Обозначает бонусы, который Древний предоставляет последователям
+     * @param ability Дополнительные способности Монстра
+     * @param behavior Новый тип движения Монстра (перезаписывает старый)
+     * @param hp Новое здоровье Монстра (-128 зарезервировано для отсутствия бонуса во избежание NPE)
+     * @param horrorDamage ditto
+     * @param horrorRating ditto
+     * @param combatDamage ditto
+     * @param combatRating ditto
+     */
+    public record WorshipperBonus(
+            Set<MonsterAbility> ability,
+            MonsterBehavior behavior,
+            byte hp,
+            byte horrorDamage,
+            byte horrorRating,
+            byte combatDamage,
+            byte combatRating
+    ) {
+    }
 
-	public void setFeatDesc(String featDesc) {
-		this.featDesc = featDesc;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder sBuilder = new StringBuilder();
-		sBuilder
-				.append(getClass().getName())
-				.append("@")
-				.append(Integer.toHexString(hashCode()))
-				.append("\n")
-				.append("Name: ")
-				.append(this.name)
-				.append("\nDoom track: ")
-				.append(this.awakening)
-				.append("\nTypes: ")
-				.append(this.types.toString())
-				.append("\nFollowers: ")
-				.append(this.followers)
-				.append("\nFeature name: ")
-				.append(this.featName)
-				.append("\nFeature description: ")
-				.append(this.featDesc);
-		return sBuilder.toString();
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		Ancient that = (Ancient) o;
-		return awakening == that.awakening &&
-				name.equals(that.name);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(name, awakening);
-	}
-
-	public enum AncientTypes {
-		NONE,
-		SPAWN,
-		INVESTIGATOR_RELATED,
-		MONSTER_RELATED,
-		GATE_RELATED,
-		MAP_RELATED,
-		ENVIRONMENT_RELATED
-	}
+    /**
+     * Обозначает последователя-Монстра и набор бонусов, предоставляемых ему его Древним.
+     * @param worshipper
+     * @param bonus
+     */
+    public record Worshipper(Monster worshipper, WorshipperBonus bonus) {
+    }
 }

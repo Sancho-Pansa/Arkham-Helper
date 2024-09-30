@@ -95,7 +95,7 @@ public class Game {
 	
 	public boolean isAwaken()
 	{
-		return this.ancient.getAwakening() <= this.doomLevel;
+		return this.ancient.getDoomTrack() <= this.doomLevel;
 	}
 
 	/**
@@ -227,7 +227,7 @@ public class Game {
 		StringBuilder info = new StringBuilder();
 
 		// Doom Track:
-		info.append(String.format("Уровень безысходности: %d / %d\n", this.doomLevel, this.ancient.getAwakening()));
+		info.append(String.format("Уровень безысходности: %d / %d\n", this.doomLevel, this.ancient.getDoomTrack()));
 		info.append(String.format("Врат: %d / %d\n", this.gateCount, this.gateLimit));
 		info.append(String.format("Монстров на карте: %d / %d\n", this.mapMonsterCount, this.monsterLimit));
 		info.append(String.format("Монстров на Окраинах: %d / %d\n", this.outMonsterCount, this.outskirtsLimit));
