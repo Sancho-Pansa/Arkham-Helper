@@ -4,6 +4,7 @@ import com.google.common.graph.MutableGraph;
 import com.google.gson.JsonDeserializer;
 import io.sanchopansa.arkham.cards.*;
 import io.sanchopansa.arkham.deserializers.*;
+import io.sanchopansa.arkham.monsters.Gate;
 import io.sanchopansa.arkham.monsters.Monster;
 
 import java.io.IOException;
@@ -23,6 +24,7 @@ public class DefaultGameFactory extends AbstractGameFactory {
             objectCountMap.putAll(jsonExtractor.extractCardCountMap("Skills.json", SkillCard.class));
             objectCountMap.putAll(jsonExtractor.extractCardCountMap("Allies.json", Ally.class));
             objectCountMap.putAll(jsonExtractor.extractCardCountMap("Monsters.json", Monster.class));
+            objectCountMap.putAll(jsonExtractor.extractCardCountMap("Gates.json", Gate.class));
 
             // Создать колоды карт (с повторяющимися элементами)
             LinkedList<AbstractCard> commonsDeck = createDeckFromCardSet(
@@ -47,9 +49,9 @@ public class DefaultGameFactory extends AbstractGameFactory {
                     objectCountMap
             );
 
-            List<Monster> monstersBag = getMonstersListFromJson("Monsters.json", objectCountMap);
+            List<Monster> monstersBag = getMonstersListFromJson(objectCountMap);
+            List<Gate> gateBag = getGatesFromJson(objectCountMap);
 
-            // TODO: Мешок Врат
         } catch(IOException e) {
             System.err.println("Error during file reading process!");
             e.printStackTrace(System.err);
@@ -80,11 +82,10 @@ public class DefaultGameFactory extends AbstractGameFactory {
         return new HashSet<>(jsonExtractor.extractCardsSetByType(filename, itemType, arrayItemType, deserializer));
     }
 
-    private List<Monster> getMonstersListFromJson(String filename,
-                                                  Map<String, Integer> cardCountMap
+    private List<Monster> getMonstersListFromJson(Map<String, Integer> cardCountMap
     ) throws IOException, URISyntaxException {
         JsonExtractor jsonExtractor = new JsonExtractor();
-        return jsonExtractor.extractMonstersFromJson(filename).stream()
+        return jsonExtractor.extractMonstersFromJson("Monsters.json").stream()
                 .collect(
                         ArrayList::new,
                         // l - list
@@ -95,6 +96,28 @@ public class DefaultGameFactory extends AbstractGameFactory {
                                     for(int i = 1; i < cardCountMap.get(monster.getName()); i++) {
 
                                         l.add(monster.clone());
+                                    }
+                                }
+                            } catch(CloneNotSupportedException e) {
+                                throw new RuntimeException(e);
+                            }
+                        },
+                        ArrayList::addAll
+                );
+    }
+
+    private List<Gate> getGatesFromJson(Map<String, Integer> cardCountMap) throws IOException, URISyntaxException {
+        JsonExtractor jsonExtractor = new JsonExtractor();
+        return jsonExtractor.extractGatesFromJson("Gates.json").stream()
+                .collect(
+                        ArrayList::new,
+                        // l - list
+                        (l, gate) -> {
+                            l.add(gate);
+                            try {
+                                if(cardCountMap.containsKey(gate.getWorld())) {
+                                    for(int i = 1; i < cardCountMap.get(gate.getWorld()); i++) {
+                                        l.add(gate.clone());
                                     }
                                 }
                             } catch(CloneNotSupportedException e) {
@@ -131,28 +154,6 @@ public class DefaultGameFactory extends AbstractGameFactory {
                             }
                         },
                         LinkedList::addAll
-                );
-    }
-
-    private List<Monster> createBagFromCardSet(Set<Monster> set, Map<String, Integer> cardCountMap) {
-        return set.stream()
-                .collect(
-                        ArrayList::new,
-                        // l - list
-                        (l, monster) -> {
-                            l.add(monster);
-                            try {
-                                if(cardCountMap.containsKey(monster.getName())) {
-                                    for(int i = 1; i < cardCountMap.get(monster.getName()); i++) {
-
-                                        l.add(monster.clone());
-                                    }
-                                }
-                            } catch(CloneNotSupportedException e) {
-                                throw new RuntimeException(e);
-                            }
-                        },
-                        ArrayList::addAll
                 );
     }
 

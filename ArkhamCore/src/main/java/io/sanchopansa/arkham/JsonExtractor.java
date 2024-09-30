@@ -4,9 +4,11 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
 import io.sanchopansa.arkham.cards.AbstractCard;
 import io.sanchopansa.arkham.deserializers.CardCountDeserializer;
+import io.sanchopansa.arkham.deserializers.GateDeserializer;
 import io.sanchopansa.arkham.deserializers.InvestigatorDeserializer;
 import io.sanchopansa.arkham.deserializers.MonsterDeserializer;
 import io.sanchopansa.arkham.investigators.Investigator;
+import io.sanchopansa.arkham.monsters.Gate;
 import io.sanchopansa.arkham.monsters.Monster;
 
 import java.io.IOException;
@@ -47,6 +49,14 @@ public class JsonExtractor {
         GsonBuilder gBuilder = new GsonBuilder();
         gBuilder.registerTypeAdapter(Monster.class, new MonsterDeserializer());
         return Arrays.asList(gBuilder.create().fromJson(json, Monster[].class));
+    }
+
+    public List<Gate> extractGatesFromJson(String filename) throws IOException, URISyntaxException {
+        matchFilename(filename);
+        String json = getStreamFromResourcesFile(filename).collect(Collectors.joining());
+        GsonBuilder gBuilder = new GsonBuilder();
+        gBuilder.registerTypeAdapter(Gate.class, new GateDeserializer());
+        return Arrays.asList(gBuilder.create().fromJson(json, Gate[].class));
     }
 
     public Map<String, Integer> extractCardCountMap(String filename, java.lang.reflect.Type type) throws IOException, URISyntaxException {

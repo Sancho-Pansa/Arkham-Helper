@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import io.sanchopansa.arkham.cards.*;
 import io.sanchopansa.arkham.deserializers.*;
 import io.sanchopansa.arkham.investigators.Investigator;
+import io.sanchopansa.arkham.monsters.Gate;
 import io.sanchopansa.arkham.monsters.Monster;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -113,6 +114,17 @@ public class DeserializerTest {
         var monsters = gBuilder.create().fromJson(monsterCollection, Monster[].class);
         assertTrue(monsters.length > 0);
         Arrays.stream(monsters).forEach(System.out::println);
+    }
+
+    @Test
+    public void GateDeserializerTest() throws IOException, URISyntaxException {
+        var monsterCollection = new DeserializerTest()
+                .getStreamFromResourcesFile("Gates.json")
+                .collect(Collectors.joining());
+        gBuilder.registerTypeAdapter(Gate.class, new GateDeserializer());
+        var gates = gBuilder.create().fromJson(monsterCollection, Gate[].class);
+        assertTrue(gates.length > 0);
+        Arrays.stream(gates).forEach(System.out::println);
     }
 
     @Test
