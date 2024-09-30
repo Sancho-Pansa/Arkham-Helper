@@ -3,11 +3,9 @@ package io.sanchopansa.arkham;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
 import io.sanchopansa.arkham.cards.AbstractCard;
-import io.sanchopansa.arkham.deserializers.CardCountDeserializer;
-import io.sanchopansa.arkham.deserializers.GateDeserializer;
-import io.sanchopansa.arkham.deserializers.InvestigatorDeserializer;
-import io.sanchopansa.arkham.deserializers.MonsterDeserializer;
+import io.sanchopansa.arkham.deserializers.*;
 import io.sanchopansa.arkham.investigators.Investigator;
+import io.sanchopansa.arkham.monsters.Ancient;
 import io.sanchopansa.arkham.monsters.Gate;
 import io.sanchopansa.arkham.monsters.Monster;
 
@@ -18,10 +16,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -35,12 +30,20 @@ public class JsonExtractor {
         return Set.of(gBuilder.create().fromJson(json, arrayType));
     }
 
-    public List<Investigator> extractInvestigatorsFromJson(String filename) throws IOException, URISyntaxException {
+    public Set<Investigator> extractInvestigatorsFromJson(String filename) throws IOException, URISyntaxException {
         matchFilename(filename);
         String json = getStreamFromResourcesFile(filename).collect(Collectors.joining());
         GsonBuilder gBuilder = new GsonBuilder();
         gBuilder.registerTypeAdapter(Investigator.class, new InvestigatorDeserializer());
-        return Arrays.asList(gBuilder.create().fromJson(json, Investigator[].class));
+        return new HashSet<>(Arrays.asList(gBuilder.create().fromJson(json, Investigator[].class)));
+    }
+
+    public Set<Ancient> extractAncientsFromJson(String filename) throws IOException, URISyntaxException {
+        matchFilename(filename);
+        String json = getStreamFromResourcesFile(filename).collect(Collectors.joining());
+        GsonBuilder gBuilder = new GsonBuilder();
+        //gBuilder.registerTypeAdapter(Ancient.class, new AncientDeserializer());
+        return new HashSet<>(Arrays.asList(gBuilder.create().fromJson(json, Ancient[].class)));
     }
 
     public List<Monster> extractMonstersFromJson(String filename) throws IOException, URISyntaxException {

@@ -4,6 +4,8 @@ import com.google.common.graph.MutableGraph;
 import com.google.gson.JsonDeserializer;
 import io.sanchopansa.arkham.cards.*;
 import io.sanchopansa.arkham.deserializers.*;
+import io.sanchopansa.arkham.investigators.Investigator;
+import io.sanchopansa.arkham.monsters.Ancient;
 import io.sanchopansa.arkham.monsters.Gate;
 import io.sanchopansa.arkham.monsters.Monster;
 
@@ -49,8 +51,13 @@ public class DefaultGameFactory extends AbstractGameFactory {
                     objectCountMap
             );
 
-            List<Monster> monstersBag = getMonstersListFromJson(objectCountMap);
-            List<Gate> gateBag = getGatesFromJson(objectCountMap);
+            List<Monster> monstersPool = getMonstersListFromJson(objectCountMap);
+            List<Gate> gatePool = getGatesFromJson(objectCountMap);
+
+            Set<Investigator> investigators = jsonExtractor.extractInvestigatorsFromJson("Investigators.json");
+            investigators.forEach(System.out::println);
+
+            return null;
 
         } catch(IOException e) {
             System.err.println("Error during file reading process!");
@@ -82,8 +89,7 @@ public class DefaultGameFactory extends AbstractGameFactory {
         return new HashSet<>(jsonExtractor.extractCardsSetByType(filename, itemType, arrayItemType, deserializer));
     }
 
-    private List<Monster> getMonstersListFromJson(Map<String, Integer> cardCountMap
-    ) throws IOException, URISyntaxException {
+    private List<Monster> getMonstersListFromJson(Map<String, Integer> cardCountMap) throws IOException, URISyntaxException {
         JsonExtractor jsonExtractor = new JsonExtractor();
         return jsonExtractor.extractMonstersFromJson("Monsters.json").stream()
                 .collect(
@@ -104,6 +110,29 @@ public class DefaultGameFactory extends AbstractGameFactory {
                         },
                         ArrayList::addAll
                 );
+    }
+
+    private Set<Ancient> getAncientsFromJson(Map<String, Integer> cardCountMap) throws IOException, URISyntaxException {
+        JsonExtractor jsonExtractor = new JsonExtractor();
+        return null;/*jsonExtractor.extractAncientsFromJson("Ancients.json").stream()
+                .collect(
+                        HashSet::new,
+                        // l - list
+                        (l, ancient) -> {
+                            l.add(ancient);
+                            try {
+                                if(cardCountMap.containsKey(ancient.getName())) {
+                                    for(int i = 1; i < cardCountMap.get(ancient.getName()); i++) {
+
+                                        l.add(ancient.clone());
+                                    }
+                                }
+                            } catch(CloneNotSupportedException e) {
+                                throw new RuntimeException(e);
+                            }
+                        },
+                        HashSet::addAll
+                );*/
     }
 
     private List<Gate> getGatesFromJson(Map<String, Integer> cardCountMap) throws IOException, URISyntaxException {
