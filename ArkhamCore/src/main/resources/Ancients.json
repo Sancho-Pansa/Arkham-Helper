@@ -74,7 +74,7 @@
       {
         "name": "Культист",
         "bonuses": {
-          "bonusAbility": "MAGICAL_IMMUNITY",
+          "bonusAbility": ["MAGICAL_IMMUNITY"],
           "stats": {
             "combatRating": -1
           }
@@ -122,7 +122,7 @@
       {
         "name": "Культист",
         "bonuses": {
-          "bonusAbility": "ENDLESS"
+          "bonusAbility": ["ENDLESS"]
         }
       }
     ],
@@ -169,9 +169,9 @@
     "combat": -5,
     "worshippers": [
       {
-        "name": "Темная молодь",
+        "name": "Тёмная молодь",
         "bonuses": {
-          "bonusAbility": "ENDLESS"
+          "bonusAbility": ["ENDLESS"]
         }
       }
     ],
