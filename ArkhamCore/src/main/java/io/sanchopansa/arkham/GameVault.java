@@ -7,7 +7,7 @@ import io.sanchopansa.arkham.monsters.Gate;
 import io.sanchopansa.arkham.monsters.Monster;
 
 import java.util.ArrayList;
-import java.util.Deque;
+import java.util.LinkedList;
 import java.util.Set;
 
 /**
@@ -19,21 +19,21 @@ public class GameVault {
     private final ArrayList<Gate> gatePool;
     private final Set<Ancient> ancientPool;
 
-    private final Deque<CommonItem> commonItems;
-    private final Deque<UniqueItem> uniqueItems;
-    private final Deque<Spell> spells;
-    private final Deque<SkillCard> skills;
-    private final Set<Ally> allies;
+    private final LinkedList<CommonItem> commonItems;
+    private final LinkedList<UniqueItem> uniqueItems;
+    private final LinkedList<Spell> spells;
+    private final LinkedList<SkillCard> skills;
+    private final LinkedList<Ally> allies;
 
     public GameVault(Set<Investigator> investigators,
                      ArrayList<Monster> monsterPool,
                      ArrayList<Gate> gatePool,
                      Set<Ancient> ancientPool,
-                     Deque<CommonItem> commonItems,
-                     Deque<UniqueItem> uniqueItems,
-                     Deque<Spell> spells,
-                     Deque<SkillCard> skills,
-                     Set<Ally> allies
+                     LinkedList<CommonItem> commonItems,
+                     LinkedList<UniqueItem> uniqueItems,
+                     LinkedList<Spell> spells,
+                     LinkedList<SkillCard> skills,
+                     LinkedList<Ally> allies
     ) {
         this.investigators = investigators;
         this.monsterPool = monsterPool;
@@ -62,23 +62,23 @@ public class GameVault {
         return ancientPool;
     }
 
-    public Deque<CommonItem> getCommonItems() {
+    public LinkedList<CommonItem> getCommonItems() {
         return commonItems;
     }
 
-    public Deque<UniqueItem> getUniqueItems() {
+    public LinkedList<UniqueItem> getUniqueItems() {
         return uniqueItems;
     }
 
-    public Deque<Spell> getSpells() {
+    public LinkedList<Spell> getSpells() {
         return spells;
     }
 
-    public Deque<SkillCard> getSkills() {
+    public LinkedList<SkillCard> getSkills() {
         return skills;
     }
 
-    public Set<Ally> getAllies() {
+    public LinkedList<Ally> getAllies() {
         return allies;
     }
 }

@@ -6,7 +6,7 @@ import io.sanchopansa.arkham.investigators.Investigator;
 import io.sanchopansa.arkham.monsters.*;
 
 import java.util.ArrayList;
-import java.util.Deque;
+import java.util.LinkedList;
 import java.util.Set;
 
 /**
@@ -30,11 +30,11 @@ public interface GameVaultBuilderInterface {
     GameVaultBuilder createDefaultLayout(MutableGraph<Location> map,
                                          Set<Ancient> ancients,
                                          Set<Investigator> investigators,
-                                         Deque<CommonItem> commonItems,
-                                         Deque<UniqueItem> uniqueItems,
-                                         Deque<Spell> spell,
-                                         Deque<SkillCard> skills,
-                                         Set<Ally> allies,
+                                         LinkedList<CommonItem> commonItems,
+                                         LinkedList<UniqueItem> uniqueItems,
+                                         LinkedList<Spell> spell,
+                                         LinkedList<SkillCard> skills,
+                                         LinkedList<Ally> allies,
                                          ArrayList<Monster> monsters,
                                          ArrayList<Gate> gates);
 

@@ -6,7 +6,7 @@ import io.sanchopansa.arkham.cards.*;
 import io.sanchopansa.arkham.investigators.Investigator;
 import io.sanchopansa.arkham.monsters.*;
 import java.util.ArrayList;
-import java.util.Deque;
+import java.util.LinkedList;
 import java.util.Set;
 
 @SuppressWarnings("UnstableApiUsage")
@@ -15,11 +15,11 @@ public class GameVaultBuilder implements GameVaultBuilderInterface {
     private Set<Ancient> ancients;
     private Set<Investigator> investigators;
 
-    private Deque<CommonItem> commonItems;
-    private Deque<UniqueItem> uniqueItems;
-    private Deque<Spell> spells;
-    private Deque<SkillCard> skills;
-    private Set<Ally> allies;
+    private LinkedList<CommonItem> commonItems;
+    private LinkedList<UniqueItem> uniqueItems;
+    private LinkedList<Spell> spells;
+    private LinkedList<SkillCard> skills;
+    private LinkedList<Ally> allies;
 
     private ArrayList<Monster> monsters;
     private ArrayList<Gate> gates;
@@ -28,11 +28,11 @@ public class GameVaultBuilder implements GameVaultBuilderInterface {
     public GameVaultBuilder createDefaultLayout(MutableGraph<Location> map,
                                                 Set<Ancient> ancients,
                                                 Set<Investigator> investigators,
-                                                Deque<CommonItem> commonItems,
-                                                Deque<UniqueItem> uniqueItems,
-                                                Deque<Spell> spell,
-                                                Deque<SkillCard> skills,
-                                                Set<Ally> allies,
+                                                LinkedList<CommonItem> commonItems,
+                                                LinkedList<UniqueItem> uniqueItems,
+                                                LinkedList<Spell> spell,
+                                                LinkedList<SkillCard> skills,
+                                                LinkedList<Ally> allies,
                                                 ArrayList<Monster> monsters,
                                                 ArrayList<Gate> gates) {
         this.map = map;
