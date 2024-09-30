@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import io.sanchopansa.arkham.cards.*;
 import io.sanchopansa.arkham.deserializers.*;
 import io.sanchopansa.arkham.investigators.Investigator;
+import io.sanchopansa.arkham.monsters.Ancient;
 import io.sanchopansa.arkham.monsters.Gate;
 import io.sanchopansa.arkham.monsters.Monster;
 import org.junit.jupiter.api.AfterEach;
@@ -19,6 +20,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -125,6 +127,23 @@ public class DeserializerTest {
         var gates = gBuilder.create().fromJson(monsterCollection, Gate[].class);
         assertTrue(gates.length > 0);
         Arrays.stream(gates).forEach(System.out::println);
+    }
+
+    @Test
+    public void AncientDeserializerTest() throws IOException, URISyntaxException {
+        var monsterCollection = new DeserializerTest()
+                .getStreamFromResourcesFile("Monsters.json")
+                .collect(Collectors.joining());
+        gBuilder.registerTypeAdapter(Monster.class, new MonsterDeserializer());
+        HashSet<Monster> monsters = new HashSet<>(Arrays.asList(gBuilder.create().fromJson(monsterCollection, Monster[].class)));
+
+        var ancientCollection = new DeserializerTest()
+                .getStreamFromResourcesFile("Ancients.json")
+                .collect(Collectors.joining());
+        gBuilder.registerTypeAdapter(Ancient.class, new AncientDeserializer(monsters));
+        var ancients = gBuilder.create().fromJson(ancientCollection, Ancient[].class);
+        assertTrue(ancients.length > 0);
+        Arrays.stream(ancients).forEach(System.out::println);
     }
 
     @Test

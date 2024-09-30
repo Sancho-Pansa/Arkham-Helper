@@ -47,6 +47,7 @@ public final class Gate extends AbstractGameElement implements Cloneable {
 
     @Override
     public Gate clone() throws CloneNotSupportedException {
+        Gate gate = (Gate) super.clone();
         return new Gate(this);
     }
 
