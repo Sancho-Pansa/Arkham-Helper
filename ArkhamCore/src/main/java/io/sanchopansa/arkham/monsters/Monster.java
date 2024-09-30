@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public final class Monster extends AbstractGameElement implements Cloneable {
     private final String name;
-    private final Behavior behavior;
+    private final MonsterBehavior behavior;
     private final Type type;
     private final DimensionSymbol dimension;
     private final int awareness;
@@ -20,7 +20,7 @@ public final class Monster extends AbstractGameElement implements Cloneable {
     private final int combatRating;
     private final int combatDamage;
     private final int compulsoryCombatDamage;
-    private final List<Ability> abilities;
+    private final List<MonsterAbility> abilities;
     private final String flavor;
 
     public Monster(Expansion e,
@@ -41,7 +41,7 @@ public final class Monster extends AbstractGameElement implements Cloneable {
     ) {
         super(e);
         this.name = name;
-        this.behavior = Behavior.of(behavior);
+        this.behavior = MonsterBehavior.of(behavior);
         this.awareness = awareness;
         this.type = Type.valueOf(type);
         this.dimension = DimensionSymbol.of(dimension);
@@ -52,7 +52,7 @@ public final class Monster extends AbstractGameElement implements Cloneable {
         this.combatRating = combatRating;
         this.combatDamage = combatDamage;
         this.compulsoryCombatDamage = compulsoryCombatDamage;
-        this.abilities = abilities.stream().map(Ability::valueOf).toList();
+        this.abilities = abilities.stream().map(MonsterAbility::valueOf).toList();
         this.flavor = flavor;
     }
 
@@ -78,7 +78,7 @@ public final class Monster extends AbstractGameElement implements Cloneable {
         return name;
     }
 
-    public Behavior getBehavior() {
+    public MonsterBehavior getBehavior() {
         return behavior;
     }
 
@@ -122,7 +122,7 @@ public final class Monster extends AbstractGameElement implements Cloneable {
         return compulsoryCombatDamage;
     }
 
-    public List<Ability> getAbilities() {
+    public List<MonsterAbility> getAbilities() {
         return abilities;
     }
 
@@ -157,20 +157,6 @@ public final class Monster extends AbstractGameElement implements Cloneable {
         return new Monster(this);
     }
 
-    public enum Behavior {
-        NORMAL,
-        STATIONARY,
-        FAST,
-        UNIQUE,
-        FLYING,
-        STALKER,
-        AQUATIC;
-
-        public static Behavior of(String name) {
-            return Optional.of(Behavior.valueOf(name)).orElse(Behavior.NORMAL);
-        }
-    }
-
     public enum Type {
         NORMAL,
         SPAWN,
@@ -179,18 +165,6 @@ public final class Monster extends AbstractGameElement implements Cloneable {
         public static Type of(String name) {
             return Optional.of(Type.valueOf(name)).orElse(Type.NORMAL);
         }
-    }
-
-    public enum Ability {
-        AMBUSH,
-        ELUSIVE,
-        ENDLESS,
-        MAGICAL_IMMUNITY,
-        MAGICAL_RESISTANCE,
-        PHYSICAL_IMMUNITY,
-        PHYSICAL_RESISTANCE,
-        UNDEAD,
-        WEAPON_IMMUNITY
     }
 }
 
