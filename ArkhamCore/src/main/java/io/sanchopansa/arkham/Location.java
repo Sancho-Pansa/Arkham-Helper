@@ -17,14 +17,14 @@ public class Location extends AbstractGameElement {
     public Location(Expansion e,
                     String name,
                     String description,
-                    List<LocationType> locationTypes,
+                    //List<LocationType> locationTypes,
                     boolean isStreet,
                     boolean isStable
     ) {
         super(e);
         this.name = name;
         this.description = description;
-        this.locationType.addAll(locationTypes);
+        //this.locationType.addAll(locationTypes);
         this.isStreet = isStreet;
         this.isStable = isStable;
     }
