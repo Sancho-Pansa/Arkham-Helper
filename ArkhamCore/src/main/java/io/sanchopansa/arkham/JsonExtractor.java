@@ -71,6 +71,14 @@ public class JsonExtractor {
         return gBuilder.create().fromJson(json, type);
     }
 
+    public Set<Location> extractLocations(String filename) throws IOException, URISyntaxException {
+        matchFilename(filename);
+
+        GsonBuilder gBuilder = new GsonBuilder();
+        return null;
+
+    }
+
     private void matchFilename(String filename) throws IllegalArgumentException {
         if(!filename.matches(".*\\.json")) {
             throw new IllegalArgumentException("Wrong file extension, expected .json");

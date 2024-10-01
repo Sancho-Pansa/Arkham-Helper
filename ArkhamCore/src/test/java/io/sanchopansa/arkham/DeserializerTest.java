@@ -1,7 +1,9 @@
 package io.sanchopansa.arkham;
 
 import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import io.sanchopansa.arkham.cards.*;
 import io.sanchopansa.arkham.deserializers.*;
 import io.sanchopansa.arkham.investigators.Investigator;
@@ -13,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -156,6 +159,23 @@ public class DeserializerTest {
         Map<String, Integer> monsterCountMap = gBuilder.create().fromJson(monsterCollection, type);
         assertFalse(monsterCountMap.keySet().isEmpty());
         System.out.println(monsterCountMap);
+    }
+
+    @Test
+    public void LocationDeserializerTest() throws IOException, URISyntaxException {
+        var locationCollection = new DeserializerTest()
+                .getStreamFromResourcesFile("ArkhamMap.json")
+                .collect(Collectors.joining());
+        Type mapTypeToken = new TypeToken<Map<String, Location>>() {}.getType();
+        gBuilder.registerTypeAdapter(mapTypeToken, new LocationDeserializer());
+        Gson gson = gBuilder.create();
+
+        JsonElement a = gson.fromJson(locationCollection, JsonElement.class);
+        JsonElement nodesJson = a.getAsJsonObject().get("graph").getAsJsonObject().get("nodes");
+
+        Map<String, Location> map = gson.fromJson(nodesJson, mapTypeToken);
+        assertFalse(map.isEmpty());
+        map.forEach((k, v) -> System.out.printf("%s :: %s%n", k, v));
     }
 
     /**
