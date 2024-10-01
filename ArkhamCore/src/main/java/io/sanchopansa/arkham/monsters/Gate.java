@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.util.Objects;
 
 /**
- * Класс-рекорд, описывающий жетон Врат
+ * Класс, описывающий жетон Врат
  */
 public final class Gate extends AbstractGameElement implements Cloneable {
     private final String world;

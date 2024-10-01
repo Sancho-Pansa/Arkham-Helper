@@ -13,12 +13,17 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 import java.util.*;
+import java.util.stream.Collectors;
 
+/**
+ * Сборщик коробки по умолчанию - из заранее составленных JSON-файлов.
+ */
 public class DefaultGameFactory extends AbstractGameFactory {
     @Override
     public GameVault createVault() {
         JsonExtractor jsonExtractor = new JsonExtractor();
         try {
+            // Таблица "Объект игры - число объектов"
             Map<String, Integer> objectCountMap = new HashMap<>();
             objectCountMap.putAll(jsonExtractor.extractCardCountMap("CommonItems.json", CommonItem.class));
             objectCountMap.putAll(jsonExtractor.extractCardCountMap("UniqueItems.json", UniqueItem.class));
@@ -29,43 +34,70 @@ public class DefaultGameFactory extends AbstractGameFactory {
             objectCountMap.putAll(jsonExtractor.extractCardCountMap("Gates.json", Gate.class));
 
             // Создать колоды карт (с повторяющимися элементами)
-            LinkedList<AbstractCard> commonsDeck = createDeckFromCardSet(
-                    getSetFromJson("CommonItems.json", CommonItem.class, CommonItem[].class, new CommonItemDeserializer()),
+            LinkedList<CommonItem> commonsDeck = createDeckFromCardSet(
+                    getSetFromJson("CommonItems.json", CommonItem.class, CommonItem[].class, new CommonItemDeserializer())
+                            .stream()
+                            .map(c -> (CommonItem) c).collect(Collectors.toSet()),
                     objectCountMap
             );
 
-            LinkedList<AbstractCard> uniquesDeck = createDeckFromCardSet(
-                    getSetFromJson("UniqueItems.json", UniqueItem.class, UniqueItem[].class, new UniqueItemDeserializer()),
+            LinkedList<UniqueItem> uniquesDeck = createDeckFromCardSet(
+                    getSetFromJson("UniqueItems.json", UniqueItem.class, UniqueItem[].class, new UniqueItemDeserializer())
+                            .stream()
+                            .map(c -> (UniqueItem) c).collect(Collectors.toSet()),
                     objectCountMap
             );
-            LinkedList<AbstractCard> spellsDeck = createDeckFromCardSet(
-                    getSetFromJson("Spells.json", Spell.class, Spell[].class, new SpellDeserializer()),
+            LinkedList<Spell> spellsDeck = createDeckFromCardSet(
+                    getSetFromJson("Spells.json", Spell.class, Spell[].class, new SpellDeserializer())
+                            .stream()
+                            .map(c -> (Spell) c).collect(Collectors.toSet()),
                     objectCountMap
             );
-            LinkedList<AbstractCard> skillsDeck = createDeckFromCardSet(
-                    getSetFromJson("Skills.json", SkillCard.class, SkillCard[].class, new SkillDeserializer()),
+            LinkedList<SkillCard> skillsDeck = createDeckFromCardSet(
+                    getSetFromJson("Skills.json", SkillCard.class, SkillCard[].class, new SkillDeserializer())
+                            .stream()
+                            .map(c -> (SkillCard) c).collect(Collectors.toSet()),
                     objectCountMap
             );
-            LinkedList<AbstractCard> alliesDeck = createDeckFromCardSet(
-                    getSetFromJson("Allies.json", Ally.class, Ally[].class, new AllyDeserializer()),
+            LinkedList<Ally> alliesDeck = createDeckFromCardSet(
+                    getSetFromJson("Allies.json", Ally.class, Ally[].class, new AllyDeserializer())
+                            .stream()
+                            .map(c -> (Ally) c).collect(Collectors.toSet()),
                     objectCountMap
             );
 
-            List<Monster> monstersPool = getMonstersListFromJson(objectCountMap);
-            List<Gate> gatePool = getGatesFromJson(objectCountMap);
+            // Монстры
+            ArrayList<Monster> monstersPool = getMonstersListFromJson(objectCountMap);
 
+            // Врата
+            ArrayList<Gate> gatePool = getGatesFromJson(objectCountMap);
+
+            //Древние
+            Set<Ancient> ancients = new JsonExtractor().extractAncientsFromJson("Ancients.json", new HashSet<>(monstersPool));
+
+            // Сыщики
             Set<Investigator> investigators = jsonExtractor.extractInvestigatorsFromJson("Investigators.json");
-            investigators.forEach(System.out::println);
 
-            return null;
+            return new GameVault(
+                    investigators,
+                    monstersPool,
+                    gatePool,
+                    ancients,
+                    commonsDeck,
+                    uniquesDeck,
+                    spellsDeck,
+                    skillsDeck,
+                    alliesDeck
+            );
 
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.err.println("Error during file reading process!");
             e.printStackTrace(System.err);
-        } catch(URISyntaxException e) {
+        } catch (URISyntaxException e) {
             System.err.println("Error in URI conversion (Java NIO)!");
             e.printStackTrace(System.err);
         }
+
         return null;
     }
 
@@ -89,22 +121,20 @@ public class DefaultGameFactory extends AbstractGameFactory {
         return new HashSet<>(jsonExtractor.extractCardsSetByType(filename, itemType, arrayItemType, deserializer));
     }
 
-    private List<Monster> getMonstersListFromJson(Map<String, Integer> cardCountMap) throws IOException, URISyntaxException {
-        JsonExtractor jsonExtractor = new JsonExtractor();
-        return jsonExtractor.extractMonstersFromJson("Monsters.json").stream()
+    private ArrayList<Monster> getMonstersListFromJson(Map<String, Integer> cardCountMap) throws IOException, URISyntaxException {
+        return new JsonExtractor().extractMonstersFromJson("Monsters.json").stream()
                 .collect(
                         ArrayList::new,
                         // l - list
                         (l, monster) -> {
                             l.add(monster);
                             try {
-                                if(cardCountMap.containsKey(monster.getName())) {
-                                    for(int i = 1; i < cardCountMap.get(monster.getName()); i++) {
-
+                                if (cardCountMap.containsKey(monster.getName())) {
+                                    for (int i = 1; i < cardCountMap.get(monster.getName()); i++) {
                                         l.add(monster.clone());
                                     }
                                 }
-                            } catch(CloneNotSupportedException e) {
+                            } catch (CloneNotSupportedException e) {
                                 throw new RuntimeException(e);
                             }
                         },
@@ -112,44 +142,20 @@ public class DefaultGameFactory extends AbstractGameFactory {
                 );
     }
 
-    private Set<Ancient> getAncientsFromJson(Map<String, Integer> cardCountMap) throws IOException, URISyntaxException {
-        JsonExtractor jsonExtractor = new JsonExtractor();
-        return null;/*jsonExtractor.extractAncientsFromJson("Ancients.json").stream()
-                .collect(
-                        HashSet::new,
-                        // l - list
-                        (l, ancient) -> {
-                            l.add(ancient);
-                            try {
-                                if(cardCountMap.containsKey(ancient.getName())) {
-                                    for(int i = 1; i < cardCountMap.get(ancient.getName()); i++) {
-
-                                        l.add(ancient.clone());
-                                    }
-                                }
-                            } catch(CloneNotSupportedException e) {
-                                throw new RuntimeException(e);
-                            }
-                        },
-                        HashSet::addAll
-                );*/
-    }
-
-    private List<Gate> getGatesFromJson(Map<String, Integer> cardCountMap) throws IOException, URISyntaxException {
-        JsonExtractor jsonExtractor = new JsonExtractor();
-        return jsonExtractor.extractGatesFromJson("Gates.json").stream()
+    private ArrayList<Gate> getGatesFromJson(Map<String, Integer> cardCountMap) throws IOException, URISyntaxException {
+        return new JsonExtractor().extractGatesFromJson("Gates.json").stream()
                 .collect(
                         ArrayList::new,
                         // l - list
                         (l, gate) -> {
                             l.add(gate);
                             try {
-                                if(cardCountMap.containsKey(gate.getWorld())) {
-                                    for(int i = 1; i < cardCountMap.get(gate.getWorld()); i++) {
+                                if (cardCountMap.containsKey(gate.getWorld())) {
+                                    for (int i = 1; i < cardCountMap.get(gate.getWorld()); i++) {
                                         l.add(gate.clone());
                                     }
                                 }
-                            } catch(CloneNotSupportedException e) {
+                            } catch (CloneNotSupportedException e) {
                                 throw new RuntimeException(e);
                             }
                         },
@@ -158,13 +164,14 @@ public class DefaultGameFactory extends AbstractGameFactory {
     }
 
     /**
-     * Преобразует поданный Сет в Очередь в соответствии с переданной таблицей соответствий карт и их количества.
+     * Преобразует поданный Сет в Список в соответствии с переданной таблицей соответствий карт и их количества.
      *
      * @param set          Сет карт
      * @param cardCountMap Таблица вида "Карта" - "Количество этих карт"
-     * @return Очередь из карт (не перемешанная)
+     * @return Двунаправленный Список из карт (не перемешанный)
      */
-    private LinkedList<AbstractCard> createDeckFromCardSet(Set<AbstractCard> set, Map<String, Integer> cardCountMap) {
+    @SuppressWarnings("unchecked")
+    private <T extends AbstractCard> LinkedList<T> createDeckFromCardSet(Set<T> set, Map<String, Integer> cardCountMap) {
         return set.stream()
                 .collect(
                         LinkedList::new,
@@ -172,13 +179,12 @@ public class DefaultGameFactory extends AbstractGameFactory {
                         (ll, item) -> {
                             ll.add(item);
                             try {
-                                if(cardCountMap.containsKey(item.getName())) {
-                                    for(int i = 1; i < cardCountMap.get(item.getName()); i++) {
-
-                                        ll.add(item.clone());
+                                if (cardCountMap.containsKey(item.getName())) {
+                                    for (int i = 1; i < cardCountMap.get(item.getName()); i++) {
+                                        ll.add((T) item.clone());
                                     }
                                 }
-                            } catch(CloneNotSupportedException e) {
+                            } catch (CloneNotSupportedException e) {
                                 throw new RuntimeException(e);
                             }
                         },

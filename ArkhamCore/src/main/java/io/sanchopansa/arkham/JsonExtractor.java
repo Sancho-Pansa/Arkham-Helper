@@ -38,11 +38,11 @@ public class JsonExtractor {
         return new HashSet<>(Arrays.asList(gBuilder.create().fromJson(json, Investigator[].class)));
     }
 
-    public Set<Ancient> extractAncientsFromJson(String filename) throws IOException, URISyntaxException {
+    public Set<Ancient> extractAncientsFromJson(String filename, Set<Monster> monsters) throws IOException, URISyntaxException {
         matchFilename(filename);
         String json = getStreamFromResourcesFile(filename).collect(Collectors.joining());
         GsonBuilder gBuilder = new GsonBuilder();
-        //gBuilder.registerTypeAdapter(Ancient.class, new AncientDeserializer());
+        gBuilder.registerTypeAdapter(Ancient.class, new AncientDeserializer(monsters));
         return new HashSet<>(Arrays.asList(gBuilder.create().fromJson(json, Ancient[].class)));
     }
 
