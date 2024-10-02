@@ -4,10 +4,10 @@ import com.google.common.reflect.TypeToken;
 import com.google.gson.*;
 import io.sanchopansa.arkham.deserializers.LocationDeserializer;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.jgrapht.*;
+import org.jgrapht.graph.*;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.jgrapht.traverse.BreadthFirstIterator;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -16,14 +16,15 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.jgrapht.*;
-import org.jgrapht.graph.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -33,12 +34,12 @@ public class LocationGraphTest {
     private static Graph<Location, DefaultEdge> graph;
 
     @BeforeAll
-    public static void getLocations() throws URISyntaxException, IOException {
+    public static void getLocations() throws IOException {
         URL resource = LocationGraphTest.class.getClassLoader().getResource("ArkhamMap.json");
-        if (resource == null) {
+        if(resource == null) {
             throw new IOException("Requested file was not found!");
         }
-        try (Stream<String> jsonFile = Files
+        try(Stream<String> jsonFile = Files
                 .lines(Paths.get(resource.toURI()), StandardCharsets.UTF_8)) {
             String locationJson = jsonFile.collect(Collectors.joining());
 
@@ -55,13 +56,13 @@ public class LocationGraphTest {
             JsonElement edgesJson = a.getAsJsonObject().get("graph").getAsJsonObject().get("edges");
             var edgesArray = edgesJson.getAsJsonArray();
 
-            for (JsonElement x : edgesArray) {
+            for(JsonElement x : edgesArray) {
                 String source = x.getAsJsonObject().get("source").getAsString();
                 String target = x.getAsJsonObject().get("target").getAsString();
                 edgesPairs.add(new ImmutablePair<>(locationMap.get(source), locationMap.get(target)));
             }
 
-        } catch (IOException | URISyntaxException e) {
+        } catch(IOException | URISyntaxException e) {
             System.err.println("IOException during Json process!");
             e.printStackTrace(System.err);
         }
@@ -91,5 +92,21 @@ public class LocationGraphTest {
         DijkstraShortestPath<Location, DefaultEdge> dj = new DijkstraShortestPath<>(graph);
         GraphPath<Location, DefaultEdge> shortestPath = dj.getPath(src, dst);
         assertEquals(3, shortestPath.getLength());
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = { 1, 2, 5 })
+    public void testBFS(int range) {
+        Location src = locationMap.get("South Church");
+        BreadthFirstIterator<Location, DefaultEdge> bfsIter = new BreadthFirstIterator<>(graph, src);
+        Set<Location> locationsInRange = new HashSet<>();
+        do {
+            Location current = bfsIter.next();
+            if(bfsIter.getDepth(current) > range)
+                break;
+            locationsInRange.add(current);
+        } while(bfsIter.hasNext());
+        locationsInRange.forEach(l -> System.out.println(l.getName()));
+        assertFalse(locationsInRange.isEmpty());
     }
 }
