@@ -23,9 +23,8 @@ import java.util.stream.Collectors;
  */
 public class DefaultGameFactory extends AbstractGameFactory {
     @Override
-    public GameVault createVault() {
+    public GameVault createVault() throws IOException, URISyntaxException {
         JsonExtractor jsonExtractor = new JsonExtractor();
-        try {
             // Таблица "Объект игры - число объектов"
             Map<String, Integer> objectCountMap = new HashMap<>();
             objectCountMap.putAll(jsonExtractor.extractCardCountMap("CommonItems.json", CommonItem.class));
@@ -93,16 +92,7 @@ public class DefaultGameFactory extends AbstractGameFactory {
                     alliesDeck
             );
 
-        } catch (IOException e) {
-            System.err.println("Error during file reading process!");
-            e.printStackTrace(System.err);
-        } catch (URISyntaxException e) {
-            System.err.println("Error in URI conversion (Java NIO)!");
-            e.printStackTrace(System.err);
         }
-
-        return null;
-    }
 
     /**
      * Эта функция принимает на вход название JSON-а, Java-тип для его преобразования и класс-десериализатор, после
@@ -203,15 +193,16 @@ public class DefaultGameFactory extends AbstractGameFactory {
     }
 
     @Override
-    public Graph<Location, DefaultEdge> createMap() {
-        JsonExtractor jsonExtractor = new JsonExtractor();
-        Map<String, Location> locationMap = jsonExtractor.extractLocationsAsMap("ArkhamMap.json");
-        List<ImmutablePair<String, String>> edgesList = jsonExtractor.extractEdgesAsPairs("ArkhamMap.json");
+    public Graph<Location, DefaultEdge> createMap() throws IOException, URISyntaxException {
+            JsonExtractor jsonExtractor = new JsonExtractor();
+            Map<String, Location> locationMap = jsonExtractor.extractLocationsAsMap("ArkhamMap.json");
+            List<ImmutablePair<String, String>> edgesList = jsonExtractor.extractEdgesAsPairs("ArkhamMap.json");
 
-        SimpleGraph<Location, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
-        locationMap.values().forEach(graph::addVertex);
-        edgesList.forEach(pair -> graph.addEdge(locationMap.get(pair.left), locationMap.get(pair.right)));
+            SimpleGraph<Location, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
+            locationMap.values().forEach(graph::addVertex);
+            edgesList.forEach(pair -> graph.addEdge(locationMap.get(pair.left), locationMap.get(pair.right)));
 
-        return graph;
+            return graph;
+
     }
 }
