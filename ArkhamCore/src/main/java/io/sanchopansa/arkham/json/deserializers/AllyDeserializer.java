@@ -1,9 +1,9 @@
-package io.sanchopansa.arkham.deserializers;
+package io.sanchopansa.arkham.json.deserializers;
 
 import com.google.gson.*;
-import io.sanchopansa.arkham.ActiveEffect;
-import io.sanchopansa.arkham.Expansion;
-import io.sanchopansa.arkham.Phase;
+import io.sanchopansa.arkham.common.ActiveEffect;
+import io.sanchopansa.arkham.common.Expansion;
+import io.sanchopansa.arkham.common.Phase;
 import io.sanchopansa.arkham.cards.Ally;
 import io.sanchopansa.arkham.cards.BonusStats;
 

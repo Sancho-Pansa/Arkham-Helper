@@ -1,4 +1,4 @@
-package io.sanchopansa.arkham;
+package io.sanchopansa.arkham.common;
 
 import com.google.common.base.Enums;
 

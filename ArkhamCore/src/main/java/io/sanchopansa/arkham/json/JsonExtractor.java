@@ -1,10 +1,11 @@
-package io.sanchopansa.arkham;
+package io.sanchopansa.arkham.json;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.*;
+import io.sanchopansa.arkham.locations.Location;
 import io.sanchopansa.arkham.cards.AbstractCard;
-import io.sanchopansa.arkham.deserializers.*;
 import io.sanchopansa.arkham.investigators.Investigator;
+import io.sanchopansa.arkham.json.deserializers.*;
 import io.sanchopansa.arkham.monsters.Ancient;
 import io.sanchopansa.arkham.monsters.Gate;
 import io.sanchopansa.arkham.monsters.Monster;
@@ -16,7 +17,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;

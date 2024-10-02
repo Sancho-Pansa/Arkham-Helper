@@ -1,9 +1,12 @@
-package io.sanchopansa.arkham;
+package io.sanchopansa.arkham.factories;
 
 import com.google.gson.JsonDeserializer;
+import io.sanchopansa.arkham.GameVault;
 import io.sanchopansa.arkham.cards.*;
-import io.sanchopansa.arkham.deserializers.*;
 import io.sanchopansa.arkham.investigators.Investigator;
+import io.sanchopansa.arkham.json.JsonExtractor;
+import io.sanchopansa.arkham.json.deserializers.*;
+import io.sanchopansa.arkham.locations.Location;
 import io.sanchopansa.arkham.monsters.Ancient;
 import io.sanchopansa.arkham.monsters.Gate;
 import io.sanchopansa.arkham.monsters.Monster;

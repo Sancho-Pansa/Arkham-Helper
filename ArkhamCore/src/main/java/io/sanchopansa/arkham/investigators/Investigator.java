@@ -1,8 +1,8 @@
 package io.sanchopansa.arkham.investigators;
 
-import io.sanchopansa.arkham.AbstractGameElement;
-import io.sanchopansa.arkham.Expansion;
-import io.sanchopansa.arkham.Phase;
+import io.sanchopansa.arkham.common.AbstractGameElement;
+import io.sanchopansa.arkham.common.Expansion;
+import io.sanchopansa.arkham.common.Phase;
 import io.sanchopansa.arkham.cards.*;
 import io.sanchopansa.arkham.monsters.Gate;
 import io.sanchopansa.arkham.monsters.Monster;

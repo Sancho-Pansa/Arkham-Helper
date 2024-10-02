@@ -1,4 +1,4 @@
-package io.sanchopansa.arkham;
+package io.sanchopansa.arkham.common;
 
 public enum Expansion {
     VANILLA("Ужас Аркхэма"),

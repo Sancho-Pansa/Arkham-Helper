@@ -4,6 +4,7 @@ import com.google.common.graph.EndpointPair;
 import com.google.common.graph.MutableGraph;
 import io.sanchopansa.arkham.cards.*;
 import io.sanchopansa.arkham.investigators.Investigator;
+import io.sanchopansa.arkham.locations.Location;
 import io.sanchopansa.arkham.monsters.*;
 import java.util.ArrayList;
 import java.util.LinkedList;

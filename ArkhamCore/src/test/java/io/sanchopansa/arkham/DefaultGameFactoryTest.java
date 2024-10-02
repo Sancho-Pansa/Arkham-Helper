@@ -1,5 +1,6 @@
 package io.sanchopansa.arkham;
 
+import io.sanchopansa.arkham.factories.DefaultGameFactory;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

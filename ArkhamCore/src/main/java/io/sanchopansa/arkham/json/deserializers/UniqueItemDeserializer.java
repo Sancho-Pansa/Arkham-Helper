@@ -1,4 +1,4 @@
-package io.sanchopansa.arkham.deserializers;
+package io.sanchopansa.arkham.json.deserializers;
 
 import io.sanchopansa.arkham.cards.UniqueItem;
 

@@ -1,4 +1,4 @@
-package io.sanchopansa.arkham.deserializers;
+package io.sanchopansa.arkham.json.deserializers;
 
 import com.google.gson.JsonObject;
 import io.sanchopansa.arkham.cards.BonusStats;

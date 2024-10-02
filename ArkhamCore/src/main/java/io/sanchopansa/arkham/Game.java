@@ -2,6 +2,7 @@ package io.sanchopansa.arkham;
 
 import com.google.common.graph.Graph;
 import io.sanchopansa.arkham.investigators.Investigator;
+import io.sanchopansa.arkham.locations.Location;
 import io.sanchopansa.arkham.monsters.Ancient;
 import io.sanchopansa.arkham.monsters.Gate;
 import io.sanchopansa.arkham.monsters.Monster;
