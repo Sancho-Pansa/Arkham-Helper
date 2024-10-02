@@ -1,6 +1,5 @@
 package io.sanchopansa.arkham;
 
-import com.google.common.graph.MutableGraph;
 import com.google.gson.JsonDeserializer;
 import io.sanchopansa.arkham.cards.*;
 import io.sanchopansa.arkham.deserializers.*;
@@ -197,10 +196,5 @@ public class DefaultGameFactory extends AbstractGameFactory {
         Collections.shuffle(linkedDeck);
         Collections.shuffle(linkedDeck);
         return linkedDeck;
-    }
-
-    @Override
-    public MutableGraph<Location> createMap() {
-        return null;
     }
 }

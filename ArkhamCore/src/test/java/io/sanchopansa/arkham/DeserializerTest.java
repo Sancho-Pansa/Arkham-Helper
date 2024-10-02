@@ -163,14 +163,14 @@ public class DeserializerTest {
 
     @Test
     public void LocationDeserializerTest() throws IOException, URISyntaxException {
-        var locationCollection = new DeserializerTest()
+        var locationJson = new DeserializerTest()
                 .getStreamFromResourcesFile("ArkhamMap.json")
                 .collect(Collectors.joining());
         Type mapTypeToken = new TypeToken<Map<String, Location>>() {}.getType();
         gBuilder.registerTypeAdapter(mapTypeToken, new LocationDeserializer());
         Gson gson = gBuilder.create();
 
-        JsonElement a = gson.fromJson(locationCollection, JsonElement.class);
+        JsonElement a = gson.fromJson(locationJson, JsonElement.class);
         JsonElement nodesJson = a.getAsJsonObject().get("graph").getAsJsonObject().get("nodes");
 
         Map<String, Location> map = gson.fromJson(nodesJson, mapTypeToken);

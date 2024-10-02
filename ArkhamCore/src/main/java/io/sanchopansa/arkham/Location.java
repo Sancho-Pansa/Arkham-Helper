@@ -1,5 +1,7 @@
 package io.sanchopansa.arkham;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,6 +81,21 @@ public class Location extends AbstractGameElement {
 
     public void setActivity(boolean hasActivity) {
         this.hasActivity = hasActivity;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("\n\tname", name)
+                .append("\n\texpansion", expansion)
+                .append("\n\tdescription", description)
+                .append("\n\tisStreet", isStreet)
+                .append("\n\tisStable", isStable)
+                .append("\n\tisSealed", isSealed)
+                .append("\n\tisOpened", isOpened)
+                .append("\n\thasActivity", hasActivity)
+                .append("\n")
+                .toString();
     }
 
     public enum LocationType {
