@@ -10,7 +10,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="junit:junit:4.13" level="project" />
     <orderEntry type="library" exported="" name="com.google.code.gson:gson:2.8.6" level="project" />
     <orderEntry type="library" exported="" name="commons-cli:commons-cli:1.4" level="project" />
     <orderEntry type="library" exported="" name="org.jetbrains:annotations:20.0.0" level="project" />
