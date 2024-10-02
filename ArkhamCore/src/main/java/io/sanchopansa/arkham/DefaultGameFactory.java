@@ -7,6 +7,10 @@ import io.sanchopansa.arkham.investigators.Investigator;
 import io.sanchopansa.arkham.monsters.Ancient;
 import io.sanchopansa.arkham.monsters.Gate;
 import io.sanchopansa.arkham.monsters.Monster;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.jgrapht.Graph;
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleGraph;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -196,5 +200,18 @@ public class DefaultGameFactory extends AbstractGameFactory {
         Collections.shuffle(linkedDeck);
         Collections.shuffle(linkedDeck);
         return linkedDeck;
+    }
+
+    @Override
+    public Graph<Location, DefaultEdge> createMap() {
+        JsonExtractor jsonExtractor = new JsonExtractor();
+        Map<String, Location> locationMap = jsonExtractor.extractLocationsAsMap("ArkhamMap.json");
+        List<ImmutablePair<String, String>> edgesList = jsonExtractor.extractEdgesAsPairs("ArkhamMap.json");
+
+        SimpleGraph<Location, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
+        locationMap.values().forEach(graph::addVertex);
+        edgesList.forEach(pair -> graph.addEdge(locationMap.get(pair.left), locationMap.get(pair.right)));
+
+        return graph;
     }
 }
