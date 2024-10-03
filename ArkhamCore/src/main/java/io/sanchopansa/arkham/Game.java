@@ -4,30 +4,36 @@ import io.sanchopansa.arkham.investigators.Investigator;
 import io.sanchopansa.arkham.monsters.Ancient;
 import io.sanchopansa.arkham.monsters.Gate;
 import io.sanchopansa.arkham.monsters.Monster;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
+import java.util.function.IntUnaryOperator;
 
 /**
  * Этот класс описывает состояние партии
+ *
  * @author SanchoPansa
  */
 
 public class Game {
-    private final LinkedList<Investigator> playersList;
+    private static final byte PLAYERS_LIMIT = 8;
+    private static final byte SEALS_LIMIT = 6;
+    private static final IntUnaryOperator GATE_LIMIT_FORMULA = (p) -> 9 - ((p + 1) / 2);
+    private static final IntUnaryOperator MONSTER_LIMIT_FORMULA = (p) -> p + 3;
+    private static final IntUnaryOperator OUTSKIRTS_LIMIT_FORMULA = (p) -> 8 - p;
+
+
+    private final Deque<Investigator> players;
     private final Ancient ancient;
-    private final ArrayList<Gate> gates;
-    private final Queue<Monster> monstersOnMap;
+    private final Set<Gate> activeGates = new HashSet<>();
+    private final Set<Monster> activeMonsters = new HashSet<>();
+    private final Set<Monster> outskirtsMonsters = new HashSet<>();
+
+    private final int gateLimit;
+    private final int monstersLimit;
+    private final int outskirtsLimit;
 
 
-    private int gateCount = 0;
-    private int mapMonsterCount = 0;
-    private int outMonsterCount = 0;
-    private int gateLimit;
-    private int monsterLimit;
-    private int outskirtsLimit;
     private int terrorLevel = 0;
     private int doomLevel = 0;
 
@@ -36,27 +42,26 @@ public class Game {
     private boolean activeRumor = false;
 
     // Условия победы
-    private int elderSignsOnMap = 0;
+    private int placedSeals = 0;
 
-    public Game(LinkedList<Investigator> playersList, Ancient ancient, ArrayList<Gate> gates, Queue<Monster> monstersOnMap) {
-        this.playersList = playersList;
+    public Game(Ancient ancient, Investigator... players) {
         this.ancient = ancient;
-        this.gates = gates;
-        this.monstersOnMap = monstersOnMap;
+        int playersCount = players.length;
+        if(players.length > PLAYERS_LIMIT) {
+            throw new IllegalArgumentException("Number of players cannot exceed " + PLAYERS_LIMIT);
+        }
+        this.players = new ArrayDeque<>(Arrays.asList(players));
+        this.gateLimit = GATE_LIMIT_FORMULA.applyAsInt(playersCount);
+        this.monstersLimit = MONSTER_LIMIT_FORMULA.applyAsInt(playersCount);
+        this.outskirtsLimit = OUTSKIRTS_LIMIT_FORMULA.applyAsInt(playersCount);
     }
 
-    public List<Investigator> getPlayersList()
-    {
-        return playersList;
+    public Deque<Investigator> getPlayers() {
+        return players;
     }
 
-    public Ancient getAncientOne()
-    {
-        return this.ancient;
-    }
-
-    public int getTerrorLevel() {
-        return this.terrorLevel;
+    public Ancient getAncient() {
+        return ancient;
     }
 
     public int getGateLimit() {
@@ -64,141 +69,54 @@ public class Game {
     }
 
     public int getMonsterLimit() {
-        return monsterLimit;
-    }
-
-    public int getMapMonsterCount() {
-        return mapMonsterCount;
-    }
-
-    public int getOutMonsterCount()
-    {
-        return this.outMonsterCount;
+        return this.monstersLimit;
     }
 
     public int getOutskirtsLimit() {
         return outskirtsLimit;
     }
 
+    public Set<Gate> getActiveGates() {
+        return activeGates;
+    }
+
+    public Set<Monster> getActiveMonsters() {
+        return activeMonsters;
+    }
+
+    public Set<Monster> getOutskirtsMonsters() {
+        return outskirtsMonsters;
+    }
+
+    public int getTotalGates() {
+        return this.activeGates.size();
+    }
+
+    public int getTotalMonsters() {
+        return this.activeMonsters.size();
+    }
+
+    public int getTotalOutskirtsMonsters() {
+        return this.outskirtsMonsters.size();
+    }
+
+    public int getTerrorLevel() {
+        return terrorLevel;
+    }
+
+    public void setTerrorLevel(int terrorLevel) {
+        this.terrorLevel = terrorLevel;
+    }
+
     public int getDoomLevel() {
         return doomLevel;
     }
 
-    public int getGateCount()
-    {
-        return this.gateCount;
+    public void setDoomLevel(int doomLevel) {
+        this.doomLevel = doomLevel;
     }
 
-    public int getElderSignsOnMap() {
-        return elderSignsOnMap;
-    }
-
-    public boolean isAwaken()
-    {
-        return this.ancient.getDoomTrack() <= this.doomLevel;
-    }
-
-    /**
-     * Создает врата на карте.
-     * Если
-     * If there was a Gate, then in initiates Monster Surge
-     * @param isThereGate true, if location already has a placed Gate
-     */
-    public void createGate(boolean isThereGate)
-    {
-        int players = this.playersList.size();
-        if(isThereGate) // Monster Surge
-            for(int i = 0; i < Integer.max(players, gateCount); i++)
-                spawnMonster();
-        else
-        {
-            gateCount++;
-            addDoom();
-            if(players > 4)
-            {
-                this.spawnMonster();
-            }
-            this.spawnMonster();
-        }
-    }
-
-    /**
-     * This function emulates process of sealing of the Gate. If parameter is true
-     * it is the Elder Sign is used to close the Gate.
-     * @param elderSign is Elder Sign item used?
-     */
-    public void closeGate(boolean elderSign) {
-        if(elderSign) {
-            gateCount--;
-            elderSignsOnMap++;
-            doomLevel--;
-        } else {
-            gateCount--;
-        }
-    }
-
-    /**
-     * Spawns a monster and observes, whether limit of monsters in Arkham or the Outskirts is breached.
-     */
-    public void spawnMonster()
-    {
-        if(mapMonsterCount > monsterLimit) {
-            if(outMonsterCount >= outskirtsLimit) {
-                outMonsterCount = 0;
-                addTerrorLevel();
-            } else
-                outMonsterCount++;
-        }
-        mapMonsterCount++;
-    }
-
-    /**
-     * Kill a monster in the main map
-     */
-    public void killMonster()
-    {
-        this.mapMonsterCount--;
-    }
-
-    /**
-     * This function increments level of Terror in Arkham. If level is greater than 10, then it increments
-     * Doom track.
-     */
-    public void addTerrorLevel()
-    {
-        this.terrorLevel++;
-        if(this.terrorLevel >= 10) {
-            monsterLimit = Integer.MAX_VALUE;
-            this.addDoom();
-        }
-    }
-
-    /**
-     * This function decrements terror level (which happens quite rarely)
-     */
-    public void minusTerrorLevel()
-    {
-        this.terrorLevel--;
-    }
-
-    /**
-     * This function increments Doom on Doom track
-     */
-    public void addDoom()
-    {
-        this.doomLevel++;
-    }
-
-    /**
-     * This function decrements Doom
-     */
-    public void minusDoom()
-    {
-        if(this.doomLevel >= 0)
-            this.doomLevel--;
-    }
-
-    public boolean isActiveEnvironment() {
+    public boolean hasActiveEnvironment() {
         return activeEnvironment;
     }
 
@@ -206,7 +124,7 @@ public class Game {
         this.activeEnvironment = activeEnvironment;
     }
 
-    public boolean isActiveRumor() {
+    public boolean hasActiveRumor() {
         return activeRumor;
     }
 
@@ -214,42 +132,30 @@ public class Game {
         this.activeRumor = activeRumor;
     }
 
+    public int getPlacedSeals() {
+        return placedSeals;
+    }
 
-
-    /**
-     * Returns String with comprehensive information about current state of the game.
-     * This includes: Number of Gates, Number of Monsters both on Map and in Outskirts, Terror Track and collateral
-     * info about closed Locations, Doom Track, active Process and/or Rumor. Every piece of info is separated via
-     * return symbol.
-     * @return String with current game state description
-     */
-    public String getState() {
-        StringBuilder info = new StringBuilder();
-
-        // Doom Track:
-        info.append(String.format("Уровень безысходности: %d / %d\n", this.doomLevel, this.ancient.getDoomTrack()));
-        info.append(String.format("Врат: %d / %d\n", this.gateCount, this.gateLimit));
-        info.append(String.format("Монстров на карте: %d / %d\n", this.mapMonsterCount, this.monsterLimit));
-        info.append(String.format("Монстров на Окраинах: %d / %d\n", this.outMonsterCount, this.outskirtsLimit));
-        info.append(String.format("Уровень ужаса: %d / 10\n", this.terrorLevel));
-        if(terrorLevel >= 3)
-            info.append("Магазин закрыт\n");
-        if(terrorLevel >= 6)
-            info.append("Лавка древностей закрыта\n");
-        if(terrorLevel >= 9)
-            info.append("Старинная лавка волшбы закрыта\n");
-        if(terrorLevel >= 10)
-            info.append("Лимит монстров снят\n");
-        if(this.activeEnvironment)
-            info.append("Активный Процесс\n");
-        if(this.activeRumor)
-            info.append("Активный Слух\n");
-        return info.toString();
+    public void setPlacedSeals(int placedSeals) {
+        this.placedSeals = placedSeals;
     }
 
     @Override
     public String toString() {
-        // TODO: Достаточное описание игры через toString()
-        return "";
+        return new ToStringBuilder(this)
+                .append("players", players)
+                .append("ancient", ancient)
+                .append("activeGates", activeGates)
+                .append("activeMonsters", activeMonsters)
+                .append("gateLimit", gateLimit)
+                .append("monstersLimit", monstersLimit)
+                .append("outskirtsLimit", outskirtsLimit)
+                .append("outskirtsMonsters", outskirtsMonsters)
+                .append("terrorLevel", terrorLevel)
+                .append("doomLevel", doomLevel)
+                .append("activeEnvironment", activeEnvironment)
+                .append("activeRumor", activeRumor)
+                .append("placedSeals", placedSeals)
+                .toString();
     }
 }
