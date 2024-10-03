@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 /**
  * Сборщик коробки по умолчанию - из заранее составленных JSON-файлов.
  */
-public class DefaultGameFactory extends AbstractGameFactory {
+public class JsonGameFactory extends AbstractGameFactory {
     @Override
     public GameVault createVault() throws IOException, URISyntaxException {
         JsonExtractor jsonExtractor = new JsonExtractor();

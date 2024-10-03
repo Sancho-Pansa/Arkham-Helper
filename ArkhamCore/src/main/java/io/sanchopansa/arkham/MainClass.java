@@ -1,9 +1,9 @@
 package io.sanchopansa.arkham;
 
-import io.sanchopansa.arkham.factories.DefaultGameFactory;
+import io.sanchopansa.arkham.factories.JsonGameFactory;
 
 public class MainClass {
     public static void main(String[] args) {
-        new DefaultGameFactory();
+        new JsonGameFactory();
     }
 }
