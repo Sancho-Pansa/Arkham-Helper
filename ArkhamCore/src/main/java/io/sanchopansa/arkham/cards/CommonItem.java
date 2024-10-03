@@ -20,7 +20,7 @@ public final class CommonItem extends AbstractItem {
     }
 
     @Override
-    public CommonItem clone() {
+    public CommonItem cloneItem() {
         return new CommonItem(
                 this.expansion,
                 this.name,
@@ -31,6 +31,6 @@ public final class CommonItem extends AbstractItem {
                 this.active.description(),
                 this.active.usablePhase(),
                 this.passive
-                );
+        );
     }
 }

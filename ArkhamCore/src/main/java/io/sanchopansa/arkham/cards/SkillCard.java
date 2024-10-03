@@ -29,7 +29,7 @@ public final class SkillCard extends AbstractCard {
     }
 
     @Override
-    public SkillCard clone() {
+    public SkillCard cloneItem() {
         return new SkillCard(
                 this.expansion,
                 this.name,

@@ -124,14 +124,10 @@ public class DefaultGameFactory extends AbstractGameFactory {
                         // l - list
                         (l, monster) -> {
                             l.add(monster);
-                            try {
-                                if (cardCountMap.containsKey(monster.getName())) {
-                                    for (int i = 1; i < cardCountMap.get(monster.getName()); i++) {
-                                        l.add(monster.clone());
-                                    }
+                            if (cardCountMap.containsKey(monster.getName())) {
+                                for (int i = 1; i < cardCountMap.get(monster.getName()); i++) {
+                                    l.add(new Monster(monster));
                                 }
-                            } catch (CloneNotSupportedException e) {
-                                throw new RuntimeException(e);
                             }
                         },
                         ArrayList::addAll
@@ -145,14 +141,10 @@ public class DefaultGameFactory extends AbstractGameFactory {
                         // l - list
                         (l, gate) -> {
                             l.add(gate);
-                            try {
-                                if (cardCountMap.containsKey(gate.getWorld())) {
-                                    for (int i = 1; i < cardCountMap.get(gate.getWorld()); i++) {
-                                        l.add(gate.clone());
-                                    }
+                            if (cardCountMap.containsKey(gate.getWorld())) {
+                                for (int i = 1; i < cardCountMap.get(gate.getWorld()); i++) {
+                                    l.add(new Gate(gate));
                                 }
-                            } catch (CloneNotSupportedException e) {
-                                throw new RuntimeException(e);
                             }
                         },
                         ArrayList::addAll
@@ -174,14 +166,10 @@ public class DefaultGameFactory extends AbstractGameFactory {
                         // ll - linked_list
                         (ll, item) -> {
                             ll.add(item);
-                            try {
-                                if (cardCountMap.containsKey(item.getName())) {
-                                    for (int i = 1; i < cardCountMap.get(item.getName()); i++) {
-                                        ll.add((T) item.clone());
-                                    }
+                            if (cardCountMap.containsKey(item.getName())) {
+                                for (int i = 1; i < cardCountMap.get(item.getName()); i++) {
+                                    ll.add((T) item.cloneItem());
                                 }
-                            } catch (CloneNotSupportedException e) {
-                                throw new RuntimeException(e);
                             }
                         },
                         LinkedList::addAll

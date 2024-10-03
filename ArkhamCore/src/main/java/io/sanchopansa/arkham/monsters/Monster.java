@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.util.List;
 import java.util.Optional;
 
-public final class Monster extends AbstractGameElement implements Cloneable {
+public final class Monster extends AbstractGameElement {
     private final String name;
     private final MonsterBehavior behavior;
     private final Type type;
@@ -149,12 +149,6 @@ public final class Monster extends AbstractGameElement implements Cloneable {
                 .append("\n\tabilities", abilities)
                 .append("\n\tflavor", flavor)
                 .toString();
-    }
-
-    @Override
-    public Monster clone() throws CloneNotSupportedException {
-        Monster monster = (Monster) super.clone();
-        return new Monster(this);
     }
 
     public enum Type {

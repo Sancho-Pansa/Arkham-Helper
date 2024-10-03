@@ -25,7 +25,7 @@ public final class Ally extends AbstractCard {
     }
 
     @Override
-    public Ally clone() {
+    public Ally cloneItem() {
         return new Ally(
                 this.expansion,
                 this.name,

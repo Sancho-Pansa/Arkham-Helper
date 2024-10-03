@@ -20,7 +20,7 @@ public final class UniqueItem extends AbstractItem {
     }
 
     @Override
-    public UniqueItem clone() {
+    public UniqueItem cloneItem() {
         return new UniqueItem(
                 this.expansion,
                 this.name,

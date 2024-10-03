@@ -9,7 +9,7 @@ import java.util.Objects;
 /**
  * Класс, описывающий жетон Врат
  */
-public final class Gate extends AbstractGameElement implements Cloneable {
+public final class Gate extends AbstractGameElement {
     private final String world;
     private final byte modifier;
     private final DimensionSymbol symbol;
@@ -43,12 +43,6 @@ public final class Gate extends AbstractGameElement implements Cloneable {
 
     public DimensionSymbol getDimension() {
         return symbol;
-    }
-
-    @Override
-    public Gate clone() throws CloneNotSupportedException {
-        Gate gate = (Gate) super.clone();
-        return new Gate(this);
     }
 
     @Override

@@ -34,7 +34,7 @@ public final class Spell extends AbstractItem {
     }
 
     @Override
-    public Spell clone() {
+    public Spell cloneItem() {
         return new Spell(
                 this.expansion,
                 this.name,
