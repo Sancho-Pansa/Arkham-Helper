@@ -15,5 +15,19 @@ public class GameEngine {
         this.map = map;
     }
 
+    public Game getGameInstance() {
+        return gameInstance;
+    }
 
+    public GameVault getVault() {
+        return vault;
+    }
+
+    public Graph<Location, DefaultEdge> getMap() {
+        return map;
+    }
+
+    public void launch() {
+
+    }
 }

@@ -16,8 +16,8 @@ import java.util.function.IntUnaryOperator;
  */
 
 public class Game {
-    private static final byte PLAYERS_LIMIT = 8;
-    private static final byte SEALS_LIMIT = 6;
+    public static final byte PLAYERS_LIMIT = 8;
+    public static final byte SEALS_LIMIT = 6;
     private static final IntUnaryOperator GATE_LIMIT_FORMULA = (p) -> 9 - ((p + 1) / 2);
     private static final IntUnaryOperator MONSTER_LIMIT_FORMULA = (p) -> p + 3;
     private static final IntUnaryOperator OUTSKIRTS_LIMIT_FORMULA = (p) -> 8 - p;
