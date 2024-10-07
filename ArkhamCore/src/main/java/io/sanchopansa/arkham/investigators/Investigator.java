@@ -68,7 +68,6 @@ public class Investigator extends AbstractGameElement {
                         String abilityName,
                         String abilityDescription,
                         Phase abilityPhase
-
     ) {
         super(e);
         this.name = name;

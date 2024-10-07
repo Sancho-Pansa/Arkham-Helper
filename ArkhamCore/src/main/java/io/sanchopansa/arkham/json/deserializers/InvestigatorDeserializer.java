@@ -19,7 +19,7 @@ public class InvestigatorDeserializer implements JsonDeserializer<Investigator> 
         int stamina = jsonInvestigator.get("stamina").getAsInt();
         int sanity = jsonInvestigator.get("sanity").getAsInt();
 
-        int minSpeed = jsonInvestigator.get("sanity").getAsInt();
+        int minSpeed = jsonInvestigator.get("minSpeed").getAsInt();
         int maxSneak = jsonInvestigator.get("maxSneak").getAsInt();
         int minFight = jsonInvestigator.get("minFight").getAsInt();
         int maxWill = jsonInvestigator.get("maxWill").getAsInt();
