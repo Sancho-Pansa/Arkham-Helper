@@ -1,5 +1,6 @@
 /.recommenders
 /.metadata/
+.idea/.name
 */.gitignore
 !.project
 !.classpath
