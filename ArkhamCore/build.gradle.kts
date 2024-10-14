@@ -24,7 +24,7 @@ dependencies {
 }
 
 group = "io.sanchopansa.arkham"
-version = "0.0.1"
+version = "0.1.0"
 description = "Core logic for creating digital version of Arkham Horror (2nd edition) applications."
 java.sourceCompatibility = JavaVersion.VERSION_17
 
@@ -40,4 +40,15 @@ tasks.withType<JavaCompile>() {
 
 tasks.withType<Javadoc>() {
     options.encoding = "UTF-8"
+}
+
+tasks.jar {
+    manifest {
+        attributes(mapOf(
+            "Implementation-Title" to project.name,
+            "Implementation-Version" to project.version,
+            "Implementation-Description" to project.description,
+            "Built-JDK" to java.sourceCompatibility
+        ))
+    }
 }
