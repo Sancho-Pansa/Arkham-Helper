@@ -6,8 +6,8 @@ import io.sanchopansa.arkham.factories.JsonGameFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.LinkedList;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class JsonGameFactoryTest {
     @Test

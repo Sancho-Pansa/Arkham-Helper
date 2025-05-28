@@ -5,7 +5,10 @@ import com.google.common.graph.MutableGraph;
 import io.sanchopansa.arkham.cards.*;
 import io.sanchopansa.arkham.investigators.Investigator;
 import io.sanchopansa.arkham.locations.Location;
-import io.sanchopansa.arkham.monsters.*;
+import io.sanchopansa.arkham.monsters.Ancient;
+import io.sanchopansa.arkham.monsters.Gate;
+import io.sanchopansa.arkham.monsters.Monster;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Set;

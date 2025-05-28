@@ -5,4 +5,13 @@
 rootProject.name = "Arkham"
 
 include("ArkhamCore")
+include("ArkhamAndroid")
+
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
 
