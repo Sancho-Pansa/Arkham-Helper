@@ -25,14 +25,13 @@ public class Game {
 
     private final Deque<Investigator> players;
     private final Ancient ancient;
-    private final Set<Gate> activeGates = new HashSet<>();
-    private final Set<Monster> activeMonsters = new HashSet<>();
-    private final Set<Monster> outskirtsMonsters = new HashSet<>();
+    private final Deque<Gate> activeGates = new ArrayDeque<>();
+    private final Deque<Monster> activeMonsters = new ArrayDeque<>();
+    private final Deque<Monster> outskirtsMonsters = new ArrayDeque<>();
 
     private final int gateLimit;
     private final int monstersLimit;
     private final int outskirtsLimit;
-
 
     private int terrorLevel = 0;
     private int doomLevel = 0;
@@ -76,15 +75,15 @@ public class Game {
         return outskirtsLimit;
     }
 
-    public Set<Gate> getActiveGates() {
+    public Deque<Gate> getActiveGates() {
         return activeGates;
     }
 
-    public Set<Monster> getActiveMonsters() {
+    public Deque<Monster> getActiveMonsters() {
         return activeMonsters;
     }
 
-    public Set<Monster> getOutskirtsMonsters() {
+    public Deque<Monster> getOutskirtsMonsters() {
         return outskirtsMonsters;
     }
 

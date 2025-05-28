@@ -304,6 +304,10 @@ public class Investigator extends AbstractGameElement {
         return focus;
     }
 
+    public void restoreFocus() {
+        this.focus.refill();
+    }
+
     public List<CommonItem> getCommonItems() {
         return commonItems;
     }
