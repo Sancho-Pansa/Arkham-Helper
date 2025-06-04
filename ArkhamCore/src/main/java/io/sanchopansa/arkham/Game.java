@@ -1,5 +1,6 @@
 package io.sanchopansa.arkham;
 
+import io.sanchopansa.arkham.common.Phase;
 import io.sanchopansa.arkham.investigators.Investigator;
 import io.sanchopansa.arkham.monsters.Ancient;
 import io.sanchopansa.arkham.monsters.Gate;
@@ -22,7 +23,6 @@ public class Game {
     private static final IntUnaryOperator MONSTER_LIMIT_FORMULA = (p) -> p + 3;
     private static final IntUnaryOperator OUTSKIRTS_LIMIT_FORMULA = (p) -> 8 - p;
 
-
     private final Deque<Investigator> players;
     private final Ancient ancient;
     private final Deque<Gate> activeGates = new ArrayDeque<>();
@@ -33,6 +33,7 @@ public class Game {
     private final int monstersLimit;
     private final int outskirtsLimit;
 
+    private Phase currentPhase = Phase.MYTHOS;
     private int terrorLevel = 0;
     private int doomLevel = 0;
 
@@ -46,9 +47,8 @@ public class Game {
     public Game(Ancient ancient, Investigator... players) {
         this.ancient = ancient;
         int playersCount = players.length;
-        if(players.length > PLAYERS_LIMIT) {
+        if(players.length > PLAYERS_LIMIT)
             throw new IllegalArgumentException("Number of players cannot exceed " + PLAYERS_LIMIT);
-        }
         this.players = new ArrayDeque<>(Arrays.asList(players));
         this.gateLimit = GATE_LIMIT_FORMULA.applyAsInt(playersCount);
         this.monstersLimit = MONSTER_LIMIT_FORMULA.applyAsInt(playersCount);
@@ -97,6 +97,14 @@ public class Game {
 
     public int getTotalOutskirtsMonsters() {
         return this.outskirtsMonsters.size();
+    }
+
+    public Phase getCurrentPhase() {
+        return this.currentPhase;
+    }
+
+    public void setCurrentPhase(Phase p) {
+        this.currentPhase = p;
     }
 
     public int getTerrorLevel() {

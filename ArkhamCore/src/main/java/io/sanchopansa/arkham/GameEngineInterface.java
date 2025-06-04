@@ -10,6 +10,9 @@ public interface GameEngineInterface {
     Graph<Location, DefaultEdge> getMap();
     void launch();
 
+    void proceedToNextPhase();
+    void onPhaseComplete();
+
     void upkeep();
     void movement();
     void encounters();
