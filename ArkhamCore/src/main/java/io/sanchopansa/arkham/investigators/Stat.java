@@ -28,13 +28,18 @@ public class Stat {
 
     /**
      * Задает характеристику, ограниченную сверху и снизу числами, переданными в аргументах функции
-     * @param minimum Минимум характеристики
-     * @param maximum Максимум характеристики
+     * @param initialMinimum Минимум характеристики
+     * @param initialMaximum Максимум характеристики
      */
-    public Stat(int minimum, int maximum) {
-        this.minimum = minimum;
-        this.value = minimum;
-        this.maximum = maximum;
+    public Stat(int initialMinimum, int initialMaximum) {
+        if(initialMinimum > initialMaximum)
+            throw new IllegalArgumentException("Initial Minimum cannot exceed initial Maximum!");
+
+        this.minimum = initialMinimum;
+        this.currentMinimum = minimum;
+        this.value = initialMaximum;
+        this.maximum = initialMaximum;
+        this.currentMaximum = maximum;
     }
 
     public int getValue() {
@@ -45,9 +50,12 @@ public class Stat {
         return currentMinimum;
     }
 
-    // Если текущее значение меньше нового минимума, оно будет доведено до него.
-    public void setCurrentMinimum(int currentMinimum) {
-        this.currentMinimum = currentMinimum;
+    /**
+     * Если текущее значение меньше нового минимума, оно будет доведено до него.
+     * @param newMin Новый минимум шкалы
+     */
+    public void setCurrentMinimum(int newMin) {
+        this.currentMinimum = newMin;
         this.value = Math.max(this.value, this.currentMinimum);
     }
 
@@ -60,9 +68,12 @@ public class Stat {
         return currentMaximum;
     }
 
-    // Если текущее значение превышает новый максимум, оно будет низведено до него.
-    public void setCurrentMaximum(int currentMaximum) {
-        this.currentMaximum = currentMaximum;
+    /**
+     * Если текущее значение превышает новый максимум, оно будет низведено до него.
+     * @param newMax Новый максимум шкалы
+     */
+    public void setCurrentMaximum(int newMax) {
+        this.currentMaximum = newMax;
         this.value = Math.min(this.currentMaximum, this.value);
     }
 
@@ -100,6 +111,10 @@ public class Stat {
             return -1;
         }
         return 0;
+    }
+
+    public int sub(int value) {
+        return add(-value);
     }
 
     /**
