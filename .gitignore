@@ -75,12 +75,16 @@ gradle-app.setting
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+.idea/**/caches
 
 # AWS User-specific
 .idea/**/aws.xml
 
 # Generated files
 .idea/**/contentModel.xml
+.idea/**/deploymentTargetSelector.xml
+.idea/**/deviceStreaming.xml
+
 
 # Sensitive or high-churn files
 .idea/**/dataSources/

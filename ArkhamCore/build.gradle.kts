@@ -30,11 +30,11 @@ version = "0.1.0"
 description = "Core logic for creating digital version of Arkham Horror (2nd edition) applications."
 java.sourceCompatibility = JavaVersion.VERSION_17
 
-publishing {
+/*publishing {
     publications.create<MavenPublication>("maven") {
         from(components["java"])
     }
-}
+}*/
 
 tasks.withType<JavaCompile>() {
     options.encoding = "UTF-8"
