@@ -8,7 +8,7 @@ public enum Expansion {
     KINGSPORT("Ужас Кингспорта"),
     INNSMOUTH("Ужас Иннсмута"),
     MISKATONIC("Ужас Мискатоника"),
-    TBGofW("Чёрная Коза Чащоб"), // The Black Goat of the Woods
+    TBGotW("Чёрная Коза Чащоб"), // The Black Goat of the Woods
     TLatT("Затаившийся у Порога"); // The Lurker at the Threshold
 
     private final String expansionName;

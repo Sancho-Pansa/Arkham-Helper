@@ -1,0 +1,82 @@
+@startuml test
+enum Expansion {
+    VANILLA
+    CotDP
+    TKiY
+    DUNWICH
+    KINGSPORT
+    INNSMOUTH
+    MISCATONIC
+    TBGotW
+    TLatT
+}
+
+enum Phase {
+    UPKEEP
+    MOVEMENT
+    ANKHAM_ENCOUNTERS
+    OTHER_WORLD_ENCOUNTERS
+    MYTHOS
+    ANY
+}
+
+enum CardType {
+    ALLY
+    BLIGHT
+    COMMON_ITEM
+    CORRUPTION
+    EXHIBIT_ITEM
+    INJURY
+    MANDESS
+    SKILL
+    SPECIAL
+    SPELL
+    UNIQUE_ITEM
+}
+
+abstract class AbstractGameElement {
+    - expansion: Expansion
+}
+note top: "Root class"
+AbstractGameElement - Expansion
+
+abstract class AbstractItem extends AbstractGameElement {
+    - name: String
+    - cardType: CardType
+    - bonusStats: BonusStats
+    - active: ActiveEffect
+    - passive: String
+}
+AbstractItem::cardType -- CardType
+AbstractItem::active *-- ActiveEffect : has
+AbstractItem::bonusStats *-- BonusStats : has
+
+class ActiveEffect <<record>> {
+    usablePhase: Phase
+    description: String
+}
+ActiveEffect -- Phase
+
+class BonusStats {
+    + speed: byte
+    + sneak: byte
+    + fight: byte
+    + will: byte
+    + lore: byte
+    + luck: byte
+    + combat: byte
+    + horror: byte
+    + evade: byte
+    + spell: byte
+    + stamina: byte
+    + sanity: byte
+}
+BonusStats +-- BonusStatsBuilder
+
+class BonusStatsBuilder as "BonusStats.Builder" {
+    build(): BonusStats
+}
+
+hide empty members
+
+@enduml
