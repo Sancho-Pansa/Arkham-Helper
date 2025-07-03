@@ -29,8 +29,8 @@ public final class AncientDeserializer extends AbstractDeserializer implements J
 
         String name = jsonAncient.get("name").getAsString();
         Expansion e = Expansion.fromString(jsonAncient.get("expansion").getAsString());
-        byte doomTrack = jsonAncient.get("doomTrack").getAsByte();
-        byte combat = jsonAncient.get("combat").getAsByte();
+        int doomTrack = jsonAncient.get("doomTrack").getAsInt();
+        int combat = jsonAncient.get("combat").getAsInt();
         String battleStart = optionallyDeserialize(jsonAncient, "battleStart", "");
         String attackDescription = optionallyDeserialize(jsonAncient, "attackDescription", "");
 
@@ -99,15 +99,15 @@ public final class AncientDeserializer extends AbstractDeserializer implements J
             behavior = MonsterBehavior.of(bonusesJson.get("movementType").getAsString());
         }
 
-        byte hp = Byte.MIN_VALUE;
-        byte horrorDamage = Byte.MIN_VALUE;
-        byte horrorRating = Byte.MIN_VALUE;
-        byte combatDamage = Byte.MIN_VALUE;
-        byte combatRating = Byte.MIN_VALUE;
+        int hp = Integer.MIN_VALUE;
+        int horrorDamage = Integer.MIN_VALUE;
+        int horrorRating = Integer.MIN_VALUE;
+        int combatDamage = Integer.MIN_VALUE;
+        int combatRating = Integer.MIN_VALUE;
 
         if(bonusesJson.has("stats")) {
             JsonObject statsJson = bonusesJson.get("stats").getAsJsonObject();
-            Function<String, Byte> checkStat = field -> statsJson.has(field) ? statsJson.get(field).getAsByte() : Byte.MIN_VALUE;
+            Function<String, Integer> checkStat = field -> statsJson.has(field) ? statsJson.get(field).getAsInt() : Integer.MIN_VALUE;
 
             hp = checkStat.apply("hp");
             horrorDamage = checkStat.apply("horrorDamage");

@@ -8,14 +8,14 @@ public final class Spell extends AbstractItem {
     private static final ItemType ITEM_TYPE = ItemType.NONE;
     private static final int PRICE = 0;
 
-    private final byte modifier;
-    private final byte sanityCost;
+    private final int modifier;
+    private final int sanityCost;
 
     public Spell(Expansion e,
                  String name,
-                 byte modifier,
-                 byte sanityCost,
-                 byte hands,
+                 int modifier,
+                 int sanityCost,
+                 int hands,
                  Phase usablePhase,
                  String description,
                  String passive

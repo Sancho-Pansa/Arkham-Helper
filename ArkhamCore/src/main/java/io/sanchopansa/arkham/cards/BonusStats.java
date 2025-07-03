@@ -4,87 +4,87 @@ package io.sanchopansa.arkham.cards;
  * Дополнительные характеристики, которые могут выдать различные предметы.
  */
 public record BonusStats(
-        byte speed, byte sneak, byte fight, byte will, byte lore, byte luck, byte combat, byte horror,
-        byte evade, byte spell, byte stamina, byte sanity
+        int speed, int sneak, int fight, int will, int lore, int luck, int combat, int horror,
+        int evade, int spell, int stamina, int sanity
 ) {
     public static Builder createBuilder() {
         return new Builder();
     }
 
     public static class Builder {
-        private byte speed = 0;
-        private byte sneak = 0;
-        private byte fight = 0;
-        private byte will = 0;
-        private byte lore = 0;
-        private byte luck = 0;
-        private byte combat = 0;
-        private byte horror = 0;
-        private byte evade = 0;
-        private byte spell = 0;
-        private byte stamina = 0;
-        private byte sanity = 0;
+        private int speed = 0;
+        private int sneak = 0;
+        private int fight = 0;
+        private int will = 0;
+        private int lore = 0;
+        private int luck = 0;
+        private int combat = 0;
+        private int horror = 0;
+        private int evade = 0;
+        private int spell = 0;
+        private int stamina = 0;
+        private int sanity = 0;
 
         private Builder() {
 
         }
 
-        public Builder speed(byte speed) {
+        public Builder speed(int speed) {
             this.speed = speed;
             return this;
         }
 
-        public Builder sneak(byte sneak) {
+        public Builder sneak(int sneak) {
             this.sneak = sneak;
             return this;
         }
 
-        public Builder fight(byte fight) {
+        public Builder fight(int fight) {
             this.fight = fight;
             return this;
         }
 
-        public Builder will(byte will) {
+        public Builder will(int will) {
             this.will = will;
             return this;
         }
 
-        public Builder lore(byte lore) {
+        public Builder lore(int lore) {
             this.lore = lore;
             return this;
         }
 
-        public Builder luck(byte luck) {
+        public Builder luck(int luck) {
             this.luck = luck;
             return this;
         }
 
-        public Builder combat(byte combat) {
+        public Builder combat(int combat) {
             this.combat = combat;
             return this;
         }
 
-        public Builder horror(byte horror) {
+        public Builder horror(int horror) {
             this.horror = horror;
             return this;
         }
 
-        public Builder evade(byte evade) {
+        public Builder evade(int evade) {
             this.evade = evade;
             return this;
         }
 
-        public Builder spell(byte spell) {
+        public Builder spell(int spell) {
             this.spell = spell;
             return this;
         }
 
-        public Builder stamina(byte stamina) {
+        public Builder stamina(int stamina) {
             this.stamina = stamina;
             return this;
         }
 
-        public Builder sanity(byte sanity) {
+        public Builder sanity(int sanity) {
             this.sanity = sanity;
             return this;
         }

@@ -9,7 +9,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public abstract class AbstractItem extends AbstractCard {
     protected final int price;
     protected final ItemType itemType;
-    protected final byte hands;
+    protected final int hands;
 
     public AbstractItem(Expansion e,
                         String name,
@@ -17,7 +17,7 @@ public abstract class AbstractItem extends AbstractCard {
                         BonusStats bonusStats,
                         int price,
                         String itemType,
-                        byte hands,
+                        int hands,
                         String active,
                         Phase phaseToUse,
                         String passive
@@ -34,7 +34,7 @@ public abstract class AbstractItem extends AbstractCard {
                         BonusStats bonusStats,
                         int price,
                         ItemType itemType,
-                        byte hands,
+                        int hands,
                         String active,
                         Phase phaseToUse,
                         String passive
@@ -69,7 +69,7 @@ public abstract class AbstractItem extends AbstractCard {
         return itemType;
     }
 
-    public byte getHands() {
+    public int getHands() {
         return hands;
     }
 

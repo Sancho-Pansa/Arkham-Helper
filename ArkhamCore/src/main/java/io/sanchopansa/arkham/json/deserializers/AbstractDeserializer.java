@@ -24,19 +24,6 @@ public abstract class AbstractDeserializer {
      * @param jsonObj Экземпляр JSONObject
      * @param field   Имя-ключ поля JSON'а
      * @param or      Резервное значение, если у указанного ключа нет значения.
-     * @return Число из JSON, либо резервное значение
-     */
-    protected byte optionallyDeserialize(JsonObject jsonObj, String field, byte or) {
-        return jsonObj.has(field) ? jsonObj.get(field).getAsByte() : or;
-    }
-
-    /**
-     * Производит десериализацию указанного поля в JSON-объекте, если указанное поле существует.
-     * Если не существует, вернет предписанное значение.
-     *
-     * @param jsonObj Экземпляр JSONObject
-     * @param field   Имя-ключ поля JSON'а
-     * @param or      Резервное значение, если у указанного ключа нет значения.
      * @return Строка из JSON, либо резервное значение
      */
     protected String optionallyDeserialize(JsonObject jsonObj, String field, String or) {
@@ -49,18 +36,18 @@ public abstract class AbstractDeserializer {
             var statsBuilder = BonusStats.createBuilder();
 
             statsBuilder
-                    .speed(optionallyDeserialize(statsJson, "speed", (byte) 0))
-                    .sneak(optionallyDeserialize(statsJson, "sneak", (byte) 0))
-                    .fight(optionallyDeserialize(statsJson, "fight", (byte) 0))
-                    .will(optionallyDeserialize(statsJson, "will", (byte) 0))
-                    .lore(optionallyDeserialize(statsJson, "lore", (byte) 0))
-                    .luck(optionallyDeserialize(statsJson, "luck", (byte) 0))
-                    .combat(optionallyDeserialize(statsJson, "combat", (byte) 0))
-                    .horror(optionallyDeserialize(statsJson, "horror", (byte) 0))
-                    .evade(optionallyDeserialize(statsJson, "evade", (byte) 0))
-                    .spell(optionallyDeserialize(statsJson, "spell", (byte) 0))
-                    .stamina(optionallyDeserialize(statsJson, "stamina", (byte) 0))
-                    .sanity(optionallyDeserialize(statsJson, "sanity", (byte) 0));
+                    .speed(optionallyDeserialize(statsJson, "speed", 0))
+                    .sneak(optionallyDeserialize(statsJson, "sneak", 0))
+                    .fight(optionallyDeserialize(statsJson, "fight", 0))
+                    .will(optionallyDeserialize(statsJson, "will", 0))
+                    .lore(optionallyDeserialize(statsJson, "lore", 0))
+                    .luck(optionallyDeserialize(statsJson, "luck", 0))
+                    .combat(optionallyDeserialize(statsJson, "combat", 0))
+                    .horror(optionallyDeserialize(statsJson, "horror", 0))
+                    .evade(optionallyDeserialize(statsJson, "evade", 0))
+                    .spell(optionallyDeserialize(statsJson, "spell", 0))
+                    .stamina(optionallyDeserialize(statsJson, "stamina", 0))
+                    .sanity(optionallyDeserialize(statsJson, "sanity", 0));
 
             return statsBuilder.build();
         } else {

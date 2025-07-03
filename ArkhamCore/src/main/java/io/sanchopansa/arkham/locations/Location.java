@@ -7,12 +7,16 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс, обозначающий игровую локацию.
+ */
 public class Location extends AbstractGameElement {
     private final String name;
     private final List<LocationType> locationType = new ArrayList<>();
     private final String description;
     private final boolean isStreet;
     private final boolean isStable;
+    //private final boolean isAquatic;
 
     private boolean isSealed = false;
     private boolean isOpened = true;

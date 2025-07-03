@@ -11,7 +11,7 @@ import java.util.Objects;
  */
 public final class Gate extends AbstractGameElement {
     private final String world;
-    private final byte modifier;
+    private final int modifier;
     private final DimensionSymbol symbol;
 
     /**
@@ -19,7 +19,7 @@ public final class Gate extends AbstractGameElement {
      * @param modifier Модификатор сложности закрытия
      * @param dSymbol  Символ Иного мира
      */
-    public Gate(Expansion e, String world, byte modifier, DimensionSymbol dSymbol) {
+    public Gate(Expansion e, String world, int modifier, DimensionSymbol dSymbol) {
         super(e);
         this.world = world;
         this.modifier = modifier;
@@ -37,7 +37,7 @@ public final class Gate extends AbstractGameElement {
         return world;
     }
 
-    public byte getModifier() {
+    public int getModifier() {
         return modifier;
     }
 

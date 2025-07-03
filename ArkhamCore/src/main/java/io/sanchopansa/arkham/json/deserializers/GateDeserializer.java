@@ -17,7 +17,7 @@ public class GateDeserializer extends AbstractDeserializer implements JsonDeseri
 
         String world = jsonMonster.get("name").getAsString();
         Expansion e = Expansion.fromString(jsonMonster.get("expansion").getAsString());
-        byte modifier = jsonMonster.get("modifier").getAsByte();
+        int modifier = jsonMonster.get("modifier").getAsInt();
         DimensionSymbol symbol = DimensionSymbol.of(jsonMonster.get("symbol").getAsString());
 
         return new Gate(

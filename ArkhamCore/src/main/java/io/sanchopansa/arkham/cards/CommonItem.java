@@ -10,7 +10,7 @@ public final class CommonItem extends AbstractItem {
                       String name,
                       int price,
                       String itemType,
-                      byte hands,
+                      int hands,
                       BonusStats bonusStats,
                       String active,
                       Phase phaseToUse,

@@ -112,7 +112,7 @@ public class Ancient extends AbstractGameElement {
     }
 
     /**
-     * Обозначает бонусы, который Древний предоставляет последователям
+     * Обозначает бонусы, которые Древний предоставляет последователям
      * @param ability Дополнительные способности Монстра
      * @param behavior Новый тип движения Монстра (перезаписывает старый)
      * @param hp Новое здоровье Монстра (-128 зарезервировано для отсутствия бонуса во избежание NPE)
@@ -124,11 +124,11 @@ public class Ancient extends AbstractGameElement {
     public record WorshipperBonus(
             Set<MonsterAbility> ability,
             MonsterBehavior behavior,
-            byte hp,
-            byte horrorDamage,
-            byte horrorRating,
-            byte combatDamage,
-            byte combatRating
+            int hp,
+            int horrorDamage,
+            int horrorRating,
+            int combatDamage,
+            int combatRating
     ) {
     }
 

@@ -22,7 +22,7 @@ public sealed class ItemDeserializerBridge extends AbstractDeserializer implemen
         String name = jsonAbstractItem.get("name").getAsString();
         Expansion e = Expansion.fromString(jsonAbstractItem.get("expansion").getAsString());
         String itemType = optionallyDeserialize(jsonAbstractItem, "itemType", "NONE");
-        byte hands = (byte) optionallyDeserialize(jsonAbstractItem, "hands", 0);
+        int hands = optionallyDeserialize(jsonAbstractItem, "hands", 0);
         int cost = optionallyDeserialize(jsonAbstractItem, "cost", 0);
         String passive = optionallyDeserialize(jsonAbstractItem, "passive", "");
         Phase usablePhase = Phase.ANY;
@@ -41,8 +41,8 @@ public sealed class ItemDeserializerBridge extends AbstractDeserializer implemen
         } else if(itemClass.getName().equals(UniqueItem.class.getName())) {
             return new UniqueItem(e, name, cost, itemType, hands, stats, activeDescription, usablePhase, passive);
         } else if(itemClass.getName().equals(Spell.class.getName())) {
-            byte modifier = jsonAbstractItem.get("modifier").getAsByte();
-            byte sanityCost = jsonAbstractItem.get("sanityCost").getAsByte();
+            int modifier = jsonAbstractItem.get("modifier").getAsInt();
+            int sanityCost = jsonAbstractItem.get("sanityCost").getAsInt();
             return new Spell(e, name, modifier, sanityCost, hands, usablePhase, activeDescription, passive);
         } else {
             return null;
