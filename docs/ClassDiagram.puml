@@ -1,4 +1,11 @@
-@startuml test
+@startuml ClassDiagram
+skinparam groupInheritance 4
+'skinparam ranksep 100
+skinparam nodesep 50
+'skinparam linetype polyline
+/'
+ВСЕ ОТДЕЛЬНЫЕ ENUM'Ы
+'/
 enum Expansion {
     VANILLA
     CotDP
@@ -20,6 +27,40 @@ enum Phase {
     ANY
 }
 
+enum Dimension {
+    CRESCENT
+    CIRCLE
+    DIAMOND
+    HEXAGON
+    CROSS
+    SLASH
+    SQUARE
+    STAR
+    TRIANGLE
+}
+
+enum MonsterBehaviour {
+    NORMAL
+    STATIONARY
+    FAST
+    UNIQUE
+    FLYING
+    STALKER
+    AQUATIC
+}
+
+enum MonsterAbility {
+    AMBUSH
+    ELUSIVE
+    ENDLESS
+    MAGICAL_IMMUNITY
+    MAGICAL_RESISTANCE
+    PHYSICAL_IMMUNITY
+    PHYSICAL_RESISTANCE
+    UNDEAD
+    WEAPON_IMMUNITY
+}
+
 enum CardType {
     ALLY
     BLIGHT
@@ -34,49 +75,290 @@ enum CardType {
     UNIQUE_ITEM
 }
 
+/'
+Общие абстракции
+'/
+
 abstract class AbstractGameElement {
     - expansion: Expansion
 }
 note top: "Root class"
-AbstractGameElement - Expansion
+AbstractGameElement::expansion -left- Expansion
+AbstractGameElement <|- Investigator
 
-abstract class AbstractItem extends AbstractGameElement {
+/'
+Карточки предметов
+'/
+abstract class AbstractCard extends AbstractGameElement {
     - name: String
     - cardType: CardType
     - bonusStats: BonusStats
     - active: ActiveEffect
     - passive: String
 }
-AbstractItem::cardType -- CardType
-AbstractItem::active *-- ActiveEffect : has
-AbstractItem::bonusStats *-- BonusStats : has
+AbstractCard::cardType - CardType
+AbstractCard::active *-- ActiveEffect : has
+AbstractCard::bonusStats *-- BonusStats : has
 
 class ActiveEffect <<record>> {
-    usablePhase: Phase
-    description: String
+    - usablePhase: Phase
+    - description: String
 }
 ActiveEffect -- Phase
 
 class BonusStats {
-    + speed: byte
-    + sneak: byte
-    + fight: byte
-    + will: byte
-    + lore: byte
-    + luck: byte
-    + combat: byte
-    + horror: byte
-    + evade: byte
-    + spell: byte
-    + stamina: byte
-    + sanity: byte
+    + speed: int
+    + sneak: int
+    + fight: int
+    + will: int
+    + lore: int
+    + luck: int
+    + combat: int
+    + horror: int
+    + evade: int
+    + spell: int
+    + stamina: int
+    + sanity: int
 }
 BonusStats +-- BonusStatsBuilder
 
 class BonusStatsBuilder as "BonusStats.Builder" {
-    build(): BonusStats
+    + build(): BonusStats
+}
+together {
+    abstract class AbstractItem extends AbstractCard {
+        - price: int
+        - itemType: ItemType
+        - hands: int
+        + {abstract} cloneItem()
+    }
+    AbstractItem +- ItemType
+
+    enum ItemType <<nested>> {
+        NONE
+        MAGICAL
+        PHYSICAL
+        TASK
+        MISSION
+        TOME
+    }
+
+    together {
+        class CommonItem extends AbstractItem {
+            - {static} cardType = CardType.COMMON
+        }
+
+        class UniqueItem extends AbstractItem {
+            - {static} cardType = CardType.UNIQUE
+        }
+
+        class Spell extends AbstractItem {
+            - {static} cardType = CardType.SPELL
+        }
+
+        class SkillCard extends AbstractItem {
+            - {static} cardType = CardType.SKILL
+        }
+
+        class Ally extends AbstractItem {
+            - {static} cardType = CardType.ALLY
+        }
+    }
+}
+/'
+Сыщики
+'/
+' Здесь не указан extends, чтобы связь на диаграмме была короче
+class Investigator {
+    - name: String
+    - title: String
+    - stamina: Stat
+    - sanity: Stat
+    - alive: boolean
+    ..
+    - SS: Skill
+    - FW: Skill
+    - LL: Skill
+    - focus: Stat
+    ..
+    - ability: InvestigatorAbility
+    ..
+    - blessing: Blessing
+    - hasRetainer: boolean
+    - hasLoan: boolean
+    - canLoan: boolean
+    - silverLodge: boolean
+    - deputy: boolean
+    ..
+    - money: int
+    - clueTokens: int
+    - commonItems: List<CommonItem>
+    - uniqueItems: List<uniqueItem>
+    - spells: List<Spell>
+    - skillCards: List<SkillCard>
+    - allies: List<Ally>
+    - monsters: List<Monster>
+    - gates: List<Gate>
+    --
+    //getters//
+    //setters//
+    + restoreFocus()
+    + kill()
+}
+Investigator *-- Skill
+Investigator::blessing +-- Blessing
+Investigator::ability +-- InvestigatorAbility
+Investigator *-- Stat
+Investigator::commonItems o-- CommonItem
+Investigator::uniqueItems o-- UniqueItem
+Investigator::spells o-- Spell
+Investigator::skillCards o-- SkillCard
+Investigator::allies o-- Ally
+Investigator::monsters o-- Monster
+Investigator::gates o--- Gate
+
+class Skill {
+    - blue: int[]
+    - red: int[]
+    + moveLeft(): int
+    + moveRight(): int
+    + setSkillPosition(int): int
 }
 
+enum Blessing <<nested>> {
+    NONE
+    BLESSED
+    CURSED
+}
+
+class InvestigatorAbility as "Investigator.Ability" <<record>> {
+    - name: String
+    - description: String
+    - usablePhase: Phase
+}
+InvestigatorAbility -- Phase
+
+class Stat {
+    - minimum: int
+    - currentMinimum: int
+    - maximum: int
+    - currentMaximum: int
+    - value: int
+    + resetCurrentMinimum()
+    + resetCurrentMaximum()
+    + add(int): int
+    + sub(int): int
+    + refill(): void
+}
+
+/'
+Локации
+'/
+
+class Location extends AbstractGameElement {
+    - name: String
+    - locationType: List<LocationType>
+    - description: String
+    - isStreet: boolean
+    - isStable: boolean
+    - isAquatic: boolean
+    ..
+    - isSealed: boolean
+    - isOpened: boolean
+    - hasActivity: boolean
+    + seal()
+    + removeSeal()
+    + open()
+    + close()
+}
+Location +-- LocationType
+
+enum LocationType <<nested>> {
+    ALLY
+    BLESSING
+    COMMON_ITEM
+    CLUE
+    MONEY
+    SANITY
+    SKILL
+    SPELL
+    STAMINA
+    UNIQUE_ITEM
+}
+
+/'
+
+Монстры
+
+
+'/
+together {
+    class Monster extends AbstractGameElement {
+        - name: String
+        - behaviour: MonsterBehaviour
+        - type: Type
+        - dimension: Dimension
+        - awareness: int
+        - health: int
+        - horrorRating: int
+        - horrorDamage: int
+        - compulsoryHorrorDamage: int
+        - combatRating: int
+        - combatRating: int
+        - compulsoryCombatDamage: int
+        - abilities: List<MonsterAbility>
+        - flavor: String
+    }
+    Monster - MonsterBehaviour
+    Monster -- Dimension
+    Monster - MonsterAbility
+    Monster::type +- MonsterType
+
+    enum MonsterType as "Monster.Type" {
+        NORMAL
+        SPAWN
+        MASK
+    }
+
+    class Gate extends AbstractGameElement {
+        - world: String
+        - modifier: int
+        - symbol: Dimension
+    }
+    Gate -- Dimension
+
+    class Ancient extends AbstractGameElement {
+        - name: String
+        - doomTrack: int
+        - combat: int
+        - monsterAbilities: Set<MonsterAbility>
+        - worshippers: Set<Worshipper>
+        - powerName: String
+        - powerDescription: String
+        - battleStart: String
+        - attackDescription: String
+    }
+    Ancient +- Worshipper
+    Ancient +- WorshipperBonus
+    Ancient -- MonsterAbility
+
+    class Worshipper <<record>> {
+        - worshipper: Monster
+        - bonus: WorshipperBonus
+    }
+    Worshipper - Monster
+    Worshipper *- WorshipperBonus
+
+    class WorshipperBonus <<record>> {
+        - ability: Set<MonsterAbility>
+        - behaviour: MonsterBehaviour
+        - hp: int
+        - horrorDamage: int
+        - horrorRating: int
+        - combatDamage: int
+        - combatRating: int
+    }
+}
 hide empty members
 
 @enduml
