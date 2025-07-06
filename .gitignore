@@ -80,6 +80,9 @@ gradle-app.setting
 # AWS User-specific
 .idea/**/aws.xml
 
+# Azure Insights
+.idea/appInsightsSettings.xml
+
 # Generated files
 .idea/**/contentModel.xml
 .idea/**/deploymentTargetSelector.xml
