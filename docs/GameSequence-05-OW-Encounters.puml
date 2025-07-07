@@ -1,0 +1,16 @@
+@startuml Ход игры
+<style>
+element {
+    FontName Arial
+    HorizontalAlignment center
+}
+</style>
+title Фаза Контактов в Иных мирах
+start
+    repeat
+        :Игрок берет карту контактов Иных Миров;
+    backward :Игрок кладет карту в низ колоды;
+    repeat while (Цвет карты совпадает с метками Иного мира?) is (нет) not(да)
+    :Игрок выполняет предписанные действия;
+stop
+@enduml
