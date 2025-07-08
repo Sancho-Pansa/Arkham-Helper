@@ -5,7 +5,7 @@ import io.sanchopansa.arkham.locations.Location;
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 
-import java.util.*;
+import java.util.Deque;
 
 public class GameEngine implements GameEngineInterface {
     private final Game gameInstance;

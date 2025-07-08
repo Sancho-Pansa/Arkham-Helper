@@ -1,7 +1,5 @@
 package io.sanchopansa.arkham;
 
-import io.sanchopansa.arkham.common.Phase;
-
 /**
  * Интерфейс-коллбэк для общения с UI
  */

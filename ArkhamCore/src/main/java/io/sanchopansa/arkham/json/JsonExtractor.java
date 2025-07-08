@@ -2,10 +2,10 @@ package io.sanchopansa.arkham.json;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.*;
-import io.sanchopansa.arkham.locations.Location;
 import io.sanchopansa.arkham.cards.AbstractCard;
 import io.sanchopansa.arkham.investigators.Investigator;
 import io.sanchopansa.arkham.json.deserializers.*;
+import io.sanchopansa.arkham.locations.Location;
 import io.sanchopansa.arkham.monsters.Ancient;
 import io.sanchopansa.arkham.monsters.Gate;
 import io.sanchopansa.arkham.monsters.Monster;

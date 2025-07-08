@@ -6,7 +6,9 @@ import io.sanchopansa.arkham.monsters.Gate;
 import io.sanchopansa.arkham.monsters.Monster;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Deque;
 import java.util.function.IntUnaryOperator;
 
 /**
