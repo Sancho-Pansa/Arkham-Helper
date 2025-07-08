@@ -1,7 +1,7 @@
 package io.sanchopansa.arkham.json.deserializers;
 
 import com.google.gson.*;
-import io.sanchopansa.arkham.common.Expansion;
+import io.sanchopansa.arkham.Expansion;
 import io.sanchopansa.arkham.monsters.DimensionSymbol;
 import io.sanchopansa.arkham.monsters.Gate;
 

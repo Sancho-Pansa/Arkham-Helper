@@ -1,4 +1,4 @@
-package io.sanchopansa.arkham.common;
+package io.sanchopansa.arkham;
 
 public abstract class AbstractGameElement {
     protected Expansion expansion;

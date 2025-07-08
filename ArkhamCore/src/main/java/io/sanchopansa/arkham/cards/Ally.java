@@ -1,7 +1,7 @@
 package io.sanchopansa.arkham.cards;
 
-import io.sanchopansa.arkham.common.ActiveEffect;
-import io.sanchopansa.arkham.common.Expansion;
+import io.sanchopansa.arkham.ActiveEffect;
+import io.sanchopansa.arkham.Expansion;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public final class Ally extends AbstractCard {

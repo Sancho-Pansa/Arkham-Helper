@@ -1,9 +1,9 @@
 package io.sanchopansa.arkham.cards;
 
-import io.sanchopansa.arkham.common.AbstractGameElement;
-import io.sanchopansa.arkham.common.ActiveEffect;
-import io.sanchopansa.arkham.common.Expansion;
-import io.sanchopansa.arkham.common.Phase;
+import io.sanchopansa.arkham.AbstractGameElement;
+import io.sanchopansa.arkham.ActiveEffect;
+import io.sanchopansa.arkham.Expansion;
+import io.sanchopansa.arkham.Phase;
 
 import java.util.Objects;
 

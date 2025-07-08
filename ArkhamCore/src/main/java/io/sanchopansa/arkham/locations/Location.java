@@ -1,7 +1,7 @@
 package io.sanchopansa.arkham.locations;
 
-import io.sanchopansa.arkham.common.AbstractGameElement;
-import io.sanchopansa.arkham.common.Expansion;
+import io.sanchopansa.arkham.AbstractGameElement;
+import io.sanchopansa.arkham.Expansion;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.ArrayList;

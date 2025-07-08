@@ -1,7 +1,7 @@
 package io.sanchopansa.arkham.cards;
 
-import io.sanchopansa.arkham.common.Expansion;
-import io.sanchopansa.arkham.common.Phase;
+import io.sanchopansa.arkham.Expansion;
+import io.sanchopansa.arkham.Phase;
 
 public final class UniqueItem extends AbstractItem {
     private static final CardType ITEM_TYPE = CardType.UNIQUE_ITEM;

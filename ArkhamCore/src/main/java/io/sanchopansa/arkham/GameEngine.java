@@ -1,6 +1,5 @@
 package io.sanchopansa.arkham;
 
-import io.sanchopansa.arkham.common.Phase;
 import io.sanchopansa.arkham.investigators.Investigator;
 import io.sanchopansa.arkham.locations.Location;
 import org.jgrapht.Graph;

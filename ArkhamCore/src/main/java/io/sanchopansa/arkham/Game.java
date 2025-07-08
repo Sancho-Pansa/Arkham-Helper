@@ -1,6 +1,5 @@
 package io.sanchopansa.arkham;
 
-import io.sanchopansa.arkham.common.Phase;
 import io.sanchopansa.arkham.investigators.Investigator;
 import io.sanchopansa.arkham.monsters.Ancient;
 import io.sanchopansa.arkham.monsters.Gate;

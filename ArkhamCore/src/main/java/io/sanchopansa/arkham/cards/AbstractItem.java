@@ -1,9 +1,9 @@
 package io.sanchopansa.arkham.cards;
 
 import com.google.common.base.Enums;
-import io.sanchopansa.arkham.common.ActiveEffect;
-import io.sanchopansa.arkham.common.Expansion;
-import io.sanchopansa.arkham.common.Phase;
+import io.sanchopansa.arkham.ActiveEffect;
+import io.sanchopansa.arkham.Expansion;
+import io.sanchopansa.arkham.Phase;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public abstract class AbstractItem extends AbstractCard {
