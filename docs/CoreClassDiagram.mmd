@@ -6,13 +6,13 @@ title: Class relations in Core module
 classDiagram
     direction TB
 
-%% Корневой абстрактный класс
+    %% Корневой абстрактный класс
     class AbstractGameElement {
         <<Abstract>>
         #expansion: Expansion
     }
 
-%% Общие перечисления (enums)
+    %% Общие перечисления (enums)
     class Expansion {
         <<enumeration>>
         VANILLA
@@ -42,7 +42,7 @@ classDiagram
         -description: String
     }
 
-%% Карточки
+    %% Карточки
     namespace cards {
         class CardType {
             <<enumeration>>
@@ -183,7 +183,7 @@ classDiagram
             CURSED
         }
     }
-    %% Локации
+%% Локации
     namespace locations {
         class LocationType {
             <<enumeration>>
@@ -213,7 +213,7 @@ classDiagram
         }
     }
 
-    %% Монстры, Древние
+%% Монстры, Древние
     namespace monsters {
         class Dimension {
             <<enumeration>>
@@ -302,7 +302,47 @@ classDiagram
         }
     }
 
-    %% Связи
+    class GameVault {
+        - investigators: Set~Investigator~
+        - monsterPool: ArrayList~Monster~
+        - gatePool: ArrayList~Gate~
+        - ancientPool: Set~Ancient~
+
+        - commonItems: LinkedList~CommonItem~
+        - uniqueItems: LinkedList~UniqueItem~
+        - spells: LinkedList~Spell~
+        - skills: LinkedList~SkillCard~
+        - allies: LinkedList~Ally~
+    }
+
+    class Game {
+        - players: Deque~Investigator~
+        - ancient: ancient
+        - activeGates: Deque~Gate~
+        - activeMonsters: Deque~Monster~
+        - outskirtsMonsters: Deque~Monster~
+
+        - gateLimit: int
+        - monsterLimit: int
+        - outskirtsLimit: int
+
+        - currentPhase: Phase
+        - terror: int
+        - doom: int
+    }
+
+    class GameEngine {
+        - gameInstace: Game
+        - vault: GameVault
+        - map: Graph~Location~
+        - listener: GameListener
+    }
+
+    class GameListener {
+        <<Interface>>
+    }
+
+%% Связи
     AbstractGameElement -- Expansion
     AbstractGameElement <|-- Investigator
     AbstractGameElement <|-- AbstractCard
@@ -348,3 +388,23 @@ classDiagram
 
     ActiveEffect --> Phase
     InvestigatorAbility --> Phase
+
+    GameVault *-- Investigator
+    GameVault *-- Monster
+    GameVault *-- Ancient
+    GameVault *-- Gate
+    GameVault *-- CommonItem
+    GameVault *-- UniqueItem
+    GameVault *-- Spell
+    GameVault *-- SkillCard
+    GameVault *-- Ally
+
+    Game *-- "1..8" Investigator
+    Game *-- Monster
+    Game *-- "1" Ancient
+    Game *-- Gate
+    Game -- Phase
+
+    GameEngine o-- Game
+    GameEngine o-- GameVault
+    GameEngine o-- GameListener
