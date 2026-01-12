@@ -1,0 +1,350 @@
+---
+config:
+  layout: elk
+title: Class relations in Core module
+---
+classDiagram
+    direction TB
+
+%% Корневой абстрактный класс
+    class AbstractGameElement {
+        <<Abstract>>
+        #expansion: Expansion
+    }
+
+%% Общие перечисления (enums)
+    class Expansion {
+        <<enumeration>>
+        VANILLA
+        CotDP
+        TKiY
+        DUNWICH
+        KINGSPORT
+        INNSMOUTH
+        MISCATONIC
+        TBGotW
+        TLatT
+    }
+
+    class Phase {
+        <<enumeration>>
+        UPKEEP
+        MOVEMENT
+        ANKHAM_ENCOUNTERS
+        OTHER_WORLD_ENCOUNTERS
+        MYTHOS
+        ANY
+    }
+
+    class ActiveEffect {
+        <<record>>
+        -usablePhase: Phase
+        -description: String
+    }
+
+%% Карточки
+    namespace cards {
+        class CardType {
+            <<enumeration>>
+            ALLY
+            BLIGHT
+            COMMON_ITEM
+            CORRUPTION
+            EXHIBIT_ITEM
+            INJURY
+            MADNESS
+            SKILL
+            SPECIAL
+            SPELL
+            UNIQUE_ITEM
+        }
+
+        class ItemType {
+            <<enumeration>>
+            NONE
+            MAGICAL
+            PHYSICAL
+            TASK
+            MISSION
+            TOME
+        }
+
+        class AbstractCard {
+            <<Abstract>>
+            -name: String
+            -cardType: CardType
+            -bonusStats: BonusStats
+            -active: ActiveEffect
+            -passive: String
+        }
+
+        class BonusStats {
+            +speed: int
+            +sneak: int
+            +fight: int
+            +will: int
+            +lore: int
+            +luck: int
+            +combat: int
+            +horror: int
+            +evade: int
+            +spell: int
+            +stamina: int
+            +sanity: int
+        }
+
+        class BonusStatsBuilder {
+            <<Builder>>
+            +build(): BonusStats
+        }
+
+    %% Предметы
+        class AbstractItem {
+            <<abstract>>
+            -price: int
+            -itemType: ItemType
+            -hands: int
+            +cloneItem()*
+        }
+
+        class CommonItem {
+            <<static>> cardType = COMMON_ITEM
+        }
+
+        class UniqueItem {
+            <<static>> cardType = UNIQUE_ITEM
+        }
+
+        class Spell {
+            <<static>> cardType = SPELL
+        }
+
+        class SkillCard {
+            <<static>> cardType = SKILL
+        }
+
+        class Ally {
+            <<static>> cardType = ALLY
+        }
+    }
+
+%% Сыщики
+    namespace investigators {
+        class Investigator {
+            -name: String
+            -title: String
+            -stamina: Stat
+            -sanity: Stat
+            -alive: boolean
+            -SS: Skill
+            -FW: Skill
+            -LL: Skill
+            -focus: Stat
+            -ability: InvestigatorAbility
+            -blessing: Blessing
+            -money: int
+            -clueTokens: int
+            +restoreFocus()
+            +kill()
+        }
+
+        class Skill {
+            -blue: int[]
+            -red: int[]
+            +moveLeft(): int
+            +moveRight(): int
+            +setSkillPosition(int): int
+        }
+
+        class InvestigatorAbility {
+            <<record>>
+            -name: String
+            -description: String
+            -usablePhase: Phase
+        }
+
+        class Stat {
+            -minimum: int
+            -currentMinimum: int
+            -maximum: int
+            -currentMaximum: int
+            -value: int
+            +resetCurrentMinimum()
+            +resetCurrentMaximum()
+            +add(int): int
+            +sub(int): int
+            +refill(): void
+        }
+
+        class Blessing {
+            <<enumeration>>
+            NONE
+            BLESSED
+            CURSED
+        }
+    }
+    %% Локации
+    namespace locations {
+        class LocationType {
+            <<enumeration>>
+            ALLY
+            BLESSING
+            COMMON_ITEM
+            CLUE
+            MONEY
+            SANITY
+            SKILL
+            SPELL
+            STAMINA
+            UNIQUE_ITEM
+        }
+
+        class Location {
+            -name: String
+            -locationType: List~LocationType~
+            -isStreet: boolean
+            -isStable: boolean
+            -isAquatic: boolean
+            -isSealed: boolean
+            +seal()
+            +removeSeal()
+            +open()
+            +close()
+        }
+    }
+
+    %% Монстры, Древние
+    namespace monsters {
+        class Dimension {
+            <<enumeration>>
+            CRESCENT
+            CIRCLE
+            DIAMOND
+            HEXAGON
+            CROSS
+            SLASH
+            SQUARE
+            STAR
+            TRIANGLE
+        }
+
+        class MonsterBehaviour {
+            <<enumeration>>
+            NORMAL
+            STATIONARY
+            FAST
+            UNIQUE
+            FLYING
+            STALKER
+            AQUATIC
+        }
+
+        class MonsterType {
+            <<enumeration>>
+            NORMAL
+            SPAWN
+            MASK
+        }
+
+        class MonsterAbility {
+            <<enumeration>>
+            AMBUSH
+            ELUSIVE
+            ENDLESS
+            MAGICAL_IMMUNITY
+            MAGICAL_RESISTANCE
+            PHYSICAL_IMMUNITY
+            PHYSICAL_RESISTANCE
+            UNDEAD
+            WEAPON_IMMUNITY
+        }
+
+        class Monster {
+            -name: String
+            -behaviour: MonsterBehaviour
+            -type: MonsterType
+            -dimension: Dimension
+            -awareness: int
+            -health: int
+            -horrorRating: int
+            -horrorDamage: int
+            -combatRating: int
+            -abilities: List~MonsterAbility~
+        }
+
+        class Gate {
+            -world: String
+            -modifier: int
+            -symbol: Dimension
+        }
+
+        class Ancient {
+            -name: String
+            -doomTrack: int
+            -combat: int
+            -monsterAbilities: Set~MonsterAbility~
+            -worshippers: Set~Worshipper~
+        }
+
+        class Worshipper {
+            <<record>>
+            -worshipper: Monster
+            -bonus: WorshipperBonus
+        }
+
+        class WorshipperBonus {
+            <<record>>
+            -ability: Set~MonsterAbility~
+            -behaviour: MonsterBehaviour
+            -hp: int
+            -horrorDamage: int
+            -combatDamage: int
+        }
+    }
+
+    %% Связи
+    AbstractGameElement -- Expansion
+    AbstractGameElement <|-- Investigator
+    AbstractGameElement <|-- AbstractCard
+    AbstractGameElement <|-- Location
+    AbstractGameElement <|-- Monster
+    AbstractGameElement <|-- Gate
+    AbstractGameElement <|-- Ancient
+
+    AbstractCard <|-- AbstractItem
+    AbstractItem <|-- CommonItem
+    AbstractItem <|-- UniqueItem
+    AbstractItem <|-- Spell
+    AbstractItem <|-- SkillCard
+    AbstractItem <|-- Ally
+
+    Investigator *-- "0..n" CommonItem
+    Investigator *-- "0..n" UniqueItem
+    Investigator *-- "0..n" Spell
+    Investigator *-- "0..n" SkillCard
+    Investigator *-- "0..n" Ally
+    Investigator *-- "0..n" Monster
+    Investigator *-- "0..n" Gate
+    Investigator *-- Stat
+    Investigator *-- Skill
+    Investigator *-- InvestigatorAbility
+    Investigator *-- "1" Blessing
+
+    AbstractCard *-- BonusStats
+    AbstractCard *-- ActiveEffect
+    AbstractItem *-- ItemType
+
+    Monster *-- MonsterBehaviour
+    Monster *-- Dimension
+    Monster *-- MonsterAbility
+    Monster *-- MonsterType
+
+    Gate *-- Dimension
+    Ancient *-- MonsterAbility
+    Ancient *-- Worshipper
+
+    Worshipper *-- Monster
+    Worshipper *-- WorshipperBonus
+
+    ActiveEffect --> Phase
+    InvestigatorAbility --> Phase
