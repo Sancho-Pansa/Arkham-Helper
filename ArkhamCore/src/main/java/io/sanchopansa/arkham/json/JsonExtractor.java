@@ -3,6 +3,7 @@ package io.sanchopansa.arkham.json;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.*;
 import io.sanchopansa.arkham.cards.AbstractCard;
+import io.sanchopansa.arkham.factories.JsonSource;
 import io.sanchopansa.arkham.investigators.Investigator;
 import io.sanchopansa.arkham.json.deserializers.*;
 import io.sanchopansa.arkham.locations.Location;
@@ -12,6 +13,9 @@ import io.sanchopansa.arkham.monsters.Monster;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -22,42 +26,49 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class JsonExtractor {
+
+    private final JsonSource source;
+    private final GsonBuilder gBuilder = new GsonBuilder();
+
+    public JsonExtractor(JsonSource source) {
+        this.source = source;
+    }
+
     public <T extends AbstractCard> Set<T> extractCardsSetByType(String filename,
                                                                  Type type,
                                                                  Type arrayType,
                                                                  JsonDeserializer<T> deserializer) throws IOException, URISyntaxException {
 
         String json = getJsonAsString(filename);
-        GsonBuilder gBuilder = new GsonBuilder();
         gBuilder.registerTypeAdapter(type, deserializer);
         return Set.of(gBuilder.create().fromJson(json, arrayType));
     }
 
-    public Set<Investigator> extractInvestigatorsFromJson(String filename) throws IOException, URISyntaxException {
-        String json = getJsonAsString(filename);
-        GsonBuilder gBuilder = new GsonBuilder();
-        gBuilder.registerTypeAdapter(Investigator.class, new InvestigatorDeserializer());
-        return new HashSet<>(Arrays.asList(gBuilder.create().fromJson(json, Investigator[].class)));
+    public Set<Investigator> extractInvestigatorsFromJson(String filename) throws IOException {
+        try (
+                InputStream is = source.openGameData(filename);
+                Reader reader = new InputStreamReader(is, StandardCharsets.UTF_8)
+                ) {
+            gBuilder.registerTypeAdapter(Investigator.class, new InvestigatorDeserializer());
+            return new HashSet<>(Arrays.asList(gBuilder.create().fromJson(reader, Investigator[].class)));
+        }
     }
 
     public Set<Ancient> extractAncientsFromJson(String filename,
                                                 Set<Monster> monsters) throws IOException, URISyntaxException {
         String json = getJsonAsString(filename);
-        GsonBuilder gBuilder = new GsonBuilder();
         gBuilder.registerTypeAdapter(Ancient.class, new AncientDeserializer(monsters));
         return new HashSet<>(Arrays.asList(gBuilder.create().fromJson(json, Ancient[].class)));
     }
 
     public List<Monster> extractMonstersFromJson(String filename) throws IOException, URISyntaxException {
         String json = getJsonAsString(filename);
-        GsonBuilder gBuilder = new GsonBuilder();
         gBuilder.registerTypeAdapter(Monster.class, new MonsterDeserializer());
         return Arrays.asList(gBuilder.create().fromJson(json, Monster[].class));
     }
 
     public List<Gate> extractGatesFromJson(String filename) throws IOException, URISyntaxException {
         String json = getJsonAsString(filename);
-        GsonBuilder gBuilder = new GsonBuilder();
         gBuilder.registerTypeAdapter(Gate.class, new GateDeserializer());
         return Arrays.asList(gBuilder.create().fromJson(json, Gate[].class));
     }
@@ -66,13 +77,11 @@ public class JsonExtractor {
                                                     Type type) throws IOException, URISyntaxException {
 
         String json = getJsonAsString(filename);
-        GsonBuilder gBuilder = new GsonBuilder();
         gBuilder.registerTypeAdapter(type, new CardCountDeserializer());
         return gBuilder.create().fromJson(json, type);
     }
 
     public Map<String, Location> extractLocationsAsMap(String filename) throws IOException, URISyntaxException {
-        GsonBuilder gBuilder = new GsonBuilder();
         var locationJson = getJsonAsString(filename);
         Type mapTypeToken = new TypeToken<Map<String, Location>>() {
         }.getType();
@@ -88,7 +97,6 @@ public class JsonExtractor {
 
     public List<ImmutablePair<String, String>> extractEdgesAsPairs(String filename) throws IOException, URISyntaxException {
         List<ImmutablePair<String, String>> edgesPairs = new ArrayList<>();
-        GsonBuilder gBuilder = new GsonBuilder();
         var locationJson = getJsonAsString(filename);
         Gson gson = gBuilder.create();
 

@@ -25,9 +25,12 @@ import java.util.stream.Collectors;
  * Сборщик коробки по умолчанию - из заранее составленных JSON-файлов.
  */
 public class JsonGameFactory extends AbstractGameFactory {
+
+    JsonSource jsonSource = new ClasspathJsonSource(getClass().getClassLoader());
+
     @Override
     public GameVault createVault() throws IOException, URISyntaxException {
-        JsonExtractor jsonExtractor = new JsonExtractor();
+        JsonExtractor jsonExtractor = new JsonExtractor(jsonSource);
             // Таблица "Объект игры - число объектов"
             Map<String, Integer> objectCountMap = new HashMap<>();
             objectCountMap.putAll(jsonExtractor.extractCardCountMap("CommonItems.json", CommonItem.class));
@@ -78,7 +81,7 @@ public class JsonGameFactory extends AbstractGameFactory {
             ArrayList<Gate> gatePool = getGatesFromJson(objectCountMap);
 
             //Древние
-            Set<Ancient> ancients = new JsonExtractor().extractAncientsFromJson("Ancients.json", new HashSet<>(monstersPool));
+            Set<Ancient> ancients = jsonExtractor.extractAncientsFromJson("Ancients.json", new HashSet<>(monstersPool));
 
             // Сыщики
             Set<Investigator> investigators = jsonExtractor.extractInvestigatorsFromJson("Investigators.json");
@@ -113,12 +116,12 @@ public class JsonGameFactory extends AbstractGameFactory {
                                              Type arrayItemType,
                                              JsonDeserializer<? extends AbstractCard> deserializer
     ) throws IOException, URISyntaxException {
-        JsonExtractor jsonExtractor = new JsonExtractor();
+        JsonExtractor jsonExtractor = new JsonExtractor(jsonSource);
         return new HashSet<>(jsonExtractor.extractCardsSetByType(filename, itemType, arrayItemType, deserializer));
     }
 
     private ArrayList<Monster> getMonstersListFromJson(Map<String, Integer> cardCountMap) throws IOException, URISyntaxException {
-        return new JsonExtractor().extractMonstersFromJson("Monsters.json").stream()
+        return new JsonExtractor(jsonSource).extractMonstersFromJson("Monsters.json").stream()
                 .collect(
                         ArrayList::new,
                         // l - list
@@ -135,7 +138,7 @@ public class JsonGameFactory extends AbstractGameFactory {
     }
 
     private ArrayList<Gate> getGatesFromJson(Map<String, Integer> cardCountMap) throws IOException, URISyntaxException {
-        return new JsonExtractor().extractGatesFromJson("Gates.json").stream()
+        return new JsonExtractor(jsonSource).extractGatesFromJson("Gates.json").stream()
                 .collect(
                         ArrayList::new,
                         // l - list
@@ -185,7 +188,7 @@ public class JsonGameFactory extends AbstractGameFactory {
 
     @Override
     public Graph<Location, DefaultEdge> createMap() throws IOException, URISyntaxException {
-            JsonExtractor jsonExtractor = new JsonExtractor();
+            JsonExtractor jsonExtractor = new JsonExtractor(jsonSource);
             Map<String, Location> locationMap = jsonExtractor.extractLocationsAsMap("ArkhamMap.json");
             List<ImmutablePair<String, String>> edgesList = jsonExtractor.extractEdgesAsPairs("ArkhamMap.json");
 
