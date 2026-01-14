@@ -1,7 +1,7 @@
 package io.sanchopansa.arkham.factories;
 
-import io.sanchopansa.arkham.GameVault;
-import io.sanchopansa.arkham.locations.Location;
+import io.sanchopansa.arkham.core.GameVault;
+import io.sanchopansa.arkham.core.locations.Location;
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 

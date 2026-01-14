@@ -1,8 +1,8 @@
 package io.sanchopansa.arkham.json.deserializers;
 
 import com.google.gson.*;
-import io.sanchopansa.arkham.Expansion;
-import io.sanchopansa.arkham.locations.Location;
+import io.sanchopansa.arkham.core.Expansion;
+import io.sanchopansa.arkham.core.locations.Location;
 
 import java.lang.reflect.Type;
 import java.util.Map;

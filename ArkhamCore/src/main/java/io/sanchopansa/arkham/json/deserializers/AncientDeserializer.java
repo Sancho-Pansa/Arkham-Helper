@@ -1,11 +1,11 @@
 package io.sanchopansa.arkham.json.deserializers;
 
 import com.google.gson.*;
-import io.sanchopansa.arkham.Expansion;
-import io.sanchopansa.arkham.monsters.Ancient;
-import io.sanchopansa.arkham.monsters.Monster;
-import io.sanchopansa.arkham.monsters.MonsterAbility;
-import io.sanchopansa.arkham.monsters.MonsterBehavior;
+import io.sanchopansa.arkham.core.Expansion;
+import io.sanchopansa.arkham.core.monsters.Ancient;
+import io.sanchopansa.arkham.core.monsters.Monster;
+import io.sanchopansa.arkham.core.monsters.MonsterAbility;
+import io.sanchopansa.arkham.core.monsters.MonsterBehavior;
 
 import java.lang.reflect.Type;
 import java.util.HashSet;

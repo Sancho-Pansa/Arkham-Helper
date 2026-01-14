@@ -3,7 +3,7 @@ package io.sanchopansa.arkham;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.*;
 import io.sanchopansa.arkham.json.deserializers.LocationDeserializer;
-import io.sanchopansa.arkham.locations.Location;
+import io.sanchopansa.arkham.core.locations.Location;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jgrapht.*;
 import org.jgrapht.graph.*;

@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -11,13 +12,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import io.sanchopansa.arkham.Game
 import io.sanchopansa.arkham.android.ui.theme.AndroidTheme
-import io.sanchopansa.arkham.common.Expansion
-import io.sanchopansa.arkham.monsters.DimensionSymbol
-import io.sanchopansa.arkham.monsters.Gate
+import io.sanchopansa.arkham.factories.JsonGameFactory
+import io.sanchopansa.arkham.investigators.Investigator
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -36,11 +36,16 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    val a = Gate(Expansion.VANILLA, "Test", -1, DimensionSymbol.DIAMOND)
-    Text(
-        text = "Hello $a!",
-        modifier = modifier
-    )
+    Column {
+        Text(
+            text = "Hello, $name"
+        )
+    }
+}
+
+@Composable
+fun Health(name: String, modifier: Modifier) {
+
 }
 
 @Preview(showBackground = true)

@@ -2,21 +2,24 @@ package io.sanchopansa.arkham;
 
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
+import io.sanchopansa.arkham.core.Game;
+import io.sanchopansa.arkham.core.GameEngine;
+import io.sanchopansa.arkham.core.GameListener;
+import io.sanchopansa.arkham.core.GameVault;
 import io.sanchopansa.arkham.factories.AbstractGameFactory;
+import io.sanchopansa.arkham.impl.ClasspathJsonSource;
 import io.sanchopansa.arkham.factories.JsonGameFactory;
-import io.sanchopansa.arkham.investigators.Investigator;
-import io.sanchopansa.arkham.locations.Location;
-import io.sanchopansa.arkham.monsters.Ancient;
+import io.sanchopansa.arkham.api.JsonSource;
+import io.sanchopansa.arkham.core.investigators.Investigator;
+import io.sanchopansa.arkham.core.locations.Location;
+import io.sanchopansa.arkham.core.monsters.Ancient;
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 class GameEngineTest {
@@ -29,7 +32,8 @@ class GameEngineTest {
 
     @BeforeAll
     public static void testGameLaunch() throws Exception {
-        AbstractGameFactory factory = new JsonGameFactory();
+        JsonSource jsonSource = new ClasspathJsonSource(GameEngineTest.class.getClassLoader());
+        AbstractGameFactory factory = new JsonGameFactory(jsonSource);
         gameVault = factory.createVault();
         map = factory.createMap();
         ancientsPool = HashMultiset.create(gameVault.getAncientsPool());

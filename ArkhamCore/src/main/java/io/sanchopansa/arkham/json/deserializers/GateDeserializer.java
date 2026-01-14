@@ -1,9 +1,9 @@
 package io.sanchopansa.arkham.json.deserializers;
 
 import com.google.gson.*;
-import io.sanchopansa.arkham.Expansion;
-import io.sanchopansa.arkham.monsters.DimensionSymbol;
-import io.sanchopansa.arkham.monsters.Gate;
+import io.sanchopansa.arkham.core.Expansion;
+import io.sanchopansa.arkham.core.monsters.DimensionSymbol;
+import io.sanchopansa.arkham.core.monsters.Gate;
 
 import java.lang.reflect.Type;
 

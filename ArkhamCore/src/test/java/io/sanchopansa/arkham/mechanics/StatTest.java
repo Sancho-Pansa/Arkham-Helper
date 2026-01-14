@@ -1,6 +1,6 @@
 package io.sanchopansa.arkham.mechanics;
 
-import io.sanchopansa.arkham.investigators.Stat;
+import io.sanchopansa.arkham.core.investigators.Stat;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;

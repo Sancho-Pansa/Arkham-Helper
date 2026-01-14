@@ -1,15 +1,16 @@
 package io.sanchopansa.arkham.factories;
 
 import com.google.gson.JsonDeserializer;
-import io.sanchopansa.arkham.GameVault;
-import io.sanchopansa.arkham.cards.*;
-import io.sanchopansa.arkham.investigators.Investigator;
+import io.sanchopansa.arkham.api.JsonSource;
+import io.sanchopansa.arkham.core.GameVault;
+import io.sanchopansa.arkham.core.cards.*;
+import io.sanchopansa.arkham.core.investigators.Investigator;
+import io.sanchopansa.arkham.core.locations.Location;
+import io.sanchopansa.arkham.core.monsters.Ancient;
+import io.sanchopansa.arkham.core.monsters.Gate;
+import io.sanchopansa.arkham.core.monsters.Monster;
 import io.sanchopansa.arkham.json.JsonExtractor;
 import io.sanchopansa.arkham.json.deserializers.*;
-import io.sanchopansa.arkham.locations.Location;
-import io.sanchopansa.arkham.monsters.Ancient;
-import io.sanchopansa.arkham.monsters.Gate;
-import io.sanchopansa.arkham.monsters.Monster;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
@@ -26,7 +27,11 @@ import java.util.stream.Collectors;
  */
 public class JsonGameFactory extends AbstractGameFactory {
 
-    JsonSource jsonSource = new ClasspathJsonSource(getClass().getClassLoader());
+    private final JsonSource jsonSource;
+
+    public JsonGameFactory(JsonSource jsonSource) {
+        this.jsonSource = jsonSource;
+    }
 
     @Override
     public GameVault createVault() throws IOException, URISyntaxException {

@@ -1,9 +1,9 @@
 package io.sanchopansa.arkham.json.deserializers;
 
 import com.google.gson.*;
-import io.sanchopansa.arkham.Expansion;
-import io.sanchopansa.arkham.Phase;
-import io.sanchopansa.arkham.investigators.Investigator;
+import io.sanchopansa.arkham.core.Expansion;
+import io.sanchopansa.arkham.core.Phase;
+import io.sanchopansa.arkham.core.investigators.Investigator;
 
 import java.lang.reflect.Type;
 import java.util.Optional;

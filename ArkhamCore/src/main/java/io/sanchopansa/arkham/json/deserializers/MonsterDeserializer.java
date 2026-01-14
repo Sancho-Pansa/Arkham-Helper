@@ -1,11 +1,17 @@
 package io.sanchopansa.arkham.json.deserializers;
 
-import com.google.gson.*;
-import io.sanchopansa.arkham.Expansion;
-import io.sanchopansa.arkham.monsters.Monster;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import io.sanchopansa.arkham.core.Expansion;
+import io.sanchopansa.arkham.core.monsters.Monster;
 
 public class MonsterDeserializer extends AbstractDeserializer implements JsonDeserializer<Monster> {
     @Override
@@ -34,7 +40,7 @@ public class MonsterDeserializer extends AbstractDeserializer implements JsonDes
                 .asList()
                 .stream()
                 .map(JsonElement::getAsString)
-                .toList();
+                .collect(Collectors.toUnmodifiableList());
 
         return new Monster(
                 e,
