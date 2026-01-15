@@ -42,11 +42,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier, player: Investigator) {
-    Column {
-        Text(
-            text = "Hello, ${player.name}"
-        )
-    }
+    InvestigatorComposable(player)
 }
 
 @Composable
@@ -60,9 +56,9 @@ fun GreetingPreview() {
     val context = LocalContext.current
     val jsonSource = AndroidJsonSource(context)
     val gameVault = JsonGameFactory(jsonSource).createVault()
-    val player = gameVault.investigators.toList()[0]
+    val player = gameVault.investigators.toList().singleOrNull { investigator -> investigator.name == "Аманда Шарп" }
 
     AndroidTheme {
-        Greeting("Android", player =  player)
+        Greeting("Android", player = player!!)
     }
 }
