@@ -7,12 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import io.sanchopansa.arkham.android.ui.theme.AndroidTheme
-import io.sanchopansa.arkham.core.investigators.Investigator
 import io.sanchopansa.arkham.factories.JsonGameFactory
 
 class MainActivity : ComponentActivity() {
@@ -27,7 +23,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             AndroidTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    CharList(
+                    PlayerSheet(
                         modifier = Modifier.padding(innerPadding),
                         player!!
                     )

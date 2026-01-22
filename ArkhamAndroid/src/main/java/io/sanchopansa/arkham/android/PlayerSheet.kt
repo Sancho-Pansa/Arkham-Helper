@@ -17,7 +17,7 @@ import io.sanchopansa.arkham.core.investigators.Investigator
 import io.sanchopansa.arkham.factories.JsonGameFactory
 
 @Composable
-fun CharList(modifier: Modifier, player: Investigator) {
+fun PlayerSheet(modifier: Modifier, player: Investigator) {
     val investigatorState = remember { mutableStateOf(player) }
     val character = investigatorState.value
     Column(modifier) {
@@ -86,6 +86,6 @@ fun CharPreview() {
     val player = gameVault.investigators.toList().singleOrNull { investigator -> investigator.name == "Аманда Шарп" }
 
     MaterialTheme {
-        CharList(modifier = Modifier, player = player!!)
+        PlayerSheet(modifier = Modifier, player = player!!)
     }
 }
