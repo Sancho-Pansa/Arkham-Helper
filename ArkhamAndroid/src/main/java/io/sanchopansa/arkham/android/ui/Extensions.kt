@@ -9,7 +9,9 @@ fun Investigator.toUiModel(): InvestigatorUi {
     return InvestigatorUi(
         name,
         stamina.value,
+        stamina.currentMaximum,
         sanity.value,
+        sanity.currentMaximum,
         money,
         clueTokens,
         itemNames

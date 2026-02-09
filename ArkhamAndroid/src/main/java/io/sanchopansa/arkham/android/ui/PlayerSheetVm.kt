@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import io.sanchopansa.arkham.android.ui.models.InvestigatorUi
 import io.sanchopansa.arkham.core.investigators.Investigator
 
 class PlayerSheetVm(
@@ -18,6 +19,10 @@ class PlayerSheetVm(
     fun loadInvestigator(investigator: Investigator) {
         uiState = PlayerSheetUiState.Ready(investigator.toUiModel())
         this.investigator = investigator
+    }
+
+    fun getInvestigatorUi(): InvestigatorUi {
+        return this.investigator.toUiModel()
     }
 
     fun changeHealth(delta: Int) {
