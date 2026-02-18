@@ -8,9 +8,7 @@ import androidx.lifecycle.ViewModel
 import io.sanchopansa.arkham.android.ui.models.InvestigatorUi
 import io.sanchopansa.arkham.core.investigators.Investigator
 
-class PlayerSheetVm(
-    savedStateHandle: SavedStateHandle,
-) : ViewModel() {
+class PlayerSheetVm() : ViewModel() {
     var uiState by mutableStateOf<PlayerSheetUiState>(PlayerSheetUiState.Loading)
     private set
 

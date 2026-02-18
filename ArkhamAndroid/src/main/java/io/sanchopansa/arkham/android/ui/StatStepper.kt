@@ -2,6 +2,7 @@ package io.sanchopansa.arkham.android.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.twotone.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.twotone.KeyboardArrowRight
@@ -29,9 +30,9 @@ fun StatStepper(
     plusAction: () -> Unit = { }
 ) {
     Row(
-        modifier = modifier,
+        modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(4.dp)
+        horizontalArrangement = Arrangement.SpaceEvenly
     ) {
         IconButton(
             onClick = minusAction,
