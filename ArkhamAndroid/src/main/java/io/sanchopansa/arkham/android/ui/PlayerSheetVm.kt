@@ -29,4 +29,19 @@ class PlayerSheetVm(
         this.investigator.stamina.add(delta)
         uiState = PlayerSheetUiState.Ready(investigator.toUiModel())
     }
+
+    fun changeSanity(delta: Int) {
+        this.investigator.sanity.add(delta)
+        uiState = PlayerSheetUiState.Ready(investigator.toUiModel())
+    }
+
+    fun changeMoney(delta: Int) {
+        this.investigator.money += delta
+        uiState = PlayerSheetUiState.Ready(investigator.toUiModel())
+    }
+
+    fun changeClueTokens(delta: Int) {
+        this.investigator.clueTokens += delta
+        uiState = PlayerSheetUiState.Ready(investigator.toUiModel())
+    }
 }
