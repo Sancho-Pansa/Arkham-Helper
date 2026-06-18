@@ -8,8 +8,8 @@ org-apache-commons-commons-lang3 = "3.16.0"
 org-jgrapht-jgrapht-core = "1.5.2"
 org-junit-jupiter-junit-jupiter-engine = "5.11.0"
 org-junit-jupiter-junit-jupiter-params = "5.11.0-RC1"
-agp = "8.13.2"
-kotlin = "2.0.21"
+agp = "9.2.1"
+kotlin = "2.4.0"
 coreKtx = "1.16.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -41,6 +41,7 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activityKtx" }
+androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleRuntimeKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
