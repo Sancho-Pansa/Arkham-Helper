@@ -1,10 +1,4 @@
-repositories {
-    google()
-    mavenCentral()
-    gradlePluginPortal()
-}
 // Root build.gradle.kts
-
 
 tasks.register("listrepos") {
     doLast {

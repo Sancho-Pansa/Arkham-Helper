@@ -31,6 +31,10 @@ android {
     buildFeatures {
         compose = true
     }
+
+    compileSdk {
+        version = release(35)
+    }
 }
 
 dependencies {
