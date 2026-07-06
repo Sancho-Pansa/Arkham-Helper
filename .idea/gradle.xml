@@ -5,9 +5,7 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="testRunner" value="CHOOSE_PER_TEST" />
-        <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="C:\Program Files\Gradle\gradle-8.14.1" />
         <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
         <option name="modules">
           <set>
@@ -16,6 +14,8 @@
             <option value="$PROJECT_DIR$/ArkhamCore" />
           </set>
         </option>
+        <option name="resolveExternalAnnotations" value="true" />
+        <option name="myGradleHome" value="C:\Program Files\Java\gradle-9.2.0" />
       </GradleProjectSettings>
     </option>
   </component>

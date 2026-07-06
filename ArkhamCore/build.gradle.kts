@@ -7,15 +7,6 @@ plugins {
     `maven-publish`
 }
 
-
-
-repositories {
-    mavenLocal()
-    maven {
-        url = uri("https://repo.maven.apache.org/maven2/")
-    }
-}
-
 dependencies {
     api(libs.com.google.guava.guava)
     api(libs.org.apache.commons.commons.lang3)
