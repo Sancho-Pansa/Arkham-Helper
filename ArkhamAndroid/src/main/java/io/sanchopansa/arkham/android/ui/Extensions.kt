@@ -1,7 +1,9 @@
 package io.sanchopansa.arkham.android.ui
 
 import io.sanchopansa.arkham.android.ui.models.InvestigatorUi
+import io.sanchopansa.arkham.android.ui.models.SkillUi
 import io.sanchopansa.arkham.core.investigators.Investigator
+import io.sanchopansa.arkham.core.investigators.Skill
 
 fun Investigator.toUiModel(): InvestigatorUi {
     val itemNames = mutableListOf<String>()
@@ -15,5 +17,15 @@ fun Investigator.toUiModel(): InvestigatorUi {
         money,
         clueTokens,
         itemNames
+    )
+}
+
+fun Skill.toUiModel(topLabel: String, bottomLabel: String): SkillUi {
+    return SkillUi(
+        topLabel = topLabel,
+        bottomLabel = bottomLabel,
+        topValues = (0..3).map { leftBlue + it },
+        bottomValues = (0..3).map {rightRed - it },
+        currentIndex = sliderIndex
     )
 }

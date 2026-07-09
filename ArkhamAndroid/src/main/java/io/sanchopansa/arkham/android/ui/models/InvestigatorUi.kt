@@ -10,3 +10,11 @@ data class InvestigatorUi(
     val clueTokens: Int,
     val commons: List<String>
 )
+
+data class SkillUi(
+    val topLabel: String,
+    val bottomLabel: String,
+    val topValues: List<Int>,
+    val bottomValues: List<Int>,
+    val currentIndex: Int
+)
