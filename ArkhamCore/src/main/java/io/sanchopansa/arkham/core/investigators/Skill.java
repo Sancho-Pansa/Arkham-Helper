@@ -57,6 +57,10 @@ public class Skill {
         return redSkill[sliderIndex];
     }
 
+    public int getSliderIndex() {
+        return sliderIndex;
+    }
+
     /**
      * Сдвигает ползунок навыка на одну позицию влево. Не может выйти за пределы массива.
      * @return Статус операции.<br />
