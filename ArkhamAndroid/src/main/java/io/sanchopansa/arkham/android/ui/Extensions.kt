@@ -10,13 +10,24 @@ fun Investigator.toUiModel(): InvestigatorUi {
     itemNames.addAll(commonItems.map { it.name })
     return InvestigatorUi(
         name,
+        title,
         stamina.value,
         stamina.currentMaximum,
         sanity.value,
         sanity.currentMaximum,
         money,
         clueTokens,
-        itemNames
+        focus.value,
+        focus.currentMaximum,
+        ability.name,
+        ability.description,
+        itemNames,
+        itemNames,
+        itemNames,
+        itemNames,
+        ss.toUiModel("Speed","Sneak"),
+        fw.toUiModel("Fight","Will"),
+        ll.toUiModel("Lore","Luck")
     )
 }
 
