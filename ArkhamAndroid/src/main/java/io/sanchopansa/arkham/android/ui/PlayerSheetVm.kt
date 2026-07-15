@@ -7,6 +7,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import io.sanchopansa.arkham.android.ui.models.InvestigatorUi
 import io.sanchopansa.arkham.core.investigators.Investigator
+import io.sanchopansa.arkham.core.investigators.Skill
 
 class PlayerSheetVm() : ViewModel() {
     var uiState by mutableStateOf<PlayerSheetUiState>(PlayerSheetUiState.Loading)
@@ -40,6 +41,15 @@ class PlayerSheetVm() : ViewModel() {
 
     fun changeClueTokens(delta: Int) {
         this.investigator.clueTokens += delta
+        uiState = PlayerSheetUiState.Ready(investigator.toUiModel())
+    }
+
+    fun moveSpeedSneak(direction: Int) = moveSkill(investigator.ss, direction)
+    fun moveFightWill(direction: Int) = moveSkill(investigator.fw, direction)
+    fun moveLoreLuck(direction: Int) = moveSkill(investigator.ll, direction)
+
+    fun moveSkill(skill: Skill, direction: Int) {
+        if (direction > 0) skill.moveRight() else skill.moveLeft()
         uiState = PlayerSheetUiState.Ready(investigator.toUiModel())
     }
 }
